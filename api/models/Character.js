@@ -20,6 +20,12 @@ module.exports = {
       enum: ['fix', 'sol', 'med']
     },
 
+    currentLevel: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 1
+    },
+
     level: {
       type: 'integer',
       required: true,
@@ -42,18 +48,24 @@ module.exports = {
       required: true
     },
 
+    // ideas on what to affect:
+    // attack, damage, crit, weapons usage
     aim: {
       type: 'integer',
       required: true,
       defaultsTo: 10
     },
 
-    agility: {
+    // ideas on what to affect:
+    // attack, defense, initiative, crit
+    speed: {
       type: 'integer',
       required: true,
       defaultsTo: 10
     },
 
+    // ideas on what to affect:
+    // defense, hp, damage reduction, armor usage
     stamina: {
       type: 'integer',
       required: true,
@@ -111,10 +123,11 @@ module.exports = {
     }
   },
 
-  beforeUpdate: function (model, next) {
+  beforeValidate: function (model, next) {
     var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
       return prof.ID === model.profession;
     });
+
     model.maxHP = model.level * profession.HP_PER_LEVEL;
     model.currentHP = model.maxHP;
 

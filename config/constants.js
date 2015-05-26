@@ -9,6 +9,10 @@ module.exports.constants = {
     BASE_GRAZE: 70,
     GRAZE_MULTIPLIER: 0.5
   },
+  LEVELUP: {
+    ATTRIBUTE_POINTS: 3,
+    SKILL_POINTS: 5
+  },
   PROFESSIONS: [
     {
       ID: 'fix',

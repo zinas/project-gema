@@ -24,13 +24,14 @@ Log.prototype.miss = function (attacker, defender, roll) {
 
 Log.prototype.damage = function (attacker, defender, roll) {
   this.log.push(`${attacker.name} damages ${defender.name} for ${roll} damage.`);
+  this.log.push(`${defender.name} now has ${defender.currentHP} hit points left.`);
 };
 
 Log.prototype.result = function (winner, looser) {
   this.log.push('\n\n');
   this.log.push(`============ Result ============`);
   this.log.push(`${looser.name} is dead.`);
-  this.log.push(`${winner.name} wins the duel`);
+  this.log.push(`${winner.name} wins the duel with ${winner.currentHP} hit points left.`);
 };
 
 Log.prototype.print = function () {
