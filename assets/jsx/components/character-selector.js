@@ -29,7 +29,7 @@ var ClassSelector = React.createClass({
     return (
       <select onChange={this.change} ref="character">
         {this.state.characters.map(function (character) {
-          return <option key={character.id} value={character.id}>{character.name} - {character.currentLevel}/{character.level}</option>
+          return <option key={character.id} value={character.id}>{character.name} - lvl. {character.level}</option>
         })}
       </select>
     );

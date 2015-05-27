@@ -20,12 +20,6 @@ module.exports = {
       enum: ['fix', 'sol', 'med']
     },
 
-    currentLevel: {
-      type: 'integer',
-      required: true,
-      defaultsTo: 1
-    },
-
     level: {
       type: 'integer',
       required: true,
