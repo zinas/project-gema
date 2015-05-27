@@ -7,13 +7,29 @@ var ClassSelector = React.createClass({
     return { characters: [] };
   },
   componentDidMount: function () {
-    utils.ajax('/character').then(function () {});
+    utils.ajax('/character').then( (function (characters) {
+      this.setState({characters:characters});
+      this.props.onChange(this.getCharacterById(React.findDOMNode(this.refs.character).value));
+    }).bind(this) );
+  },
+  change: function (event) {
+    this.props.onChange(this.getCharacterById(event.target.value));
+  },
+  getCharacterById: function (id) {
+    var character = {};
+    this.state.characters.forEach(function (c) {
+      if ( c.id === id ) {
+        character = c;
+      }
+    });
+
+    return character;
   },
   render: function() {
     return (
-      <select>
-        {thegrid.config.PROFESSIONS.map(function (profession) {
-          return <option key={profession.ID} value={profession.ID}>{profession.LABEL}</option>
+      <select onChange={this.change} ref="character">
+        {this.state.characters.map(function (character) {
+          return <option key={character.id} value={character.id}>{character.name} - {character.currentLevel}/{character.level}</option>
         })}
       </select>
     );

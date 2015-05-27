@@ -5,16 +5,16 @@ var
 
 var LevelupView = React.createClass({
   getInitialState: function () {
-    return { character: {name: 'not!'} };
+    return { character: {name: ''} };
   },
-  onCharacterSelected: function (character) {
+  onCharacterUpdated: function (character) {
     this.setState({character: character});
   },
   render: function() {
     return (
       <div>
-        <CharacterSelector onChange={this.onCharacterSelected} />
-        <div>selected character: {this.state.character.name} </div>
+        <CharacterSelector onChange={this.onCharacterUpdated} />
+        <LevelupForm character={this.state.character} onRefresh={this.onCharacterUpdated} />
       </div>
     );
   }

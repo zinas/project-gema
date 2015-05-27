@@ -120,6 +120,11 @@ module.exports = {
 
     location: {
       model: 'area'
+    },
+
+    skills: {
+      collection: 'characterSkill',
+      via: 'character'
     }
   },
 
@@ -131,6 +136,18 @@ module.exports = {
     model.maxHP = model.level * profession.HP_PER_LEVEL;
     model.currentHP = model.maxHP;
 
+    next();
+  },
+
+  afterCreate: function (character, next) {
+    Skill.find({profession: character.profession}).exec(function (error, skills) {
+      _.forEach(skills, function (skill) {
+        CharacterSkill.create({
+          character: character.id,
+          skill: skill.id
+        }).exec(function () {});
+      });
+    });
     next();
   }
 };

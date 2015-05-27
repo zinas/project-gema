@@ -11,7 +11,7 @@ module.exports.constants = {
   },
   LEVELUP: {
     ATTRIBUTE_POINTS: 3,
-    SKILL_POINTS: 5
+    SKILL_POINTS: 2
   },
   PROFESSIONS: [
     {
