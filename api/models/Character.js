@@ -67,7 +67,7 @@ module.exports = {
     },
 
     attack: function () {
-      return (
+      return Math.round(
         this.level *
         this.professionStats().ATTACK_PER_LEVEL *
         (1 + (this.aim - 10)/100 )
@@ -75,31 +75,38 @@ module.exports = {
     },
 
     defence: function () {
-      return (
+      return Math.round(
         this.level *
         this.professionStats().DEFENCE_PER_LEVEL *
-        (1 + (this.agility - 10)/100 )
+        (1 + (this.speed - 10)/100 )
       );
     },
 
-    hit: function () {
+    hitThreshold: function () {
       return sails.config.constants.STATS.TO_HIT;
     },
+    hitDamage: function () {
+      return Dice.roll(10);
+    },
 
-    graze: function () {
+    grazeThreshold: function () {
       return sails.config.constants.STATS.BASE_GRAZE;
     },
-
-    crit: function () {
-      return sails.config.constants.STATS.BASE_CRIT;
-    },
-
     grazeMult: function () {
       return sails.config.constants.STATS.GRAZE_MULTIPLIER;
     },
+    grazeDamage: function () {
+      return Math.round(this.hitDamage() * this.grazeMult());
+    },
 
+    critThreshold: function () {
+      return sails.config.constants.STATS.BASE_CRIT;
+    },
     critMult: function () {
       return sails.config.constants.STATS.CRIT_MULTIPLIER;
+    },
+    critDamage: function () {
+      return Math.round(this.hitDamage() * this.critMult());
     },
 
     professionStats: function() {

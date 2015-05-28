@@ -6,7 +6,13 @@ var LevelupForm = React.createClass({
   getInitialState: function () {
     return {
       skills: [],
-      character: {}
+      character: {
+        aim: 10,
+        speed: 10,
+        stamina: 10,
+        level: 1,
+        skills: []
+      }
     }
   },
   reloadState: function (props) {
@@ -73,11 +79,12 @@ var LevelupForm = React.createClass({
     this.reloadState(props);
   },
   render: function() {
-    var skills, attributes;
+    return (
+      <div className="form">
+        <div className="form-group">
+          {this.props.character.name}, ({this.props.character.profession} lvl. {this.props.character.level})
+        </div>
 
-    if ( this.props.character.currentLevel < this.props.character.level ) {
-      attributes = (
-        <div>
         <div className="form-group">
           <label>Unassigned attribute points</label> <strong>{this.getUnassignedAttributes()}</strong>
         </div>
@@ -115,11 +122,7 @@ var LevelupForm = React.createClass({
             </tr>
           </table>
         </div>
-        </div>
-      );
 
-      skills = (
-        <div>
         <div className="form-group">
           <label>Unassigned skill points</label> <strong>{this.getUnassignedSkills()}</strong>
         </div>
@@ -143,17 +146,6 @@ var LevelupForm = React.createClass({
             }).bind(this) )}
           </table>
         </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="form">
-        <div className="form-group">
-          {this.props.character.name}, ({this.props.character.profession} lvl. {this.props.character.level})
-        </div>
-        {attributes}
-        {skills}
         <div className="form-group">
           <button onClick={this.saveCharacter}>Save Character</button>
         </div>

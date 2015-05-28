@@ -10,13 +10,16 @@ var Promise = require('bluebird');
 module.exports = {
   fight: function (req, res) {
 
-    Promise.all([
-      Character.findOne({name: 'Nikos'}),
-      Character.findOne({name: 'Efi'})
-    ]).spread(function (att, def) {
-      var fight = new Fight(att, def);
-      fight.resolve();
-      return res.view({att:att, def:def, log: fight.log.log});
+    Character.find().exec(function (error, characters) {
+      var
+        att = characters[0],
+        def = characters[1],
+        fight = new Fight(att, def);
+      fight.resolve().then(function () {
+        return res.view({att:att, def:def, log: fight.log.log});
+      }, function (error) {
+        console.log('error', error);
+      });
     });
   },
 

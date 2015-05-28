@@ -1,5 +1,7 @@
 <h1>Fight</h1>
 <h3><%= att.name %> vs. <%= def.name %></h3>
+<div class="fight-log">
 <% _.each(log, function (l) { %>
-  <p><%=l%></p>
+  <div class="fight-log__entry"><%-l%></div>
 <% }); %>
+</div>
