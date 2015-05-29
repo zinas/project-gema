@@ -11,6 +11,11 @@ module.exports = {
     this.users();
     this.skills();
 
+    this.weapons();
+    this.armors();
+    this.gadgets();
+    this.implants();
+
     return res.json({});
   },
 
@@ -73,6 +78,67 @@ module.exports = {
         probability: 1,
         dice: 4
       }
+    }).exec(function () {});
+  },
+
+  weapons: function () {
+    Weapon.create({
+      name: 'Glock 30',
+      damage: 8,
+      modifiers: [
+        { type: 'toHit', value: 5}
+      ]
+    }).exec(function () {});
+
+    Weapon.create({
+      name: 'FMK-3',
+      damage: 10,
+      modifiers: [
+        { type: 'combat', target:'toHit', value: -5},
+        { type: 'combat', target:'crit', val: 3}
+      ]
+    }).exec(function () {});
+
+    Weapon.create({
+      name: 'Benelli M3 Super 90',
+      damage: 4,
+      modifiers: [
+        { type: 'combat', target:'damage', value: 6}
+      ]
+    }).exec(function () {});
+  },
+
+  armors: function () {
+    Armor.create({
+      name: 'Bulletproof vest',
+      protection: 3
+    }).exec(function () {});
+  },
+
+  gadgets: function () {
+    Gadget.create({
+      name: 'Night vision goggles',
+      modifiers: [
+        { type: 'stat', target: 'aim', value: 5}
+      ],
+    }).exec(function () {});
+  },
+
+  implants: function () {
+    Implant.create({
+      name: 'Reflex module',
+      slot: 'head',
+      modifiers: [
+        { type: 'stat', target: 'speed', value: 5}
+      ],
+    }).exec(function () {});
+
+    Implant.create({
+      name: 'Heart pump',
+      slot: 'heart',
+      modifiers: [
+        { type: 'round', target: 'hp', value: 5}
+      ],
     }).exec(function () {});
   }
 };

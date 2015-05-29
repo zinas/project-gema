@@ -8,6 +8,7 @@
 module.exports = {
 
   attributes: {
+    ///////// Base characteristics
     name: {
       type: 'string',
       required: true,
@@ -50,6 +51,8 @@ module.exports = {
       defaultsTo: 10
     },
 
+    ///////// Attributes
+
     // ideas on what to affect:
     // attack, defense, initiative, crit
     speed: {
@@ -66,6 +69,17 @@ module.exports = {
       defaultsTo: 10
     },
 
+    ///////// Inventory slots
+    rightHand: { model: 'weapon' },
+    leftHand: { model: 'gadget' },
+    body: { model: 'armor' },
+
+    ///////// Implant slots
+    head: { model: 'implant' },
+    eye: { model: 'implant' },
+    heart: { model: 'implant' },
+
+    ///////// Combat stats
     attack: function () {
       return Math.round(
         this.level *
