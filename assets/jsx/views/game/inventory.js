@@ -10,7 +10,6 @@ var InventoryView = React.createClass({
   },
   onCharacterUpdated: function (character) {
     this.setState({character: character});
-    console.log('character changed');
   },
   render: function() {
     return (

@@ -150,18 +150,16 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
-    if ( model.level ) {
-      Character.findOne({id: this.update.arguments[0]}).exec(function (err, character) {
+    Character.findOne({id: this.update.arguments[0]}).exec(function (err, character) {
+      if ( model.level ) {
         var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
           return prof.ID === character.profession;
         });
 
         model.maxHP = model.level * profession.HP_PER_LEVEL;
-
-        next();
-      });
-
-    }
+      }
+      next();
+    });
   },
 
   afterCreate: function (character, next) {

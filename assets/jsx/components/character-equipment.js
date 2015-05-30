@@ -11,10 +11,11 @@ var CharacterEquipment = React.createClass({
     }
   },
   componentWillMount: function () {
-    utils.ajax('/weapon').then( (function (weapons) {
+    io.socket.get('/weapon', {}, ( function (weapons) {
       this.setState({weapons: weapons});
     }).bind(this) );
-    utils.ajax('/armor').then( (function (armors) {
+
+    io.socket.get('/armor', {}, ( function (armors) {
       this.setState({armors: armors});
     }).bind(this) );
   },
@@ -25,16 +26,16 @@ var CharacterEquipment = React.createClass({
     this.setState({character: props.character});
   },
   getEquippedWeapon: function () {
-    return this.state.character.weapon ? this.state.character.weapon : {};
+    return this.state.character.weapon ? this.state.character.weapon : { id: -1 };
   },
   getEquippedArmor: function () {
-    return this.state.character.armor ? this.state.character.armor : {};
+    return this.state.character.armor ? this.state.character.armor : { id: -1 };
   },
   onArmorSelected: function (e) {
     if ( e.target.value == -1 ) {
-     io.socket.delete(
-      '/character/'+this.state.character.id+'/armor',
-      {}
+     io.socket.put(
+      '/character/'+this.state.character.id,
+      { armor: null },
       (function (character) {
         this.setState({character: character});
       }).bind(this));
@@ -49,18 +50,19 @@ var CharacterEquipment = React.createClass({
   },
   onWeaponSelected: function (e) {
     if ( e.target.value == -1 ) {
-     io.socket.delete(
-      '/character/'+this.state.character.id+'/weapon',
-      {}
+     io.socket.put(
+      '/character/'+this.state.character.id,
+      { weapon: null },
       (function (character) {
+        console.log(character);
         this.setState({character: character});
       }).bind(this));
     } else {
      io.socket.put(
       '/character/'+this.state.character.id,
       { weapon: e.target.value },
-      (function (resp) {
-        console.log('weapon updated', resp);
+      (function (character) {
+        this.setState({character: character})
       }).bind(this));
     }
   },
@@ -71,9 +73,8 @@ var CharacterEquipment = React.createClass({
       <table className="stats">
         <tr>
           <th>Armor</th>
-          <td>{this.getEquippedArmor().name}</td>
           <td>
-            <select onChange={this.onArmorSelected}>
+            <select onChange={this.onArmorSelected} value={this.getEquippedArmor().id}>
               <option value="-1">None</option>
               {this.state.armors.map(function (armors) {
                 return <option key={armors.id} value={armors.id}>{armors.name}</option>;
@@ -83,9 +84,8 @@ var CharacterEquipment = React.createClass({
         </tr>
         <tr>
           <th>Weapon</th>
-          <td>{this.getEquippedWeapon().name}</td>
           <td>
-            <select onChange={this.onWeaponSelected}>
+            <select onChange={this.onWeaponSelected} value={this.getEquippedWeapon().id}>
               <option value="-1">None</option>
               {this.state.weapons.map(function (weapon) {
                 return <option key={weapon.id} value={weapon.id}>{weapon.name}</option>;

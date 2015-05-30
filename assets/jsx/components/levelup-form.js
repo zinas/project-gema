@@ -70,16 +70,19 @@ var LevelupForm = React.createClass({
   },
   saveCharacter: function (e) {
     io.socket.put('/character/'+this.state.character.id, {
-      aim: this.state.character.aim
-    }, function ( character ) {
-      console.log('char updated', character);
+      aim: this.state.character.aim,
+      speed: this.state.character.speed,
+      stamina: this.state.character.stamina
+    }, function ( character , resp) {
     });
 
-    // utils
-    //   .ajax('/character/'+this.state.character.id, this.state.character, 'PUT')
-    //   .then(function (results) {
-    //     console.log('save results', results);
-    //   });
+    this.state.character.skills.forEach( (function (s) {
+      io.socket.put('/characterSkill/'+s.id, {
+        level: s.level,
+      }, function ( skill , resp) {
+        console.log(skill);
+      });
+    }).bind(this) );
   },
   componentDidMount: function () {
     this.reloadState(this.props);
