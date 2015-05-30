@@ -29,6 +29,10 @@ module.exports = {
 
   levelup: function (req, res) {
     return res.view();
+  },
+
+  inventory: function (req, res) {
+    return res.view();
   }
 };
 

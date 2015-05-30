@@ -23,24 +23,20 @@ module.exports = {
 
     level: {
       type: 'integer',
-      required: true,
       defaultsTo: 1
     },
 
     xp: {
       type: 'integer',
-      required: true,
       defaultsTo: 0
     },
 
     currentHP: {
-      type: 'integer',
-      required: true
+      type: 'integer'
     },
 
     maxHP: {
-      type: 'integer',
-      required: true
+      type: 'integer'
     },
 
     // ideas on what to affect:
@@ -70,9 +66,8 @@ module.exports = {
     },
 
     ///////// Inventory slots
-    rightHand: { model: 'weapon' },
-    leftHand: { model: 'gadget' },
-    body: { model: 'armor' },
+    weapon: { model: 'weapon' },
+    armor: { model: 'armor' },
 
     ///////// Implant slots
     head: { model: 'implant' },
@@ -143,7 +138,7 @@ module.exports = {
     }
   },
 
-  beforeValidate: function (model, next) {
+  beforeCreate: function ( model, next ) {
     var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
       return prof.ID === model.profession;
     });
@@ -152,6 +147,21 @@ module.exports = {
     model.currentHP = model.maxHP;
 
     next();
+  },
+
+  beforeUpdate: function ( model, next ) {
+    if ( model.level ) {
+      Character.findOne({id: this.update.arguments[0]}).exec(function (err, character) {
+        var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
+          return prof.ID === character.profession;
+        });
+
+        model.maxHP = model.level * profession.HP_PER_LEVEL;
+
+        next();
+      });
+
+    }
   },
 
   afterCreate: function (character, next) {
@@ -163,6 +173,7 @@ module.exports = {
         }).exec(function () {});
       });
     });
+
     next();
   }
 };

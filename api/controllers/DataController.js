@@ -13,7 +13,6 @@ module.exports = {
 
     this.weapons();
     this.armors();
-    this.gadgets();
     this.implants();
 
     return res.json({});
@@ -86,7 +85,7 @@ module.exports = {
       name: 'Glock 30',
       damage: 8,
       modifiers: [
-        { type: 'toHit', value: 5}
+        { type: 'combat', target:'toHit', value: 5 }
       ]
     }).exec(function () {});
 
@@ -94,8 +93,8 @@ module.exports = {
       name: 'FMK-3',
       damage: 10,
       modifiers: [
-        { type: 'combat', target:'toHit', value: -5},
-        { type: 'combat', target:'crit', val: 3}
+        { type: 'combat', target:'toHit', value: -5 },
+        { type: 'combat', target:'crit', value: 3 }
       ]
     }).exec(function () {});
 
@@ -103,7 +102,7 @@ module.exports = {
       name: 'Benelli M3 Super 90',
       damage: 4,
       modifiers: [
-        { type: 'combat', target:'damage', value: 6}
+        { type: 'combat', target:'damage', value: 6 }
       ]
     }).exec(function () {});
   },
@@ -115,21 +114,12 @@ module.exports = {
     }).exec(function () {});
   },
 
-  gadgets: function () {
-    Gadget.create({
-      name: 'Night vision goggles',
-      modifiers: [
-        { type: 'stat', target: 'aim', value: 5}
-      ],
-    }).exec(function () {});
-  },
-
   implants: function () {
     Implant.create({
       name: 'Reflex module',
       slot: 'head',
       modifiers: [
-        { type: 'stat', target: 'speed', value: 5}
+        { type: 'stat', target: 'speed', value: 5 }
       ],
     }).exec(function () {});
 
@@ -137,7 +127,7 @@ module.exports = {
       name: 'Heart pump',
       slot: 'heart',
       modifiers: [
-        { type: 'round', target: 'hp', value: 5}
+        { type: 'round', target: 'hp', value: 5 }
       ],
     }).exec(function () {});
   }
