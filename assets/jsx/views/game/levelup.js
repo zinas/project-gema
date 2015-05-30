@@ -5,7 +5,15 @@ var
 
 var LevelupView = React.createClass({
   getInitialState: function () {
-    return { character: {name: ''} };
+    return {
+      character: {
+        aim: 10,
+        speed: 10,
+        stamina: 10,
+        level: 1,
+        skills: []
+      }
+    };
   },
   onCharacterUpdated: function (character) {
     this.setState({character: character});

@@ -19,11 +19,14 @@ var LevelupForm = React.createClass({
     this.setState({
       character: props.character
     });
-    utils.ajax('/skill', {
-      profession: props.character.profession
-    }).then( (function (skills) {
+    io.socket.get('/skill', {
+      or: [
+        {profession: props.character.profession},
+        {profession: 'all'}
+      ]
+    }, (function (skills) {
       this.setState({skills: skills});
-    }).bind(this) );
+    }).bind(this));
   },
   getUnassignedAttributes: function () {
     return (
@@ -66,11 +69,17 @@ var LevelupForm = React.createClass({
     this.setState({character: character});
   },
   saveCharacter: function (e) {
-    utils
-      .ajax('/character/'+this.state.character.id, this.state.character, 'PUT')
-      .then(function (results) {
-        console.log('save results', results);
-      });
+    io.socket.put('/character/'+this.state.character.id, {
+      aim: this.state.character.aim
+    }, function ( character ) {
+      console.log('char updated', character);
+    });
+
+    // utils
+    //   .ajax('/character/'+this.state.character.id, this.state.character, 'PUT')
+    //   .then(function (results) {
+    //     console.log('save results', results);
+    //   });
   },
   componentDidMount: function () {
     this.reloadState(this.props);

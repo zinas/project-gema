@@ -1,7 +1,6 @@
 var
   React = require('React'),
-  ClassSelector = require('./class-selector'),
-  utils = require('./../../js/lib/utils');
+  ClassSelector = require('./class-selector');
 
 var CharacterCreateForm = React.createClass({
   onSubmit: function (e) {
@@ -11,9 +10,10 @@ var CharacterCreateForm = React.createClass({
       profession: React.findDOMNode(this.refs.profession).value
     };
 
-    utils.ajax('/character', data, 'POST').then(function (response) {
-      console.log('character created', response);
+    io.socket.post('/character', data, function (data) {
+      alert('Character created');
     });
+
 
     e.preventDefault();
   },
