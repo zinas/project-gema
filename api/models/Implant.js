@@ -12,11 +12,6 @@ module.exports = {
       type: 'string',
       required: true
     },
-    slot: {
-      type: 'string',
-      required: true,
-      enum: ['head', 'eye', 'heart']
-    },
     modifiers: {
       type: 'array'
     }

@@ -1,8 +1,7 @@
 var
   React = require('React'),
   CharacterSelector = require('./../../components/character-selector'),
-  CharacterEquipment = require('./../../components/character-equipment'),
-  CharacterImplants = require('./../../components/character-implants');
+  CharacterEquipment = require('./../../components/character-equipment');
 
 var InventoryView = React.createClass({
   getInitialState: function () {
@@ -18,7 +17,6 @@ var InventoryView = React.createClass({
         <CharacterEquipment
           character={this.state.character}
           onEquipmentChanged={this.onCharacterUpdated}/>
-        <CharacterImplants character={this.state.character} />
       </div>
     );
   }

@@ -68,11 +68,7 @@ module.exports = {
     ///////// Inventory slots
     weapon: { model: 'weapon' },
     armor: { model: 'armor' },
-
-    ///////// Implant slots
-    head: { model: 'implant' },
-    eye: { model: 'implant' },
-    heart: { model: 'implant' },
+    implant: { model: 'implant' },
 
     ///////// Combat stats
     attack: function () {

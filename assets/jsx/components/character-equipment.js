@@ -1,13 +1,13 @@
 var
-  React = require('React'),
-  utils = require('./../../js/lib/utils');
+  React = require('React');
 
 var CharacterEquipment = React.createClass({
   getInitialState: function () {
     return {
       character: {},
       weapons: [],
-      armors: []
+      armors: [],
+      implants: []
     }
   },
   componentWillMount: function () {
@@ -18,6 +18,10 @@ var CharacterEquipment = React.createClass({
     io.socket.get('/armor', {}, ( function (armors) {
       this.setState({armors: armors});
     }).bind(this) );
+
+    io.socket.get('/implant', {}, ( function (implants) {
+      this.setState({implants: implants});
+    }).bind(this) );
   },
   componentDidMount: function () {
     this.setState({character: this.props.character});
@@ -25,46 +29,28 @@ var CharacterEquipment = React.createClass({
   componentWillReceiveProps: function (props) {
     this.setState({character: props.character});
   },
-  getEquippedWeapon: function () {
-    return this.state.character.weapon ? this.state.character.weapon : { id: -1 };
-  },
-  getEquippedArmor: function () {
-    return this.state.character.armor ? this.state.character.armor : { id: -1 };
+  getEquipment: function (type) {
+    return this.state.character[type] ? this.state.character[type] : { id: -1 };
   },
   onArmorSelected: function (e) {
-    if ( e.target.value == -1 ) {
-     io.socket.put(
-      '/character/'+this.state.character.id,
-      { armor: null },
-      (function (character) {
-        this.setState({character: character});
-      }).bind(this));
-    } else {
-     io.socket.put(
-      '/character/'+this.state.character.id,
-      { armor: e.target.value },
-      (function (character) {
-        this.setState({character: character});
-      }).bind(this));
-    }
+    this.changeEquipment('armor', e.target.value);
   },
   onWeaponSelected: function (e) {
-    if ( e.target.value == -1 ) {
-     io.socket.put(
+    this.changeEquipment('weapon', e.target.value);
+  },
+  onImplantSelected: function (e) {
+    this.changeEquipment('implant', e.target.value);
+  },
+  changeEquipment: function (type, value) {
+    var params = {};
+    params[type] = value === -1 ? null : value;
+    io.socket.put(
       '/character/'+this.state.character.id,
-      { weapon: null },
-      (function (character) {
-        console.log(character);
-        this.setState({character: character});
-      }).bind(this));
-    } else {
-     io.socket.put(
-      '/character/'+this.state.character.id,
-      { weapon: e.target.value },
+      params,
       (function (character) {
         this.setState({character: character})
-      }).bind(this));
-    }
+      }).bind(this)
+    );
   },
   render: function() {
     return (
@@ -74,7 +60,7 @@ var CharacterEquipment = React.createClass({
         <tr>
           <th>Armor</th>
           <td>
-            <select onChange={this.onArmorSelected} value={this.getEquippedArmor().id}>
+            <select onChange={this.onArmorSelected} value={this.getEquipment('armor').id}>
               <option value="-1">None</option>
               {this.state.armors.map(function (armors) {
                 return <option key={armors.id} value={armors.id}>{armors.name}</option>;
@@ -85,10 +71,21 @@ var CharacterEquipment = React.createClass({
         <tr>
           <th>Weapon</th>
           <td>
-            <select onChange={this.onWeaponSelected} value={this.getEquippedWeapon().id}>
+            <select onChange={this.onWeaponSelected} value={this.getEquipment('weapon').id}>
               <option value="-1">None</option>
               {this.state.weapons.map(function (weapon) {
                 return <option key={weapon.id} value={weapon.id}>{weapon.name}</option>;
+              })}
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Implant</th>
+          <td>
+            <select onChange={this.onImplantSelected} value={this.getEquipment('implant').id}>
+              <option value="-1">None</option>
+              {this.state.implants.map(function (implant) {
+                return <option key={implant.id} value={implant.id}>{implant.name}</option>;
               })}
             </select>
           </td>

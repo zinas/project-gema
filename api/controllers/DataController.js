@@ -59,24 +59,22 @@ module.exports = {
       uuid: 'minor-drain',
       name: 'Minor drain',
       profession: 'fix',
-      action: {
-        type: 'active',
-        target: 'drain',
-        probability: 1,
-        dice: 2
-      }
+      action: { type: 'combat', target: 'drain', probability: 1, value: 2 }
     }).exec(function () {});
 
     Skill.create({
       uuid: 'lucky-shot',
       name: 'Lucky shot',
       profession: 'sol',
-      action: {
-        type: 'active',
-        target: 'damage',
-        probability: 1,
-        dice: 4
-      }
+      action: { type: 'combat', target: 'damage', probability: 1, value: 4 }
+    }).exec(function () {});
+
+    Skill.create({
+      uuid: 'durability',
+      name: 'Durability',
+      profession: 'all',
+      action:
+      { type: 'stat', target: 'stamina', value: 5 }
     }).exec(function () {});
   },
 
@@ -117,7 +115,6 @@ module.exports = {
   implants: function () {
     Implant.create({
       name: 'Reflex module',
-      slot: 'head',
       modifiers: [
         { type: 'stat', target: 'speed', value: 5 }
       ],
@@ -125,7 +122,6 @@ module.exports = {
 
     Implant.create({
       name: 'Heart pump',
-      slot: 'heart',
       modifiers: [
         { type: 'round', target: 'hp', value: 5 }
       ],
