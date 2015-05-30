@@ -87,33 +87,6 @@ module.exports = {
       );
     },
 
-    hitThreshold: function () {
-      return sails.config.constants.STATS.TO_HIT;
-    },
-    hitDamage: function () {
-      return Dice.roll(10);
-    },
-
-    grazeThreshold: function () {
-      return sails.config.constants.STATS.BASE_GRAZE;
-    },
-    grazeMult: function () {
-      return sails.config.constants.STATS.GRAZE_MULTIPLIER;
-    },
-    grazeDamage: function () {
-      return Math.round(this.hitDamage() * this.grazeMult());
-    },
-
-    critThreshold: function () {
-      return sails.config.constants.STATS.BASE_CRIT;
-    },
-    critMult: function () {
-      return sails.config.constants.STATS.CRIT_MULTIPLIER;
-    },
-    critDamage: function () {
-      return Math.round(this.hitDamage() * this.critMult());
-    },
-
     professionStats: function() {
       return _.find(sails.config.constants.PROFESSIONS, (function (prof) {
         return prof.ID === this.profession;
@@ -159,7 +132,12 @@ module.exports = {
   },
 
   afterCreate: function (character, next) {
-    Skill.find({profession: character.profession}).exec(function (error, skills) {
+    Skill.find({
+      or: [
+        {profession: character.profession},
+        {profession: 'all'}
+      ]
+    }).exec(function (error, skills) {
       _.forEach(skills, function (skill) {
         CharacterSkill.create({
           character: character.id,

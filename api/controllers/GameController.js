@@ -33,6 +33,32 @@ module.exports = {
 
   inventory: function (req, res) {
     return res.view();
+  },
+
+  test: function (req, res) {
+    Character
+      .findOne({name: 'Efi'})
+      .populateAll()
+      .then(function (character) {
+        var skillIds = [];
+        character.skills.forEach(function (skill) {
+          skillIds.push(skill.skill);
+        });
+
+        Skill.find({id: skillIds}).then(function (skills) {
+          character.skills = _.map(character.skills, function(item){
+              item.details = _.findWhere(skills, {id: item.skill})
+              return item;
+          });
+
+          var result = {
+            character: character,
+            stats: Statistics.generate(character)
+          };
+
+          res.json(result);
+        });
+    });
   }
 };
 

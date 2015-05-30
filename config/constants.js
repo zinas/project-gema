@@ -3,6 +3,7 @@ module.exports.constants = {
     MAX_ROUNDS: 100
   },
   STATS: {
+    BASE_DAMAGE: 4,
     TO_HIT: 50,
     BASE_CRIT: 95,
     CRIT_MULTIPLIER: 1.5,
