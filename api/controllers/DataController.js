@@ -26,6 +26,7 @@ module.exports = {
       width: 2,
       height: 2
     }).exec(function (error, level) {
+      console.log(error);
       Area.create({x:1, y:1, level:level.id}).exec(function () {});
       Area.create({x:1, y:2, level:level.id}).exec(function () {});
       Area.create({x:2, y:1, level:level.id}).exec(function () {});

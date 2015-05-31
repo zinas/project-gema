@@ -147,6 +147,28 @@ module.exports = {
     });
 
     next();
+  },
+
+  findOnePopulated : function ( params ) {
+    var promise = Character
+      .findOne(params)
+      .populateAll()
+      .then(function (character) {
+        var ids = [];
+        character.skills.forEach(function (skill) {
+          ids.push(skill.skill);
+        });
+
+        return Skill.find({id: ids}).then(function (skills) {
+          character.skills = _.map(character.skills, function(skill){
+              skill.details = _.findWhere(skills, {id: skill.skill})
+              return skill;
+          });
+
+          return character;
+        });
+      });
+    return promise;
   }
 };
 

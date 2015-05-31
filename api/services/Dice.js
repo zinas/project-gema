@@ -1,7 +1,9 @@
+var math = require('mathjs');
+
 module.exports = {
-  roll: function (sides) {
-    sides = sides || 100;
-    return Math.floor(Math.random() * sides) + 1;
+  roll: function (max) {
+    max = max || 100;
+    return math.round(math.random([1, max]), 4);
   },
 
   check: function (p) {
