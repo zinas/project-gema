@@ -36,6 +36,7 @@ module.exports = {
   },
 
   test: function (req, res) {
+    // return res.json({});
     Character
       .findOne({name: 'Efi'})
       .populateAll()

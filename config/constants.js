@@ -1,4 +1,5 @@
 module.exports.constants = {
+  ROUNDING_DIGITS: 4,
   COMBAT: {
     MAX_ROUNDS: 100
   },

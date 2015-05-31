@@ -37,6 +37,7 @@
   "devDependencies": {
     "grunt-browserify": "^3.8.0",
     "grunt-react": "^0.12.2",
+    "mathjs": "^1.7.0",
     "react": "^0.13.3"
   }
 }

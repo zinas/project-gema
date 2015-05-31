@@ -65,6 +65,22 @@ module.exports = {
     }).exec(function () {});
 
     Skill.create({
+      uuid: 'accuracy',
+      name: 'Accuracy',
+      profession: 'all',
+      action:
+      { type: 'stat', target: 'aim', value: 1 }
+    }).exec(function () {});
+
+    Skill.create({
+      uuid: 'alacrity',
+      name: 'Alacrity',
+      profession: 'all',
+      action:
+      { type: 'stat', target: 'speed', value: 1 }
+    }).exec(function () {});
+
+    Skill.create({
       uuid: 'durability',
       name: 'Durability',
       profession: 'all',
@@ -78,7 +94,7 @@ module.exports = {
       name: 'Glock 30',
       damage: 8,
       modifiers: [
-        { type: 'combat', target:'toHit', value: 5 }
+        { type: 'combat', target:'attack', value: 5 }
       ]
     }).exec(function () {});
 
@@ -86,8 +102,8 @@ module.exports = {
       name: 'FMK-3',
       damage: 10,
       modifiers: [
-        { type: 'combat', target:'toHit', value: -5 },
-        { type: 'combat', target:'crit', value: 3 }
+        { type: 'combat', target:'attack', value: -5 },
+        { type: 'combat', target:'critMult', value: 0.3 }
       ]
     }).exec(function () {});
 
