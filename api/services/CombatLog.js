@@ -3,8 +3,8 @@ function Log() {
 };
 
 Log.prototype.summary = function (char1, char2) {
-  this.log.push(`${char1.name} (Lvl.${char1.level}): <strong>${char1.currentHP}/${char1.maxHP}</strong> hit points. `);
-  this.log.push(`${char2.name} (Lvl.${char2.level}): <strong>${char2.currentHP}/${char2.maxHP}</strong> hit points. `);
+  this.log.push(`${char1.name} (Lvl.${char1.level}): <strong>${char1.currentHP.toFixed(sails.config.constants.ROUNDING_DIGITS)}/${char1.maxHP}</strong> hit points. `);
+  this.log.push(`${char2.name} (Lvl.${char2.level}): <strong>${char2.currentHP.toFixed(sails.config.constants.ROUNDING_DIGITS)}/${char2.maxHP}</strong> hit points. `);
 }
 
 Log.prototype.init = function (character) {
@@ -12,38 +12,38 @@ Log.prototype.init = function (character) {
 }
 
 Log.prototype.hit = function (attacker, defender, roll) {
-  this.log.push(`${attacker.name} rolls ${roll} and <span class="hit">hits</span>.`);
+  this.log.push(`${attacker.name} rolls ${roll.toFixed(sails.config.constants.ROUNDING_DIGITS)} and <span class="hit">hits</span>.`);
 };
 
 Log.prototype.crit = function (attacker, defender, roll) {
-  this.log.push(`${attacker.name} rolls ${roll} and <span class="crit">CRITS</span>!`);
+  this.log.push(`${attacker.name} rolls ${roll.toFixed(sails.config.constants.ROUNDING_DIGITS)} and <span class="crit">CRITS</span>!`);
 };
 
 Log.prototype.graze = function (attacker, defender, roll) {
-  this.log.push(`${attacker.name} rolls ${roll} and <span class="graze">GRAZES</span>!`);
+  this.log.push(`${attacker.name} rolls ${roll.toFixed(sails.config.constants.ROUNDING_DIGITS)} and <span class="graze">GRAZES</span>!`);
 };
 
 Log.prototype.miss = function (attacker, defender, roll) {
-  this.log.push(`${attacker.name} rolls ${roll} and misses.`);
+  this.log.push(`${attacker.name} rolls ${roll.toFixed(sails.config.constants.ROUNDING_DIGITS)} and misses.`);
 };
 
 Log.prototype.damage = function (attacker, defender, roll) {
-  this.log.push(`${attacker.name} damages ${defender.name} for <strong>${roll}</strong> damage.`);
+  this.log.push(`${attacker.name} damages ${defender.name} for <strong>${roll.toFixed(sails.config.constants.ROUNDING_DIGITS)}</strong> damage.`);
   this.hp(defender);
 };
 
 Log.prototype.hp = function (character) {
-  this.log.push(`${character.name} now has ${character.currentHP} hit points left.`);
+  this.log.push(`${character.name} now has ${character.currentHP.toFixed(sails.config.constants.ROUNDING_DIGITS)} hit points left.`);
 };
 
 Log.prototype.result = function (winner, looser) {
   this.log.push(`<span class="sep">============ Result ============</span>`);
   this.log.push(`${looser.name} is dead.`);
-  this.log.push(`${winner.name} wins the duel with ${winner.currentHP} hit points left.`);
+  this.log.push(`${winner.name} wins the duel with ${winner.currentHP.toFixed(sails.config.constants.ROUNDING_DIGITS)} hit points left.`);
 };
 
 Log.prototype.skill = function (skill, attacker, val) {
-  this.log.push(`${attacker.name} triggers <span class="skill">${skill.name}</span> for ${val} ${skill.action.target}`);
+  this.log.push(`${attacker.name} triggers <span class="skill">${skill.details.name}</span> for ${val} ${skill.details.action.target}`);
 }
 
 Log.prototype.print = function () {

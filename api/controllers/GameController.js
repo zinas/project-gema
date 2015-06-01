@@ -40,30 +40,12 @@ module.exports = {
   },
 
   test: function (req, res) {
-    // return res.json({});
     Character
-      .findOne({name: 'Efi'})
-      .populateAll()
+      .findOnePopulated({name: 'Warrior'})
       .then(function (character) {
-        var skillIds = [];
-        character.skills.forEach(function (skill) {
-          skillIds.push(skill.skill);
-        });
-
-        Skill.find({id: skillIds}).then(function (skills) {
-          character.skills = _.map(character.skills, function(item){
-              item.details = _.findWhere(skills, {id: item.skill})
-              return item;
-          });
-
-          var result = {
-            character: character,
-            stats: Statistics.generate(character)
-          };
-
-          res.json(result);
-        });
-    });
+        character.stats = Statistics.generate(character);
+        res.json(character);
+      });
   }
 };
 

@@ -7,8 +7,6 @@ module.exports = {
       speed: character.speed,
       stamina: character.stamina,
 
-      maxHP: 0,
-
       attack: 0,
       defence: 0,
       damage: 0,
@@ -24,27 +22,39 @@ module.exports = {
     }, statsFromItems, statsFromSkills;
 
     statsFromItems = this.getStatsFromItems(character);
-    stats.aim += statsFromItems.aim;
-    stats.speed += statsFromItems.speed;
-    stats.stamina += statsFromItems.stamina;
+    stats = this._extendStats(stats, statsFromItems);
 
     statsFromSkills = this.getStatsFromSkills(character);
-    stats.aim += statsFromSkills.aim;
-    stats.speed += statsFromSkills.speed;
-    stats.stamina += statsFromSkills.stamina;
+    stats = this._extendStats(stats, statsFromSkills);
 
     stats.attack = this.calculateAttack(stats, character);
     stats.defence = this.calculateDefence(stats, character);
     stats.damage = this.calculateDamage(stats, character);
     stats.armor = this.calculateArmor(stats, character);
 
-    console.log(sails.config.constants.ROUNDING_DIGITS);
-
     return stats;
   },
 
+  _extendStats: function (original, addition) {
+    var keys = [
+      'aim', 'speed', 'stamina', 'attack', 'defence',
+      'hitThreshold', 'grazeThreshold', 'grazeMult',
+      'critThreshold', 'critMult'
+    ];
+
+    keys.forEach(function (key) {
+      if ( addition[key] ) {
+        original[key] += addition[key];
+      }
+    });
+
+    return original;
+  },
+
   calculateAttack: function (stats, character) {
+
     return math.round(
+      stats.attack +
       character.level *
       character.professionStats().ATTACK_PER_LEVEL *
       (1 + ( (stats.aim*3/4 + stats.speed/4) - 10)/100 )
@@ -53,6 +63,7 @@ module.exports = {
 
   calculateDefence: function (stats, character) {
     return math.round(
+      stats.defence +
       character.level *
       character.professionStats().DEFENCE_PER_LEVEL *
       (1 + ( (stats.speed*3/4 + stats.stamina/4) - 10)/100 )
@@ -82,51 +93,30 @@ module.exports = {
   },
 
   getStatsFromSkills: function (character) {
-    var stats = {
-      aim: 0,
-      speed: 0,
-      stamina: 0
-    };
+    var stats = {};
 
     character.skills.forEach(function (skill) {
       if ( skill.details.action.type === 'stat' ) {
-        stats[skill.details.action.target] += skill.details.action.value * skill.level;
+        stats[skill.details.action.target] = stats[skill.details.action.target] || 0;
+        stats[skill.details.action.target] = skill.details.action.value * skill.level;
       }
     });
 
     return stats;
   },
   getStatsFromItems: function (character) {
-    var stats = {
-      aim: 0,
-      speed: 0,
-      stamina: 0
-    };
+    var stats = {};
 
-    if ( character.weapon && character.weapon.modifiers ) {
-      character.weapon.modifiers.forEach(function (mod) {
-        if ( mod.type === 'stat' ) {
-          stats[modifer.target] += mod.value;
-        }
-      });
-    }
-
-    if ( character.armor && character.armor.modifiers ) {
-      character.armor.modifiers.forEach(function (mod) {
-        if ( mod.type === 'stat' ) {
-          stats[modifer.target] += mod.value;
-        }
-      });
-    }
-
-    if ( character.implant && character.implant.modifiers ) {
-      character.implant.modifiers.forEach(function (mod) {
-        if ( mod.type === 'stat' ) {
-          stats[modifer.target] += mod.value;
-        }
-      });
-    }
-
+    sails.config.constants.ITEM_SLOTS.forEach(function (slot) {
+      if ( character[slot] && character[slot].modifiers ) {
+        character[slot].modifiers.forEach(function (modifier) {
+          if ( modifier.type === 'stat' ) {
+            stats[modifier.target] = stats[modifier.target] || 0;
+            stats[modifier.target] += modifier.value;
+          }
+        });
+      }
+    }, this);
     return stats;
   }
 };

@@ -69,24 +69,21 @@ module.exports = {
       uuid: 'accuracy',
       name: 'Accuracy',
       profession: 'all',
-      action:
-      { type: 'stat', target: 'aim', value: 1 }
+      action: { type: 'stat', target: 'aim', value: 1 }
     }).exec(function () {});
 
     Skill.create({
       uuid: 'alacrity',
       name: 'Alacrity',
       profession: 'all',
-      action:
-      { type: 'stat', target: 'speed', value: 1 }
+      action: { type: 'stat', target: 'speed', value: 1 }
     }).exec(function () {});
 
     Skill.create({
       uuid: 'durability',
       name: 'Durability',
       profession: 'all',
-      action:
-      { type: 'stat', target: 'stamina', value: 1 }
+      action: { type: 'stat', target: 'stamina', value: 1 }
     }).exec(function () {});
   },
 
@@ -95,7 +92,7 @@ module.exports = {
       name: 'Glock 30',
       damage: 8,
       modifiers: [
-        { type: 'combat', target:'attack', value: 5 }
+        { type: 'stat', target:'attack', value: 5 }
       ]
     }).exec(function () {});
 
@@ -103,8 +100,8 @@ module.exports = {
       name: 'FMK-3',
       damage: 10,
       modifiers: [
-        { type: 'combat', target:'attack', value: -5 },
-        { type: 'combat', target:'critMult', value: 0.3 }
+        { type: 'stat', target:'attack', value: -5 },
+        { type: 'stat', target:'critMult', value: 0.3 }
       ]
     }).exec(function () {});
 
@@ -112,7 +109,7 @@ module.exports = {
       name: 'Benelli M3 Super 90',
       damage: 4,
       modifiers: [
-        { type: 'combat', target:'damage', value: 6 }
+        { type: 'stat', target:'damage', value: 6 }
       ]
     }).exec(function () {});
   },
@@ -135,7 +132,7 @@ module.exports = {
     Implant.create({
       name: 'Heart pump',
       modifiers: [
-        { type: 'round', target: 'hp', value: 5 }
+        { type: 'combat', target: 'heal', value: 5, probability: 100 }
       ],
     }).exec(function () {});
   }

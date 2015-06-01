@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+var math = require('mathjs');
 
 function Fight(char1, char2) {
   this.char1 = char1;
@@ -16,18 +17,17 @@ Fight.prototype.resolve = function () {
   ) {
     this.log.roundStart(this.round);
     this.executeRound();
-
-    if ( this.char1.currentHP <= 0 ) {
-      winner = this.char2;
-      looser = this.char1;
-    } else {
-      winner = this.char1;
-      looser = this.char2;
-    }
-    this.log.result(winner, looser);
-
     this.round++;
   }
+
+  if ( this.char1.currentHP <= 0 ) {
+    winner = this.char2;
+    looser = this.char1;
+  } else {
+    winner = this.char1;
+    looser = this.char2;
+  }
+  this.log.result(winner, looser);
 };
 
 Fight.prototype.executeRound = function () {

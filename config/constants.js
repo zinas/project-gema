@@ -1,5 +1,5 @@
 module.exports.constants = {
-  ROUNDING_DIGITS: 4,
+  ROUNDING_DIGITS: 3,
   COMBAT: {
     MAX_ROUNDS: 100
   },
@@ -15,6 +15,7 @@ module.exports.constants = {
     ATTRIBUTE_POINTS: 3,
     SKILL_POINTS: 2
   },
+  ITEM_SLOTS: ['weapon', 'armor', 'implant'],
   PROFESSIONS: [
     {
       ID: 'fix',
