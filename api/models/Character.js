@@ -101,6 +101,10 @@ module.exports = {
       model: 'area'
     },
 
+    continent: {
+      model: 'level'
+    },
+
     skills: {
       collection: 'characterSkill',
       via: 'character'

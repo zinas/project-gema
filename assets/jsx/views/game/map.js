@@ -5,14 +5,14 @@ var
 var MapView = React.createClass({
   getInitialState: function () {
     return {
-      character: {},
+      character: {
+        location: {x: 1, y: 1},
+        continent: {height: 1, width: 1}
+      },
       others: []
     };
   },
   componentWillMount:function () {
-
-  },
-  refreshAreaCharacters: function () {
 
   },
   removeListeners: function () {
@@ -40,6 +40,52 @@ var MapView = React.createClass({
       this.addListeners();
     }).bind(this) );
   },
+  move: function (e) {
+    var coords = {
+      x: this.state.character.location.x,
+      y: this.state.character.location.y
+    };
+
+    switch ( e.target.getAttribute('data-direction') ) {
+      case 'up':
+        coords.y += 1;
+      case 'down':
+        coords.y -= 1;
+      case 'left':
+        coords.x -= 1;
+      case 'right':
+        coords.y += 1;
+    }
+
+    this.removeListeners();
+    io.socket.post(
+      '/character/move',
+      {coords: coords, id: this.state.character.id},
+      (function (character) {
+        this.setState({character: character}, (function () {
+          this.fetchOthers();
+          this.addListeners();
+        }).bind(this) );
+      }).bind(this));
+  },
+  canIMove: function (direction) {
+    var
+      level = this.state.character.continent,
+      area = this.state.character.location;
+
+    switch (direction) {
+      case 'up':
+        return area.y < level.height;
+      case 'down':
+        return area.y > 1;
+      case 'left':
+        return area.x > 1;
+      case 'right':
+        return area.x <= level.width;
+    }
+
+    return false;
+  },
   render: function() {
     return (
       <div>
@@ -51,12 +97,23 @@ var MapView = React.createClass({
           return <div>{character.name}</div>
         })}
         <br/><br/>
-        <button onClick={this.move} data-direction="up">Move Up</button>
-        <button onClick={this.move} data-direction="down">Move Down</button>
-        <button onClick={this.move} data-direction="left">Move Down</button>
-        <button onClick={this.move} data-direction="right">Move Down</button>
-        <br />
-        <button onClick={this.closeSocket}>CloseSockets</button>
+        <button
+          onClick={this.move}
+          disabled={!this.canIMove('up')}
+          data-direction="up">Up</button>
+        <button
+          onClick={this.move}
+          disabled={!this.canIMove('down')}
+          data-direction="down">Down</button>
+        <br/>
+        <button
+          onClick={this.move}
+          disabled={!this.canIMove('left')}
+          data-direction="left">Left</button>
+        <button
+        onClick={this.move}
+        disabled={!this.canIMove('right')}
+        data-direction="right">Right</button>
       </div>
     );
   }

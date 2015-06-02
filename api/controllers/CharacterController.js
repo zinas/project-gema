@@ -6,4 +6,12 @@
  */
 
 module.exports = {
+  move: function (req, res) {
+    Character.move({
+      id: req.param('id')
+    }, req.param('coords'))
+    .then(function (character) {
+      res.json(character);
+    });
+  }
 };
