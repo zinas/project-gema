@@ -39,6 +39,10 @@ module.exports = {
     return res.view();
   },
 
+  map: function (req, res) {
+    return res.view();
+  },
+
   test: function (req, res) {
     Character
       .findOnePopulated({name: 'Warrior'})

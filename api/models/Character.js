@@ -127,6 +127,10 @@ module.exports = {
 
         model.maxHP = model.level * profession.HP_PER_LEVEL;
       }
+      if ( model.location && model.location !== character.location) {
+        sails.sockets.blast('character-left-area-'+character.location, {character:character});
+        sails.sockets.blast('character-joined-area-'+model.location, {character:character});
+      }
       next();
     });
   },

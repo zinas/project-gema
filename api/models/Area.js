@@ -20,6 +20,10 @@ module.exports = {
     },
     level: {
       model: 'level'
+    },
+    characters: {
+      collection: 'character',
+      via: 'location'
     }
   }
 };
