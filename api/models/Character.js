@@ -123,7 +123,7 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
-    Character.findOne({id: this.update.arguments[0]}).exec(function (err, character) {
+    Character.findOne(this.update.arguments[0]).then(function (character) {
       if ( model.level ) {
         var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
           return prof.ID === character.profession;
@@ -177,6 +177,19 @@ module.exports = {
         });
       });
     return promise;
+  },
+
+  move: function (where, coords) {
+    return Area.findOne({
+      x: coords.x,
+      y: coords.y
+    }).then(function (area) {
+      return Character.update(where, {
+        location: area.id
+      }).then(function ( character ) {
+        return Character.findOne(character.id).populateAll();
+      });
+    });
   }
 };
 

@@ -49,12 +49,16 @@ var MapView = React.createClass({
     switch ( e.target.getAttribute('data-direction') ) {
       case 'up':
         coords.y += 1;
+        break;
       case 'down':
         coords.y -= 1;
+        break;
       case 'left':
         coords.x -= 1;
+        break;
       case 'right':
         coords.y += 1;
+        break;
     }
 
     this.removeListeners();

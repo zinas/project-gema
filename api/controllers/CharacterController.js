@@ -11,6 +11,7 @@ module.exports = {
       id: req.param('id')
     }, req.param('coords'))
     .then(function (character) {
+      console.log('sending back character', character);
       res.json(character);
     });
   }
