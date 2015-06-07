@@ -24,6 +24,18 @@ module.exports = {
       type: 'string'
     },
 
+    rank: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 1
+    },
+
+    maxLevelAllowed: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 1
+    },
+
     width: {
       type: 'integer',
       required: true,

@@ -23,14 +23,21 @@ module.exports = {
       uuid: 'new-york',
       name: 'New York',
       description: 'Streets of New York',
+      rank: 1,
+      maxLevelAllowed: 10,
       width: 2,
       height: 2
     }).exec(function (error, level) {
       console.log(error);
       Area.create({x:1, y:1, level:level.id}).exec(function () {});
       Area.create({x:1, y:2, level:level.id}).exec(function () {});
+      Area.create({x:1, y:3, level:level.id}).exec(function () {});
       Area.create({x:2, y:1, level:level.id}).exec(function () {});
       Area.create({x:2, y:2, level:level.id}).exec(function () {});
+      Area.create({x:2, y:3, level:level.id}).exec(function () {});
+      Area.create({x:3, y:1, level:level.id}).exec(function () {});
+      Area.create({x:3, y:2, level:level.id}).exec(function () {});
+      Area.create({x:3, y:3, level:level.id}).exec(function () {});
     });
 
   },

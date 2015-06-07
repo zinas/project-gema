@@ -119,7 +119,19 @@ module.exports = {
     model.maxHP = model.level * profession.HP_PER_LEVEL;
     model.currentHP = model.maxHP;
 
-    next();
+    Level.findOne({rank: 1}).populateAll().then(function (level) {
+      var area = _.find(level.areas, function (area) {
+        return area.x === 1 && area.y === 1;
+      });
+
+      console.log('level', level);
+      console.log('area', area);
+
+      model.continent = level.id;
+      model.location = area.id;
+
+      next();
+    });
   },
 
   beforeUpdate: function ( model, next ) {
@@ -193,3 +205,9 @@ module.exports = {
   }
 };
 
+// Validations to do
+// 1) if equiping weapon, check whether it belongs to him
+// 2) if changing continent, check for the maxAllowedLevel
+// 3) if changing area, check if area exists in the current continent
+// 4) if changing attibutes, check if the sum isnt over the level allowance
+// 5) if changing skills, check if the sum isnt over the level allowance
