@@ -50,6 +50,10 @@ module.exports = {
         character.stats = Statistics.generate(character);
         res.json(character);
       });
+  },
+
+  index: function (req, res) {
+    return res.view();
   }
 };
 

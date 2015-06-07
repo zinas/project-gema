@@ -32,14 +32,12 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  },
+  '/': { controller: 'Game', action: 'index' },
 
   // Auth related routes
-  'get /login': 'AuthController.login',
-  'get /logout': 'AuthController.logout',
-  'get /register': 'AuthController.register',
+  'get /login': { controller: 'Auth', action: 'login', locals: {withMenu: false} },
+  'get /logout': { controller: 'Auth', action: 'logout', locals: {withMenu: false} },
+  'get /register': { controller: 'Auth', action: 'register', locals: {withMenu: false} },
 
   'post /auth/local': 'AuthController.callback',
   'post /auth/local/:action': 'AuthController.callback',

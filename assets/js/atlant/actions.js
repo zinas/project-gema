@@ -309,6 +309,7 @@ var page_actions = function(){
 }
 
 $(document).ready(function(){
+    alert('page_actions');
     page_actions();
 });
 
@@ -544,6 +545,8 @@ function x_navigation_minimize(action){
 }
 
 function x_navigation(){
+
+    alert('aaaa');
 
     $(".x-navigation-control").click(function(){
         $(this).parents(".x-navigation").toggleClass("x-navigation-open");

@@ -1,35 +1,34 @@
-<% if (errors) {%>
-<% errors.forEach(function (error) { %>
-<%= __(error) %>
-<% }) %>
-<% } %>
-
-<!-- <form role="form" action="/auth/local/register" method="post">
-  <input type="text" name="username" placeholder="Username">
-  <input type="text" name="email" placeholder="Email">
-  <input type="password" name="password" placeholder="Password">
-  <button type="submit">Sign up</button>
-</form>
--->
-
 <div class="registration-container registration-extended">
   <div class="registration-box animated fadeInDown">
-    <div class="registration-logo"></div>
+        <div class="well">
+          <h3>TheGrid</h3>
+          <p>Please keep in mind that the game is <strong>under development</strong>.</p>
+          <p>This means that there are plenty of bugs, half finished features, little balance and
+            that database wipes happen regularly.</p>
+          <p>Any feedback will be much appreciated. Feel free to drop an email: zinas.nikos-gmail-com</p>
+        </div>
     <div class="registration-body">
+      <% if ( errors ) {%>
+        <% errors.forEach(function (error) { %>
+          <div class="alert alert-danger">
+            <p><%= __(error) %></p>
+          </div>
+        <% }) %>
+      <% } %>
 
       <div class="row">
         <div class="col-md-6">
 
-         <div class="registration-title"><strong>Welcome</strong>, Please login</div>
+         <div class="registration-title"><strong>Already a member?</strong> Please login</div>
          <form action="index.html" class="form-horizontal" method="post">
           <div class="form-group">
             <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="Username"/>
+              <input type="text" class="form-control" name="identifier" placeholder="Username or email"/>
             </div>
           </div>
           <div class="form-group">
             <div class="col-md-12">
-              <input type="password" class="form-control" placeholder="Password"/>
+              <input type="password" name="password" class="form-control" placeholder="Password"/>
             </div>
           </div>
           <div class="form-group push-down-30">
@@ -41,51 +40,43 @@
             </div>
           </div>
         </form>
-
       </div>
       <div class="col-md-6">
 
-        <div class="registration-title"><strong>Registration</strong>, use form below</div>
-        <div class="registration-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In odio mauris, maximus ac sapien sit amet.</div>
-        <form action="index.html" class="form-horizontal" method="post">
+        <div class="registration-title"><strong>No account</strong>? Register now</div>
+        <form action="/auth/local/register" class="form-horizontal" method="post">
 
           <h4>Personal info</h4>
           <div class="form-group">
             <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="First Name"/>
+              <input type="text" class="form-control" placeholder="First Name" name="firstname"/>
             </div>
           </div>
           <div class="form-group">
             <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="Surname"/>
+              <input type="text" class="form-control" placeholder="Surname" name="lastname" />
             </div>
           </div>
           <div class="form-group">
             <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="E-mail"/>
+              <input type="text" class="form-control" placeholder="E-mail" name="email" required />
             </div>
           </div>
 
           <h4>Authentication</h4>
           <div class="form-group">
             <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="Login"/>
+              <input type="text" class="form-control" placeholder="Username" name="username" />
             </div>
           </div>
           <div class="form-group">
-            <div class="col-md-12">
-              <input type="password" class="form-control" placeholder="Password"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-12">
-              <input type="password" class="form-control" placeholder="Re-Password"/>
+            <div class="col-md-13">
+              <input type="password" class="form-control" placeholder="Password" name="password" />
             </div>
           </div>
 
           <div class="form-group push-up-30">
             <div class="col-md-6">
-              <a href="#" class="btn btn-link btn-block">Already have an account?</a>
             </div>
             <div class="col-md-6">
               <button class="btn btn-danger btn-block">Sign Up</button>
@@ -100,13 +91,8 @@
   </div>
 
   <div class="registration-footer">
-    <div class="pull-left">
+    <div class="text-center">
       &copy; 2015 thegrid
-    </div>
-    <div class="pull-right">
-      <a href="#">About</a> |
-      <a href="#">Privacy</a> |
-      <a href="#">Contact Us</a>
     </div>
   </div>
 </div>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="<%= (typeof withMenu === 'undefined') || withMenu ? '' : 'body-full-height'%>">
   <head>
-    <title>New Sails App</title>
+    <title>The Grid</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
     <!--
@@ -34,7 +36,11 @@
   </head>
 
   <body>
-    <%- body %>
+    <% if ((typeof withMenu === 'undefined') || withMenu) { %>
+      <%- partial('menu') %>
+    <% } else { %>
+      <%- body %>
+    <% } %>
 
 
 
@@ -106,6 +112,7 @@
 
     <script type="text/javascript" src="js/atlant/plugins.js"></script>
     <script type="text/javascript" src="js/atlant/actions.js"></script>
+    <script type="text/javascript" src="js/atlant/portlet.js"></script>
 
     <script src="/js/<%=req.options.controller%>-<%=req.options.action%>.js"></script>
   </body>
