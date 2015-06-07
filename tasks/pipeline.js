@@ -15,7 +15,8 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'styles/**/*.css'
+  'styles/inject/**/*.css',
+  'styles/importer.css'
 ];
 
 
@@ -24,8 +25,7 @@ var cssFilesToInject = [
 var jsFilesToInject = [
 
   // Load sails.io before everything else
-  'js/dependencies/sails.io.js',
-
+  'js/dependencies/sails.io.js'
   // Dependencies like jQuery, or Angular are brought in here
   // 'js/dependencies/**/*.js',
 
