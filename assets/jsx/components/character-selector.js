@@ -27,7 +27,7 @@ var ClassSelector = React.createClass({
   },
   render: function() {
     return (
-      <select onChange={this.change} ref="character">
+      <select className="form-control" onChange={this.change} ref="character">
         {this.state.characters.map(function (character) {
           return <option key={character.id} value={character.id}>{character.name} - lvl. {character.level}</option>
         })}

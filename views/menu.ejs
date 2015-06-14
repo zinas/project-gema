@@ -58,6 +58,7 @@
         </ul>
       </div>
       <div style="" class="page-content">
+        <% if ( typeof user !== 'undefined' ) { %>
         <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
           <li class="xn-icon-button pull-right last" data-js="account-menu">
             <a href="#"><span class="fa fa-power-off"></span></a>
@@ -76,6 +77,7 @@
             <a><%= user.email %></a>
           </li>
         </ul>
+        <% } %>
         <div class="content-frame">
           <div class="content-frame-top">
             <div class="page-title">

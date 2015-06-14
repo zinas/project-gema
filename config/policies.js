@@ -30,8 +30,8 @@ module.exports.policies = {
   // '*': true,
 
   GameController: {
-    '*' : ['passport', 'hasCharacter'],
-    createCharacter: ['passport']
+    '*' : ['passport', 'isLogged', 'hasCharacter'],
+    createCharacter: ['passport', 'isLogged']
   }
 
   /***************************************************************************
