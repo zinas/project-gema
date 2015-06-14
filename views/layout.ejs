@@ -66,7 +66,7 @@
     -->
 
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
 
 
@@ -99,21 +99,10 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
-    <script type="text/javascript" src="js/atlant/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="js/atlant/plugins/jquery/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/atlant/plugins/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/atlant/actions.js"></script>
 
-    <script type='text/javascript' src='js/atlant/plugins/noty/jquery.noty.js'></script>
-    <script type='text/javascript' src='js/atlant/plugins/noty/layouts/topRight.js'></script>
-    <script type='text/javascript' src='js/atlant/plugins/noty/themes/default.js'></script>
-
-    <script type="text/javascript" src="js/atlant/plugins/icheck/icheck.min.js"></script>
-
-
-    <script type="text/javascript" src="js/atlant/plugins.js"></script>
-    <script type="text/javascript" src="js/atlant/actions.js"></script>
-    <script type="text/javascript" src="js/atlant/portlet.js"></script>
-
-    <script src="/js/<%=req.options.controller%>-<%=req.options.action%>.js"></script>
+    <% console.log('>>>>>>>>>>', isJsx); if (typeof isJsx !== 'undefined' && isJsx === true ) { %>
+      <script src="/js/<%=req.options.controller%>-<%=req.options.action%>.js"></script>
+    <% } %>
   </body>
 </html>

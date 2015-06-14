@@ -1,19 +1,68 @@
-<% if (errors) {%>
-  <% errors.forEach(function (error) { %>
-    <%= __(error) %>
-  <% }) %>
-<% } %>
+<div class="login-container">
+  <% if ( errors ) {%>
+    <% errors.forEach(function (error) { %>
+      <div class="alert alert-danger">
+        <p><%= __(error) %></p>
+      </div>
+    <% }) %>
+  <% } %>
+  <div class="login-box animated fadeInDown">
+      <div class="well">
+        <h3>TheGrid</h3>
+        <p>Please keep in mind that the game is <strong>under development</strong>.</p>
+        <p>This means that there are plenty of bugs, half finished features, little balance and
+        that database wipes happen regularly.</p>
+        <p>Any feedback will be much appreciated. Feel free to drop an email: zinas.nikos-gmail-com</p>
+      </div>
+      <div class="login-body">
+      <div class="login-title"><strong>Log In</strong> to your account</div>
+      <form action="/auth/local" class="form-horizontal" method="post">
+        <div class="form-group">
+          <div class="col-md-12">
+            <input class="form-control" type="text" name="identifier" placeholder="Username or Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-6">
+            <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-info btn-block">Log In</button>
+          </div>
+        </div>
+        <div class="login-or">OR</div>
+        <div class="form-group">
+          <div class="col-md-4">
+            <a href="/auth/twitter" class="btn btn-info btn-block btn-twitter">
+              <span class="fa fa-twitter"></span> Twitter
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="/auth/facebook" class="btn btn-info btn-block btn-facebook">
+              <span class="fa fa-facebook"></span> Facebook
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="/auth/google" class="btn btn-info btn-block btn-google">
+              <span class="fa fa-google-plus"></span> Google
+            </a>
+          </div>
+        </div>
+        <div class="login-subtitle">
+          Don't have an account yet? <a href="/register">Create an account</a>
+        </div>
+      </form>
+    </div>
+    <div class="login-footer">
+      <div class="text-center">
+        &copy; 2015 thegrid
+      </div>
+    </div>
+  </div>
 
-<form role="form" action="/auth/local" method="post">
-  <input type="text" name="identifier" placeholder="Username or Email">
-  <input type="password" name="password" placeholder="Password">
-  <button type="submit">Sign in</button>
-</form>
-
-<% if (Object.keys(providers).length) {%>
-  <h4>You can also use one of these...</h4>
-
-  <% Object.keys(providers).forEach(function (key) { %>
-    <a href="/auth/<%= providers[key].slug %>" role="button"><%= providers[key].name %></a>
-  <% }) %>
-<% } %>
+</div>

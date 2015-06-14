@@ -1,49 +1,20 @@
-<div class="registration-container registration-extended">
-  <div class="registration-box animated fadeInDown">
-        <div class="well">
-          <h3>TheGrid</h3>
-          <p>Please keep in mind that the game is <strong>under development</strong>.</p>
-          <p>This means that there are plenty of bugs, half finished features, little balance and
-            that database wipes happen regularly.</p>
-          <p>Any feedback will be much appreciated. Feel free to drop an email: zinas.nikos-gmail-com</p>
-        </div>
-    <div class="registration-body">
-      <% if ( errors ) {%>
-        <% errors.forEach(function (error) { %>
-          <div class="alert alert-danger">
-            <p><%= __(error) %></p>
-          </div>
-        <% }) %>
-      <% } %>
-
-      <div class="row">
-        <div class="col-md-6">
-
-         <div class="registration-title"><strong>Already a member?</strong> Please login</div>
-         <form action="index.html" class="form-horizontal" method="post">
-          <div class="form-group">
-            <div class="col-md-12">
-              <input type="text" class="form-control" name="identifier" placeholder="Username or email"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-12">
-              <input type="password" name="password" class="form-control" placeholder="Password"/>
-            </div>
-          </div>
-          <div class="form-group push-down-30">
-            <div class="col-md-6">
-              <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
-            </div>
-            <div class="col-md-6">
-              <button class="btn btn-info btn-block">Log In</button>
-            </div>
-          </div>
-        </form>
+<div class="registration-container">
+  <% if ( errors ) {%>
+    <% errors.forEach(function (error) { %>
+      <div class="alert alert-danger">
+        <p><%= __(error) %></p>
       </div>
-      <div class="col-md-6">
-
-        <div class="registration-title"><strong>No account</strong>? Register now</div>
+    <% }) %>
+  <% } %>
+  <div class="registration-box animated fadeInDown">
+      <div class="well">
+        <h3>TheGrid</h3>
+        <p>Please keep in mind that the game is <strong>under development</strong>.</p>
+        <p>This means that there are plenty of bugs, half finished features, little balance and
+        that database wipes happen regularly.</p>
+        <p>Any feedback will be much appreciated. Feel free to drop an email: zinas.nikos-gmail-com</p>
+      </div>
+      <div class="registration-body">
         <form action="/auth/local/register" class="form-horizontal" method="post">
 
           <h4>Personal info</h4>
@@ -59,7 +30,7 @@
           </div>
           <div class="form-group">
             <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="E-mail" name="email" required />
+              <input type="email" class="form-control" placeholder="E-mail" name="email" required />
             </div>
           </div>
 
@@ -70,31 +41,26 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-md-13">
+            <div class="col-md-12">
               <input type="password" class="form-control" placeholder="Password" name="password" />
             </div>
           </div>
 
           <div class="form-group push-up-30">
             <div class="col-md-6">
+              <a href="/login" class="btn btn-link btn-block">Already have account?</a>
             </div>
             <div class="col-md-6">
               <button class="btn btn-danger btn-block">Sign Up</button>
             </div>
           </div>
-
         </form>
 
       </div>
-    </div>
-
+    <div class="registration-footer">
+      <div class="text-center">
+        &copy; 2015 thegrid
+      </div>
   </div>
-
-  <div class="registration-footer">
-    <div class="text-center">
-      &copy; 2015 thegrid
     </div>
   </div>
-</div>
-
-</div>

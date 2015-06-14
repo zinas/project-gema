@@ -28,7 +28,10 @@ module.exports = {
   },
 
   createCharacter: function (req, res) {
-    return res.view();
+    return res.view({
+      frameTitle: 'Create your character',
+      isJsx: true
+    });
   },
 
   levelup: function (req, res) {
@@ -40,7 +43,7 @@ module.exports = {
   },
 
   map: function (req, res) {
-    return res.view();
+    return res.view({frameTitle: 'Map'});
   },
 
   test: function (req, res) {
@@ -52,8 +55,8 @@ module.exports = {
       });
   },
 
-  index: function (req, res) {
-    return res.view();
+  explore: function (req, res) {
+    return res.view({frameTitle: 'Explore'});
   }
 };
 

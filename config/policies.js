@@ -26,8 +26,13 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': [ 'passport', /* your auth dependant policies go here */ ]
+  '*': [ 'passport', /* your auth dependant policies go here */ ],
   // '*': true,
+
+  GameController: {
+    '*' : ['passport', 'hasCharacter'],
+    createCharacter: ['passport']
+  }
 
   /***************************************************************************
   *                                                                          *

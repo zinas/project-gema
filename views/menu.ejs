@@ -2,45 +2,88 @@
       <div style="height: 852px;" class="page-sidebar scroll">
         <ul class="x-navigation">
           <li class="xn-logo">
-            <a href="index.html">ATLANT</a>
+            <a href="index.html">The Grid</a>
             <a href="#" class="x-navigation-control"></a>
           </li>
-          <li class="xn-title">Navigation</li>
+          <li class="xn-title">Arm heads-up display unit</li>
+          <li class="xn-profile">
+            <div class="profile">
+              <div class="profile-image">
+                <img src="/images/no-image.jpg" alt="John Doe">
+              </div>
+              <div class="profile-data">
+                <div class="profile-data-name">John Doe</div>
+                <div class="profile-data-title">Web Developer/Designer</div>
+              </div>
+            </div>
+          </li>
           <li>
-            <a href="index.html">
-              <span class="fa fa-desktop"></span>
-              <span class="xn-text">Dashboard</span>
+            <a href="/game/explore">
+              <span class="fa fa-globe"></span>
+              <span class="xn-text">Explore</span>
+            </a>
+          </li>
+          <li>
+            <a href="/game/character">
+              <span class="glyphicon glyphicon-dashboard"></span>
+              <span class="xn-text">Vital Signs</span>
+            </a>
+          </li>
+          <li>
+          </li>
+          <li>
+            <a href="/game/inventory">
+              <span class="fa fa-suitcase"></span>
+              <span class="xn-text">Equipment</span>
+            </a>
+          </li>
+          <li>
+            <a href="/encyclopedia">
+              <span class="fa fa-book"></span>
+              <span class="xn-text">Encyclopedia</span>
+            </a>
+          </li>
+          <li>
+            <a href="/game/guild">
+              <span class="fa fa-group"></span>
+              <span class="xn-text">Connections</span>
+            </a>
+          </li>
+          <li>
+            <a href="/game/news">
+              <span class="glyphicon glyphicon-volume-up"></span>
+              <span class="xn-text">Intelligence Network</span>
             </a>
           </li>
         </ul>
       </div>
       <div style="" class="page-content">
         <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
-          <li class="xn-icon-button">
-            <a href="#" class="x-navigation-minimize">
-              <span class="fa fa-dedent"></span>
-            </a>
+          <li class="xn-icon-button pull-right last" data-js="account-menu">
+            <a href="#"><span class="fa fa-power-off"></span></a>
+            <ul class="xn-drop-left animated zoomIn">
+              <li>
+                <a href="/account/settings"><span class="fa fa-wrench"></span> Account settings</a>
+              </li>
+              <li>
+                <a href="/logout" class="mb-control" data-box="#mb-signout">
+                  <span class="fa fa-sign-out"></span> Sign Out
+                </a>
+              </li>
+            </ul>
           </li>
-        </ul>
-        <ul class="breadcrumb push-down-0">
-          <li>
-            <a href="#">Link</a>
+          <li class="pull-right">
+            <a><%= user.email %></a>
           </li>
-          <li class="active">Active</li>
         </ul>
         <div class="content-frame">
           <div class="content-frame-top">
             <div class="page-title">
-              <h2><span class="fa fa-arrow-circle-o-left"></span> Frame Title</h2>
-            </div>
-            <div class="pull-right">
-              <button class="btn btn-default content-frame-right-toggle">
-                <span class="fa fa-bars"></span>
-              </button>
+              <h2 data-js="frame-title"><%= typeof frameTitle !== 'undefined' ? frameTitle : '' %></h2>
             </div>
           </div>
-          <div style="display: block; height: 710px;" class="content-frame-right"></div>
-          <div style="height: 770px;" class="content-frame-body content-frame-body-left">
+          <div style="display: block; min-height: 710px;" class="content-frame-right"></div>
+          <div class="content-frame-body content-frame-body-left">
             <%- body -%>
           </div>
         </div>
