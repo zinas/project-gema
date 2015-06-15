@@ -32,7 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { controller: 'Game', action: 'index' },
+  '/': { controller: 'Static', action: 'index' },
 
   // Auth related routes
   'get /login': { controller: 'Auth', action: 'login', locals: {withMenu: false} },
