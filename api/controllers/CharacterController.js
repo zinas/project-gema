@@ -6,6 +6,17 @@
  */
 
 module.exports = {
+  create: function (req, res) {
+    Character.create({
+      name: req.param('name'),
+      profession: req.param('profession')
+    }).exec(function (err, newInstance) {
+      if (err) return res.negotiate(err);
+
+      res.created(newInstance);
+    });
+  },
+
   move: function (req, res) {
     Character.move({
       id: req.param('id')

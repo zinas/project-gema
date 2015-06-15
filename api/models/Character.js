@@ -5,6 +5,8 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
+var Promise = require('bluebird');
+
 module.exports = {
 
   attributes: {
@@ -79,26 +81,27 @@ module.exports = {
   },
 
   beforeCreate: function ( model, next ) {
-    throw 'need to update beforeCreat for the profession';
-    var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
-      return prof.ID === model.profession;
-    });
+    var level = Level.findOne({rank: 1}).populateAll();
+    var profession = Profession.find(model.profession);
 
-    model.maxHP = model.level * profession.HP_PER_LEVEL;
-    model.currentHP = model.maxHP;
+    Promise
+    .all([profession, level])
+    .spread(function (profession, level) {
 
-    Level.findOne({rank: 1}).populateAll().then(function (level) {
+      // Set default values for location related properties
       var area = _.find(level.areas, function (area) {
         return area.x === 1 && area.y === 1;
       });
-
-      console.log('level', level);
-      console.log('area', area);
-
       model.continent = level.id;
       model.location = area.id;
 
+      // Set default values for profession related properties
+      model.maxHP = profession.hp;
+      model.currentHP = profession.hp;
+
       next();
+    }, function (error) {
+      next(error);
     });
   },
 
@@ -121,11 +124,10 @@ module.exports = {
   },
 
   afterCreate: function (character, next) {
-    throw 'need to update update for the profession';
     Skill.find({
       or: [
         {profession: character.profession},
-        {profession: 'all'}
+        {profession: null}
       ]
     }).exec(function (error, skills) {
       _.forEach(skills, function (skill) {

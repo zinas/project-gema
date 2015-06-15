@@ -26,10 +26,10 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': [ 'passport', /* your auth dependant policies go here */ ],
-  '*': false,
+  '*': [ 'passport', /* your auth dependant policies go here */ ],
+  // '*': false,
 
-  StatiController: {
+  StaticController: {
     '*': true,
   },
 
@@ -39,66 +39,67 @@ module.exports.policies = {
 
   GameController: {
     '*' : ['passport', 'isLogged', 'hasCharacter'],
-    createCharacter: ['passport', 'isLogged']
+    createCharacter: ['passport', 'isLogged', 'noCharacter']
   },
 
-  AreaController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // AreaController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  ArmorController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // ArmorController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  CharacterController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // CharacterController: {
+  //   '*': false,
+  //   'create':['passport', 'isLogged', 'noCharacter'],
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  CharacterSkillController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // CharacterSkillController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  DataController: {
-    '*': true,
-  },
+  // DataController: {
+  //   '*': true,
+  // },
 
-  ImplantController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // ImplantController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  LevelController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // LevelController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  ProfessionController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // ProfessionController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  SkillController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // SkillController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
 
-  WeaponController: {
-    '*': false,
-    'find':['passport', 'isLogged'],
-    'findOne':['passport', 'isLogged']
-  },
+  // WeaponController: {
+  //   '*': false,
+  //   'find':['passport', 'isLogged'],
+  //   'findOne':['passport', 'isLogged']
+  // },
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
