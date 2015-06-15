@@ -26,14 +26,79 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': [ 'passport', /* your auth dependant policies go here */ ],
-  // '*': true,
+  // '*': [ 'passport', /* your auth dependant policies go here */ ],
+  '*': false,
+
+  StatiController: {
+    '*': true,
+  },
+
+  AuthController: {
+    '*': ['passport']
+  },
 
   GameController: {
     '*' : ['passport', 'isLogged', 'hasCharacter'],
     createCharacter: ['passport', 'isLogged']
-  }
+  },
 
+  AreaController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  ArmorController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  CharacterController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  CharacterSkillController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  DataController: {
+    '*': true,
+  },
+
+  ImplantController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  LevelController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  ProfessionController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  SkillController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
+
+  WeaponController: {
+    '*': false,
+    'find':['passport', 'isLogged'],
+    'findOne':['passport', 'isLogged']
+  },
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
