@@ -16,6 +16,7 @@ module.exports = {
       type: 'integer',
       required: true
     },
+    description: { type: 'string', },
     modifiers: {
       type: 'array'
     }

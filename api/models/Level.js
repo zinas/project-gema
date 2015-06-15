@@ -20,9 +20,7 @@ module.exports = {
       unique: true
     },
 
-    description: {
-      type: 'string'
-    },
+    description: { type: 'string' },
 
     rank: {
       type: 'integer',

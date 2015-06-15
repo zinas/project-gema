@@ -15,12 +15,6 @@ module.exports = {
       unique: true
     },
 
-    profession: {
-      type: 'string',
-      required: true,
-      enum: ['fix', 'sol', 'med']
-    },
-
     level: {
       type: 'integer',
       defaultsTo: 1
@@ -70,40 +64,13 @@ module.exports = {
     armor: { model: 'armor' },
     implant: { model: 'implant' },
 
-    ///////// Combat stats
-    attack: function () {
-      return Math.round(
-        this.level *
-        this.professionStats().ATTACK_PER_LEVEL *
-        (1 + (this.aim - 10)/100 )
-      );
-    },
 
-    defence: function () {
-      return Math.round(
-        this.level *
-        this.professionStats().DEFENCE_PER_LEVEL *
-        (1 + (this.speed - 10)/100 )
-      );
-    },
+    user: { model: 'user' },
 
-    professionStats: function() {
-      return _.find(sails.config.constants.PROFESSIONS, (function (prof) {
-        return prof.ID === this.profession;
-      }).bind(this));
-    },
+    location: { model: 'area' },
+    continent: { model: 'level' },
 
-    user: {
-      model: 'user'
-    },
-
-    location: {
-      model: 'area'
-    },
-
-    continent: {
-      model: 'level'
-    },
+    profession: { model: 'profession' },
 
     skills: {
       collection: 'characterSkill',
@@ -112,6 +79,7 @@ module.exports = {
   },
 
   beforeCreate: function ( model, next ) {
+    throw 'need to update beforeCreat for the profession';
     var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
       return prof.ID === model.profession;
     });
@@ -135,6 +103,7 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
+    throw 'need to update update for the profession';
     Character.findOne(this.update.arguments[0]).then(function (character) {
       if ( model.level ) {
         var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
@@ -152,6 +121,7 @@ module.exports = {
   },
 
   afterCreate: function (character, next) {
+    throw 'need to update update for the profession';
     Skill.find({
       or: [
         {profession: character.profession},

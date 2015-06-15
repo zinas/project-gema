@@ -24,11 +24,7 @@ module.exports = {
       type: 'string'
     },
 
-    profession: {
-      type: 'string',
-      required: true,
-      enum: ['all', 'fix', 'sol', 'med']
-    },
+    profession: { model: 'profession' },
 
     action: {
       type: 'json',

@@ -12,6 +12,7 @@ module.exports = {
       type: 'string',
       required: true
     },
+    description: { type: 'string', },
     protection: {
       type: 'integer',
       required: true

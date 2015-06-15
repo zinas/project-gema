@@ -12,6 +12,7 @@ module.exports = {
       type: 'string',
       required: true
     },
+    description: { type: 'string', },
     modifiers: {
       type: 'array'
     }

@@ -60,17 +60,28 @@ var CharacterCreateForm = React.createClass({
             </div>
             <div className="panel-body">
               <p>{this.state.profession.description}</p>
+            </div>
+          </div>
+
+          <div className="panel">
+            <div className="panel-body list-group">
               <ul className="list-group border-bottom">
                 <li className="list-group-item">
-                  HP per level<span className="badge">{this.state.profession.hp}</span>
+                  HP per level<span className="badge badge-danger">{this.state.profession.hp}</span>
                 </li>
                 <li className="list-group-item">
-                  Attack per level<span className="badge">{this.state.profession.attack}</span>
+                  Attack per level<span className="badge badge-danger">{this.state.profession.attack}</span>
                 </li>
                 <li className="list-group-item">
-                  Defence per level<span className="badge">{this.state.profession.defence}</span>
+                  Defence per level<span className="badge badge-danger">{this.state.profession.defence}</span>
                 </li>
               </ul>
+            </div>
+          </div>
+
+          <div className="panel">
+            <div className="panel-body">
+              <p>TODO: add skills description</p>
             </div>
           </div>
         </div>
