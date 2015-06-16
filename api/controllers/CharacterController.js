@@ -9,8 +9,11 @@ module.exports = {
   create: function (req, res) {
     Character.create({
       name: req.param('name'),
-      profession: req.param('profession')
+      profession: req.param('profession'),
+      user: req.user.id
     }).exec(function (err, newInstance) {
+      console.log('err', err);
+      console.log('newInstance', newInstance);
       if (err) return res.negotiate(err);
 
       res.created(newInstance);

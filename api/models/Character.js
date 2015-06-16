@@ -27,39 +27,20 @@ module.exports = {
       defaultsTo: 0
     },
 
-    currentHP: {
-      type: 'integer'
-    },
-
-    maxHP: {
-      type: 'integer'
-    },
+    currentHP: { type: 'integer' },
+    maxHP: { type: 'integer' },
 
     // ideas on what to affect:
     // attack, damage, crit, weapons usage
-    aim: {
-      type: 'integer',
-      required: true,
-      defaultsTo: 10
-    },
-
-    ///////// Attributes
+    aim: { type: 'integer', defaultsTo: 10 },
 
     // ideas on what to affect:
     // attack, defense, initiative, crit
-    speed: {
-      type: 'integer',
-      required: true,
-      defaultsTo: 10
-    },
+    speed: { type: 'integer', defaultsTo: 10 },
 
     // ideas on what to affect:
     // defense, hp, damage reduction, armor usage
-    stamina: {
-      type: 'integer',
-      required: true,
-      defaultsTo: 10
-    },
+    stamina: { type: 'integer', defaultsTo: 10 },
 
     ///////// Inventory slots
     weapon: { model: 'weapon' },
@@ -67,22 +48,18 @@ module.exports = {
     implant: { model: 'implant' },
 
 
-    user: { model: 'user' },
+    user: { model: 'user', required: true },
 
-    location: { model: 'area' },
+    location: { model: 'area', required: true },
     continent: { model: 'level' },
 
     profession: { model: 'profession' },
-
-    skills: {
-      collection: 'characterSkill',
-      via: 'character'
-    }
+    skills: { collection: 'characterSkill', via: 'character' }
   },
 
   beforeCreate: function ( model, next ) {
     var level = Level.findOne({rank: 1}).populateAll();
-    var profession = Profession.find(model.profession);
+    var profession = Profession.findOne(model.profession);
 
     Promise
     .all([profession, level])
@@ -127,7 +104,7 @@ module.exports = {
     Skill.find({
       or: [
         {profession: character.profession},
-        {profession: null}
+        {profession: 'all'}
       ]
     }).exec(function (error, skills) {
       _.forEach(skills, function (skill) {

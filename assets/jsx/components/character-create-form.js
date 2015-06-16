@@ -16,7 +16,8 @@ var CharacterCreateForm = React.createClass({
     };
 
     io.socket.post('/character', data, function (data) {
-      alert('Character created');
+      console.log('data', data);
+      // window.location = '/game/levelup';
     });
 
     e.preventDefault();

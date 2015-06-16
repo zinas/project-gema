@@ -29,6 +29,7 @@ module.exports = {
       defence: 6,
       description: 'Fixers are the ultimate killing maching in the grid. With vast amount of offencive choices and little defence, the hit hard and hope to kill before being killed'
     }).exec(function (err, model) {
+      console.log('--->', model, err);
       Skill.create({
         uuid: 'minor-drain',
         name: 'Minor drain',
