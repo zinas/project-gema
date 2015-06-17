@@ -14,11 +14,14 @@ var CharacterCreateForm = React.createClass({
       name: React.findDOMNode(this.refs.name).value,
       profession: React.findDOMNode(this.refs.profession).value
     };
-
-    io.socket.post('/character', data, function (data) {
-      console.log('data', data);
-      // window.location = '/game/levelup';
-    });
+    this.props.onError({});
+    io.socket.post('/character', data, (function (data) {
+      if ( data.error ) {
+        this.props.onError(data);
+      } else {
+        window.location = '/game/character';
+      }
+    }).bind(this));
 
     e.preventDefault();
   },

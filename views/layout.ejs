@@ -95,6 +95,13 @@
     <script>
       window.thegrid = window.thegrid || {};
       window.thegrid.config = <%-JSON.stringify(sails.config.constants)%>;
+
+      <% if ( typeof user !== 'undefined' ) { %>
+        window.thegrid.user = <%-JSON.stringify(user)%>;
+      <% } %>
+      <% if ( typeof character !== 'undefined' ) { %>
+        window.thegrid.character = <%-JSON.stringify(character)%>;
+      <% } %>
     </script>
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>

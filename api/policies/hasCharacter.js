@@ -1,5 +1,5 @@
 module.exports = function (req, res, next) {
-  Character.findOne({user: req.user.id}).populateAll().exec(function (err, character) {
+  Character.findOnePopulated({user: req.user.id}).then(function (character) {
     if ( !character ) {
       return res.redirect('/game/createCharacter');
     }

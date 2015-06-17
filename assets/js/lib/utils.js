@@ -64,4 +64,8 @@ utils.defer = function (obj) {
   return deferred.promise;
 };
 
+utils.explain = function (modifier) {
+  return JSON.stringify(modifier);
+}
+
 module.exports = utils;

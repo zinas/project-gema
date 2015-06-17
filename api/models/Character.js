@@ -50,7 +50,7 @@ module.exports = {
 
     user: { model: 'user', required: true },
 
-    location: { model: 'area', required: true },
+    location: { model: 'area' },
     continent: { model: 'level' },
 
     profession: { model: 'profession' },
@@ -123,6 +123,9 @@ module.exports = {
       .findOne(params)
       .populateAll()
       .then(function (character) {
+        if ( !character ) {
+          return null;
+        }
         var ids = [];
         character.skills.forEach(function (skill) {
           ids.push(skill.skill);

@@ -34,8 +34,11 @@ module.exports = {
     });
   },
 
-  levelup: function (req, res) {
-    return res.view();
+  character: function (req, res) {
+    return res.view({
+      frameTitle: 'Vital signs',
+      isJsx: true
+    });
   },
 
   inventory: function (req, res) {
