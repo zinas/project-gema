@@ -49,12 +49,12 @@ var CharacterSheet = React.createClass({
     this.setState({character: character});
   },
   saveCharacter: function (e) {
-    console.log('would save');
-    console.log('this.state.character.aim', this.state.character.aim);
-    console.log('this.state.character.speed', this.state.character.speed);
-    console.log('this.state.character.stamina', this.state.character.stamina);
-    console.log('this.state.character.skills', this.state.character.skills);
-    return;
+    io.socket.post(
+      '/character/levelup/'+this.state.character.id,
+      this.state.character,
+      (function (data) {
+
+      }).bind(this));
 
     io.socket.put('/character/'+this.state.character.id, {
       aim: this.state.character.aim,
@@ -129,6 +129,13 @@ var CharacterSheet = React.createClass({
                 Unassigned attribute points <strong className="label label-info">{this.getUnassignedAttributes()}</strong>
               </td>
             </tr>
+            <tr>
+              <td colSpan="3" className="text-right">
+                <button
+                  className="btn btn-primary"
+                  onClick={this.saveCharacter}>Save Character</button>
+              </td>
+            </tr>
           </tbody>
           </table>
 
@@ -158,12 +165,15 @@ var CharacterSheet = React.createClass({
                 Unassigned skill points <strong className="label label-info">{this.getUnassignedSkills()}</strong>
               </td>
             </tr>
+            <tr>
+              <td colSpan="3" className="text-right">
+                <button
+                  className="btn btn-primary"
+                  onClick={this.saveCharacter}>Save Character</button>
+              </td>
+            </tr>
           </tbody>
           </table>
-
-        <div className="form-group">
-          <button onClick={this.saveCharacter}>Save Character</button>
-        </div>
       </div>
     );
   }

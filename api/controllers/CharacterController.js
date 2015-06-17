@@ -20,6 +20,10 @@ module.exports = {
     });
   },
 
+  levelup: function (req, res) {
+
+  },
+
   move: function (req, res) {
     Character.move({
       id: req.param('id')
