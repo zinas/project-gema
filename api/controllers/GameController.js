@@ -59,7 +59,10 @@ module.exports = {
   },
 
   explore: function (req, res) {
-    return res.view({frameTitle: 'Explore'});
+    return res.view({
+      frameTitle: 'Explore',
+      isJsx: true
+    });
   }
 };
 

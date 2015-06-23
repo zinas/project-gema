@@ -83,9 +83,9 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
-    throw 'need to update update for the profession';
     Character.findOne(this.update.arguments[0]).then(function (character) {
       if ( model.level ) {
+        throw 'need to update update for the profession';
         var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
           return prof.ID === character.profession;
         });
@@ -119,6 +119,7 @@ module.exports = {
   },
 
   findOnePopulated : function ( params ) {
+    console.log('params', params);
     var promise = Character
       .findOne(params)
       .populateAll()
@@ -150,8 +151,8 @@ module.exports = {
     }).then(function (area) {
       return Character.update(where, {
         location: area.id
-      }).then(function ( character ) {
-        return Character.findOne(character.id).populateAll();
+      }).then(function ( characters ) {
+        return Character.findOnePopulated(characters[0].id);
       });
     });
   }

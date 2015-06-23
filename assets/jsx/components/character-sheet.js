@@ -1,7 +1,7 @@
 var
   React = require('React'),
   utils = require('./../../js/lib/utils'),
-  Iso = require('./../../js/lib/iso');
+  data = require('./../../js/lib/data');
 
 var CharacterSheet = React.createClass({
   getInitialState: function () {
@@ -20,7 +20,7 @@ var CharacterSheet = React.createClass({
   },
   getUnassignedAttributes: function () {
     return (
-      (this.state.character.level - 1)  * Iso('config').LEVELUP.ATTRIBUTE_POINTS
+      (this.state.character.level - 1)  * data('config').LEVELUP.ATTRIBUTE_POINTS
       + 10 - this.state.character.aim
       + 10 - this.state.character.speed
       + 10 - this.state.character.stamina
@@ -28,7 +28,7 @@ var CharacterSheet = React.createClass({
   },
   getUnassignedSkills: function () {
     var
-      total = (this.state.character.level - 1)  * Iso('config').LEVELUP.SKILL_POINTS,
+      total = (this.state.character.level - 1)  * data('config').LEVELUP.SKILL_POINTS,
       current = 0;
 
     this.state.character.skills.forEach(function (skill) {

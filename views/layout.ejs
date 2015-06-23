@@ -36,11 +36,9 @@
   </head>
 
   <body>
-    <% if ((typeof withMenu === 'undefined') || withMenu) { %>
-      <%- partial('menu') %>
-    <% } else { %>
+    <div class="page-container">
       <%- body %>
-    <% } %>
+    </div>
 
 
 
@@ -106,7 +104,6 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
-    <script type="text/javascript" src="/js/atlant/actions.js"></script>
 
     <% if (typeof isJsx !== 'undefined' && isJsx === true ) { %>
       <script src="/js/<%=req.options.controller%>-<%=req.options.action%>.js"></script>

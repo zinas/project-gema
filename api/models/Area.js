@@ -24,6 +24,10 @@ module.exports = {
     characters: {
       collection: 'character',
       via: 'location'
+    },
+    monsters: {
+      collection: 'monster',
+      via: 'location'
     }
   }
 };
