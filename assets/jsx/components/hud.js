@@ -25,6 +25,18 @@ module.exports = React.createClass({
             </div>
           </div>
         </li>
+        <li className="xn-title">
+          <div>HP: {this.props.character.currentHP} / {this.props.character.maxHP}</div>
+          <div className="progress progress-small">
+            <div className="progress-bar progress-bar-danger" role="progressbar"
+              style={{width: (this.props.character.currentHP*100/this.props.character.maxHP)+'%'}}></div>
+          </div>
+          <div>XP: {this.props.character.xp} / {this.props.character.level * 1000}</div>
+          <div className="progress progress-small">
+            <div className="progress-bar progress-bar-warning" role="progressbar"
+              style={{width: ((this.props.character.xp*100)/(this.props.character.level * 1000))+'%'}}></div>
+          </div>
+        </li>
         <li>
           <a href="/game/explore">
             <span className="fa fa-globe"></span>
