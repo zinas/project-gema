@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   CharacterSelector = require('./../../components/character-selector'),
   CharacterEquipment = require('./../../components/character-equipment');
 

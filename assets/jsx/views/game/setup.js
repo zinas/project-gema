@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   CharacterSheet = require('../../components/character-sheet');
 
 React.render(

@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   CharacterCreateForm = require('./../../components/character-create-form'),
   Errors = require('./../../components/errors'),
   data = require('./../../../js/lib/data.js'),

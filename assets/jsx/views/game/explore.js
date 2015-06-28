@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   data = require('./../../../js/lib/data.js'),
   AreaInformation = require('./../../components/area-information'),
   Hud = require('./../../components/hud'),
