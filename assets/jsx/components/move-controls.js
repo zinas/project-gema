@@ -26,7 +26,6 @@ module.exports = React.createClass({
       '/character/move',
       {coords: coords},
       (function (character) {
-        console.log('moved char', character);
         this.props.onMove(character);
       }).bind(this));
 

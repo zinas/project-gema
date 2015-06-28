@@ -1,4 +1,6 @@
-var React = require('React');
+var
+  React = require('React'),
+  _ = require('lodash');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -16,8 +18,11 @@ module.exports = React.createClass({
   },
   getOthers: function (areaId) {
     io.socket.get('/area', {id: areaId}, ( function (area) {
+      var characters = _.reject(area.characters, ( function (character) {
+        return character.id === this.props.character.id;
+      }).bind(this) );
       this.setState({
-        characters: area.characters,
+        characters: characters,
         monsters: area.monsters
       });
     }).bind(this) );
@@ -64,14 +69,14 @@ module.exports = React.createClass({
           <p>{this.props.level.description}</p>
           {this.state.monsters.map(function (monster) {
             return (
-              <a key={character.id} className="btn btn-danger btn-rounded" href={'/game/fight/'+character.id}>
-                <span className="fa fa-bug"></span> {monster.template.name} (lvl. {monster.template.level})
+              <a key={monster.id} className="btn btn-danger btn-rounded" href={'/game/fight/monster/'+monster.id}>
+                <span className="fa fa-bug"></span> {monster.name} (lvl. {monster.level})
               </a>
             )
           })}
           {this.state.characters.map(function (character) {
             return (
-              <a key={character.id} className="btn btn-danger btn-rounded" href={'/game/fight/'+character.id}>
+              <a key={character.id} className="btn btn-danger btn-rounded" href={'/game/fight/character/'+character.id}>
                 <span className="fa fa-male"></span> {character.name} (lvl. {character.level})
               </a>
             )

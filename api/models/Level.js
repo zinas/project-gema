@@ -28,6 +28,12 @@ module.exports = {
       defaultsTo: 1
     },
 
+    minLevelAllowed: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 1
+    },
+
     maxLevelAllowed: {
       type: 'integer',
       required: true,

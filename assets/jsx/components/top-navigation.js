@@ -1,10 +1,21 @@
 var React = require('React');
+var cn = require('classnames');
 
 module.exports = React.createClass({
+  getInitialState: function () {
+    return {
+      expanded: false
+    };
+  },
+  onClick: function () {
+    this.setState({expanded: !this.state.expanded})
+  },
   render: function() {
     return (
-    <ul className="x-navigation x-navigation-horizontal x-navigation-panel">
-      <li className="xn-icon-button pull-right last active">
+    <ul className={cn('x-navigation', 'x-navigation-horizontal', 'x-navigation-panel')}>
+      <li
+        onClick={this.onClick}
+        className={cn('xn-icon-button pull-right last', {active: this.state.expanded})}>
         <a href="#"><span className="fa fa-power-off"></span></a>
         <ul className="xn-drop-left animated zoomIn">
           <li>

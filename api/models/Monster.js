@@ -1,3 +1,5 @@
+var math = require('mathjs');
+
 /**
 * Monster.js
 *
@@ -9,6 +11,9 @@ module.exports = {
 
   attributes: {
 
+    name: { type: 'string' },
+    level: { type: 'integer' },
+
     currentHP: { type: 'integer' },
     maxHP: { type: 'integer' },
 
@@ -16,36 +21,46 @@ module.exports = {
     speed: { type: 'integer', defaultsTo: 10 },
     stamina: { type: 'integer', defaultsTo: 10 },
 
-    template: { model: 'monsterTemplate', required: true },
+    weapon: { type: 'json' },
+    armor: { type: 'json' },
 
     location: { model: 'area', required: true },
     continent: { model: 'level', required: true },
-
-    skills: { collection: 'monsterSkill', via: 'monster' }
   },
 
-  findOnePopulated : function ( params ) {
-    var promise = Monster
-      .findOne(params)
-      .populateAll()
-      .then(function (monster) {
-        if ( !monster ) {
-          return null;
+  spawn: function (area, num) {
+    num = num || 1;
+    for ( var i = 0; i < num; i++ ) {
+      MonsterTemplate.find({
+        level: {'>=': area.level.minLevelAllowed, '<=': area.level.maxLevelAllowed}
+      }).then(function (templates) {
+        var tpl_id = math.randomInt(0, templates.length-1);
+        var tpl = templates[tpl_id];
+
+        function getStat(val) {
+          var min = math.round(0.8*val);
+          var max = math.round(1.2*val);
+
+          return math.random(min, max);
         }
-        var ids = [];
-        monster.skills.forEach(function (skill) {
-          ids.push(skill.skill);
-        });
 
-        return Skill.find({id: ids}).then(function (skills) {
-          monster.skills = _.map(monster.skills, function(skill){
-              skill.details = _.findWhere(skills, {id: skill.skill})
-              return skill;
-          });
+        var hp = getStat(tpl.maxHP);
 
-          return monster;
+        return Monster.create({
+          name: tpl.name,
+          level: tpl.level,
+          aim: getStat(tpl.aim),
+          speed: getStat(tpl.speed),
+          stamina: getStat(tpl.stamina),
+          maxHP: hp,
+          currentHP: hp,
+          weapon: tpl.weapon,
+          armor: tpl.armor,
+          location: area.id,
+          continent: area.level
         });
       });
-    return promise;
+    }
   }
+
 };

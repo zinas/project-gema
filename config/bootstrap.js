@@ -14,5 +14,12 @@ module.exports.bootstrap = function(cb) {
   sails.services.passport.loadStrategies();
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+
+  var schedule = require('node-schedule');
+  Object.keys(sails.config.crons).forEach(function(key) {
+      var val = sails.config.crons[key];
+      schedule.scheduleJob(key, val);
+  });
+
   cb();
 };

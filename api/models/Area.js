@@ -1,3 +1,4 @@
+var math = require('mathjs');
 /**
 * Area.js
 *
@@ -29,6 +30,17 @@ module.exports = {
       collection: 'monster',
       via: 'location'
     }
+  },
+
+  fillAll: function () {
+    Area.find({}).populateAll().then(function (areas) {
+      areas.forEach(function (area) {
+        if ( area.monsters.length < 2 ) {
+          console.log('spawning...');
+          Monster.spawn(area, math.randomInt(4));
+        }
+      });
+    });
   }
 };
 

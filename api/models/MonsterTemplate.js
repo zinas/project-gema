@@ -8,7 +8,17 @@
 module.exports = {
 
   attributes: {
+    name: { type: 'string' },
+    level: { type: 'integer' },
 
+    maxHP: { type: 'integer' },
+
+    aim: { type: 'integer', defaultsTo: 10 },
+    speed: { type: 'integer', defaultsTo: 10 },
+    stamina: { type: 'integer', defaultsTo: 10 },
+
+    weapon: { type: 'json' },
+    armor: {type: 'json' }
   }
 };
 

@@ -6,6 +6,16 @@
  */
 
 module.exports = {
+
+  test: function (req, res) {
+    Area.findOne({id: '558ef59930f9fd000a9b6cd0'}).populateAll().then(function (area) {
+      console.log('got area', area.x, area.y);
+      Monster.generate(area);
+    });
+
+    res.json({});
+  },
+
 	generate: function (req, res) {
     this.professions();
 
@@ -16,8 +26,49 @@ module.exports = {
     this.weapons();
     this.armors();
     this.implants();
+    this.monsterTemplates();
 
     return res.json({});
+  },
+
+  monsterTemplates: function () {
+    MonsterTemplate.create({
+      name: 'Low-life Junkie',
+      level: 1,
+      aim: 5,
+      speed: 5,
+      stamina: 5,
+      maxHP: 10,
+      weapon: {
+        name: 'Fists',
+        damege: 2
+      },
+      armor: {
+        name: 'T-shirt',
+        protection: 0
+      }
+    }).exec(function (m) {
+      console.log(m);
+    });
+
+    MonsterTemplate.create({
+      name: 'Thug',
+      level: 2,
+      aim: 8,
+      speed: 8,
+      stamina: 8,
+      maxHP: 15,
+      weapon: {
+        name: 'Crowbar',
+        damege: 4
+      },
+      armor: {
+        name: 'Leather jacket',
+        protection: 1
+      }
+    }).exec(function (m) {
+      console.log(m);
+    });
   },
 
   professions: function () {

@@ -8,18 +8,11 @@
 module.exports = {
 
   attributes: {
-    name: {
-      type: 'string',
-      required: true
-    },
+    name: { type: 'string', required: true },
     description: { type: 'string', },
-    protection: {
-      type: 'integer',
-      required: true
-    },
-    modifiers: {
-      type: 'array'
-    }
+    protection: { type: 'integer', required: true },
+    modifiers: { type: 'array' },
+    owner: { model: 'character' }
   }
 };
 

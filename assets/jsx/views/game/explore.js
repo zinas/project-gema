@@ -47,7 +47,10 @@ var CharacterView = React.createClass({
               </div>
               <div className="col-md-6">
                 <MoveControls character={this.state.character} onMove={this.onCharacterUpdated} />
-                <AreaInformation level={this.state.character.continent} area={this.state.character.location} />
+                <AreaInformation
+                  character={this.state.character}
+                  level={this.state.character.continent}
+                  area={this.state.character.location} />
               </div>
             </div>
 

@@ -28,7 +28,7 @@ module.exports = React.createClass({
         <li className="xn-title">
           <div>HP: {this.props.character.currentHP} / {this.props.character.maxHP}</div>
           <div className="progress progress-small">
-            <div className="progress-bar progress-bar-danger" role="progressbar"
+            <div className="progress-bar progress-bar-colorful" role="progressbar"
               style={{width: (this.props.character.currentHP*100/this.props.character.maxHP)+'%'}}></div>
           </div>
           <div>XP: {this.props.character.xp} / {this.props.character.level * 1000}</div>
