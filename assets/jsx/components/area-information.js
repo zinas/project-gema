@@ -59,13 +59,12 @@ module.exports = React.createClass({
   },
 
   fight: function (e) {
-    console.log('fight...');
     io.socket.post('/game/fight', {
       target: e.currentTarget.getAttribute('data-target'),
       id: e.currentTarget.getAttribute('data-id')
-    }, function (result) {
-      console.log(result);
-    });
+    }, (function (result) {
+      this.props.onResult(result);
+    }).bind(this));
   },
 
   render: function() {

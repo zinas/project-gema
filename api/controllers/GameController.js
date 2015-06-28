@@ -22,7 +22,7 @@ module.exports = {
       char2.stats = Statistics.generate(char2);
       var fight = new Fight(char1, char2);
       fight.resolve();
-      return res.json({att:char1, def:char2, log: fight.log.log});
+      return res.json({attacker:char1, defender:char2, log: fight.log.log});
     });
   },
 

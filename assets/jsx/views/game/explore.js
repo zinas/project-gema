@@ -6,14 +6,27 @@ var
   TopNavigation = require('./../../components/top-navigation'),
   Chat = require('./../../components/chat'),
   Map = require('./../../components/map'),
-  MoveControls = require('./../../components/move-controls');
+  MoveControls = require('./../../components/move-controls'),
+  CombatLog = require('./../../components/combat-log');
 
 var CharacterView = React.createClass({
   getInitialState: function () {
     return {
       character: data('character'),
-      user: data('user')
+      user: data('user'),
+      fight: {
+        attacker: {},
+        defender: {},
+        log: []
+      }
     };
+  },
+  onResult: function (result) {
+    this.setState({fight: {
+      attacker: result.attacker,
+      defender: result.defender,
+      log: result.log
+    }});
   },
   onCharacterUpdated: function (character) {
     this.setState({character: character});
@@ -44,13 +57,15 @@ var CharacterView = React.createClass({
             <div className="row">
               <div className="col-md-6">
                 <Map level={this.state.character.continent} current={this.state.character.location}/>
+                <CombatLog fight={this.state.fight} />
               </div>
               <div className="col-md-6">
                 <MoveControls character={this.state.character} onMove={this.onCharacterUpdated} />
                 <AreaInformation
                   character={this.state.character}
                   level={this.state.character.continent}
-                  area={this.state.character.location} />
+                  area={this.state.character.location}
+                  onResult={this.onResult} />
               </div>
             </div>
 
