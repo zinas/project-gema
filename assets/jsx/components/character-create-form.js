@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   ClassSelector = require('./class-selector');
 
 var CharacterCreateForm = React.createClass({

@@ -1,5 +1,5 @@
 var
-  React = require('React');
+  React = require('react');
 
 var CharacterEquipment = React.createClass({
   getInitialState: function () {

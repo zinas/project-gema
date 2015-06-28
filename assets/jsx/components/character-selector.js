@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   utils = require('./../../js/lib/utils');
 
 var ClassSelector = React.createClass({

@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   cn = require('classnames');
 
 module.exports = React.createClass({

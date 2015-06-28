@@ -1,4 +1,4 @@
-var React = require('React');
+var React = require('react');
 
 module.exports = React.createClass({
   move: function (e) {

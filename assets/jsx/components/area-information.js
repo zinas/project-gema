@@ -1,5 +1,5 @@
 var
-  React = require('React'),
+  React = require('react'),
   _ = require('lodash');
 
 module.exports = React.createClass({
