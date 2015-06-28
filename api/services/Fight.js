@@ -62,21 +62,18 @@ Fight.prototype.attack = function (attacker, defender) {
     this.log.miss(attacker, defender, toHit);
   } else if ( toHit <= attacker.stats.grazeThreshold ) {
     // Graze
-    this.log.graze(attacker, defender, toHit);
     damageRoll = damageRoll * attacker.stats.grazeMult;
     defender.currentHP = defender.currentHP - damageRoll;
-    this.log.damage(attacker, defender, damageRoll, defender.currentHP);
+    this.log.graze(attacker, defender, toHit, damageRoll, defender.currentHP);
   } else if ( toHit < attacker.stats.critThreshold ) {
     // Hit
-    this.log.hit(attacker, defender, toHit);
     defender.currentHP = defender.currentHP - damageRoll;
-    this.log.damage(attacker, defender, damageRoll, defender.currentHP);
+    this.log.hit(attacker, defender, toHit, damageRoll, defender.currentHP);
   } else {
     // Crit
-    this.log.crit(attacker, defender, toHit);
     damageRoll = damageRoll * attacker.stats.critMult;
     defender.currentHP = defender.currentHP - damageRoll;
-    this.log.damage(attacker, defender, damageRoll, defender.currentHP);
+    this.log.crit(attacker, defender, toHit, damageRoll, defender.currentHP);
   }
 
   if ( attacker.skills ) {

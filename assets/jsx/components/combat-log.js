@@ -28,7 +28,9 @@ module.exports = React.createClass({
             </div>
             <div className="text">
               <div className="heading"><strong>{log.actor.name}</strong></div>
-              has rolled <span className="text-primary">{log.value}</span> and hits
+              has rolled <span className="text-primary">{log.roll}</span> and hits
+              for {log.damage}
+              <p><strong>{log.victim.name}</strong> has {log.hpLeft} hit points left</p>
             </div>
           </div>
         );
@@ -40,7 +42,9 @@ module.exports = React.createClass({
             </div>
             <div className="text">
               <div className="heading"><strong>{log.actor.name}</strong></div>
-              has rolled <span className="text-primary">{log.value}</span> and <span className="text-success">crits</span>
+              has rolled <span className="text-primary">{log.roll}</span> and <span className="text-success">crits</span>
+              for {log.damage}
+              <p><strong>{log.victim.name}</strong> has {log.hpLeft} hit points left</p>
             </div>
           </div>
         );
@@ -52,7 +56,9 @@ module.exports = React.createClass({
             </div>
             <div className="text">
               <div className="heading"><strong>{log.actor.name}</strong></div>
-              has rolled <span className="text-primary">{log.value}</span> and <span className="text-muted">grazes</span>
+              has rolled <span className="text-primary">{log.roll}</span> and <span className="text-muted">grazes</span>
+              for {log.damage}
+              <p><strong>{log.victim.name}</strong> has {log.hpLeft} hit points left</p>
             </div>
           </div>
         );
@@ -65,19 +71,6 @@ module.exports = React.createClass({
             <div className="text">
               <div className="heading"><strong>{log.actor.name}</strong></div>
               has rolled <span className="text-primary">{log.value}</span> and <span className="text-danger">misses</span>
-            </div>
-          </div>
-        );
-      case 'damage':
-        return (
-          <div className={cn('item item-visible', {'in': this.props.fight.defender.id === log.actor.id})}>
-            <div className="image">
-              <img src="/images/no-image.jpg" />
-            </div>
-            <div className="text">
-              <div className="heading"><strong>{log.actor.name}</strong></div>
-              hits for <strong>{log.value}</strong> points of damage
-              <p>{log.victim.name} has {log.secondaryValue} hit points left</p>
             </div>
           </div>
         );
