@@ -79,9 +79,11 @@ Fight.prototype.attack = function (attacker, defender) {
     this.log.damage(attacker, defender, damageRoll);
   }
 
-  attacker.skills.forEach( (function (skill) {
-    this.skill(skill, attacker, defender);
-  }).bind(this) );
+  if ( attacker.skills ) {
+    attacker.skills.forEach( (function (skill) {
+      this.skill(skill, attacker, defender);
+    }).bind(this) );
+  }
 };
 
 Fight.prototype.skill = function ( skill, character, target ) {

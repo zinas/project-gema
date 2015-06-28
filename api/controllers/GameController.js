@@ -9,22 +9,21 @@ var Promise = require('bluebird');
 
 module.exports = {
   fight: function (req, res) {
-    var
-      char1 = Character.findOnePopulated({name: 'Warrior'}),
-      char2 = Character.findOnePopulated({name: 'Doctor'});
+    var char1 = res.locals.character;
+    var target = req.param('target');
+    var id = req.param('id');
+    var targets = {
+      monster: Monster,
+      character: Character
+    };
 
-    Promise
-      .all([char1, char2])
-      .spread(function (char1, char2) {
-        char1.stats = Statistics.generate(char1);
-        char2.stats = Statistics.generate(char2);
-        var fight = new Fight(char1, char2);
-        fight.resolve();
-        return res.view({att:char1, def:char2, log: fight.log.log});
-      }, function (error) {
-        console.log(error);
-        res.json({})
-      });
+    targets[target].findOnePopulated({id: id}).then(function (char2) {
+      char1.stats = Statistics.generate(char1);
+      char2.stats = Statistics.generate(char2);
+      var fight = new Fight(char1, char2);
+      fight.resolve();
+      return res.json({att:char1, def:char2, log: fight.log.log});
+    });
   },
 
   createCharacter: function (req, res) {

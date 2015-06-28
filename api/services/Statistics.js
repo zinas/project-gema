@@ -24,8 +24,10 @@ module.exports = {
     statsFromItems = this.getStatsFromItems(character);
     stats = this._extendStats(stats, statsFromItems);
 
-    statsFromSkills = this.getStatsFromSkills(character);
-    stats = this._extendStats(stats, statsFromSkills);
+    if ( character.skills ) {
+      statsFromSkills = this.getStatsFromSkills(character);
+      stats = this._extendStats(stats, statsFromSkills);
+    }
 
     stats.attack = this.calculateAttack(stats, character);
     stats.defence = this.calculateDefence(stats, character);
@@ -56,7 +58,7 @@ module.exports = {
     return math.round(
       stats.attack +
       character.level *
-      character.professionStats().ATTACK_PER_LEVEL *
+      character.baseStats().attack *
       (1 + ( (stats.aim*3/4 + stats.speed/4) - 10)/100 )
     , sails.config.constants.ROUNDING_DIGITS);
   },
@@ -65,7 +67,7 @@ module.exports = {
     return math.round(
       stats.defence +
       character.level *
-      character.professionStats().DEFENCE_PER_LEVEL *
+      character.baseStats().defence *
       (1 + ( (stats.speed*3/4 + stats.stamina/4) - 10)/100 )
     , sails.config.constants.ROUNDING_DIGITS);
   },

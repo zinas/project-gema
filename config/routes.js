@@ -46,6 +46,7 @@ module.exports.routes = {
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
 
+  'post /game/fight': 'GameController.fight'
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

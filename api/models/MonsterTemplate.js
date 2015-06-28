@@ -17,6 +17,9 @@ module.exports = {
     speed: { type: 'integer', defaultsTo: 10 },
     stamina: { type: 'integer', defaultsTo: 10 },
 
+    attack: { type: 'integer', defaultsTo: 10 },
+    defence: { type: 'integer', defaultsTo: 10 },
+
     weapon: { type: 'json' },
     armor: {type: 'json' }
   }

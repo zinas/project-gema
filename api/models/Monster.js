@@ -21,11 +21,28 @@ module.exports = {
     speed: { type: 'integer', defaultsTo: 10 },
     stamina: { type: 'integer', defaultsTo: 10 },
 
+    attack: { type: 'integer', defaultsTo: 10 },
+    defence: { type: 'integer', defaultsTo: 10 },
+
     weapon: { type: 'json' },
     armor: { type: 'json' },
 
+    baseStats: function () {
+      return {
+        attack: this.attack,
+        defence: this.defence
+      }
+    },
+
+
     location: { model: 'area', required: true },
     continent: { model: 'level', required: true },
+  },
+
+  findOnePopulated : function ( params ) {
+    return Monster
+      .findOne(params)
+      .populateAll();
   },
 
   spawn: function (area, num) {
@@ -34,7 +51,7 @@ module.exports = {
       MonsterTemplate.find({
         level: {'>=': area.level.minLevelAllowed, '<=': area.level.maxLevelAllowed}
       }).then(function (templates) {
-        var tpl_id = math.randomInt(0, templates.length-1);
+        var tpl_id = math.randomInt(0, templates.length);
         var tpl = templates[tpl_id];
 
         function getStat(val) {
@@ -52,12 +69,16 @@ module.exports = {
           aim: getStat(tpl.aim),
           speed: getStat(tpl.speed),
           stamina: getStat(tpl.stamina),
+          attack: getStat(tpl.attack),
+          defence: getStat(tpl.defence),
           maxHP: hp,
           currentHP: hp,
           weapon: tpl.weapon,
           armor: tpl.armor,
           location: area.id,
           continent: area.level
+        }).then(function () {}, function (err) {
+          console.log(require('util').inspect(err));
         });
       });
     }

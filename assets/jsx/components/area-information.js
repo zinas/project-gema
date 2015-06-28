@@ -58,6 +58,15 @@ module.exports = React.createClass({
     io.socket.on('monster-joined-area-'+this.props.area.id, this.addMonster);
   },
 
+  fight: function (e) {
+    console.log('fight...');
+    io.socket.post('/game/fight', {
+      target: e.currentTarget.getAttribute('data-target'),
+      id: e.currentTarget.getAttribute('data-id')
+    }, function (result) {
+      console.log(result);
+    });
+  },
 
   render: function() {
     return (
@@ -67,13 +76,18 @@ module.exports = React.createClass({
         </div>
         <div className="panel-body">
           <p>{this.props.level.description}</p>
-          {this.state.monsters.map(function (monster) {
+          {this.state.monsters.map( (function (monster) {
             return (
-              <a key={monster.id} className="btn btn-danger btn-rounded" href={'/game/fight/monster/'+monster.id}>
+              <a
+                key={monster.id}
+                className="btn btn-danger btn-rounded"
+                onClick={this.fight}
+                data-target="monster"
+                data-id={monster.id}>
                 <span className="fa fa-bug"></span> {monster.name} (lvl. {monster.level})
               </a>
             )
-          })}
+          }).bind(this))}
           {this.state.characters.map(function (character) {
             return (
               <a key={character.id} className="btn btn-danger btn-rounded" href={'/game/fight/character/'+character.id}>

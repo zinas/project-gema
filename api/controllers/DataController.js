@@ -7,16 +7,8 @@
 
 module.exports = {
 
-  test: function (req, res) {
-    Area.findOne({id: '558ef59930f9fd000a9b6cd0'}).populateAll().then(function (area) {
-      console.log('got area', area.x, area.y);
-      Monster.generate(area);
-    });
-
-    res.json({});
-  },
-
 	generate: function (req, res) {
+    return;
     this.professions();
 
     this.levels();
@@ -38,10 +30,12 @@ module.exports = {
       aim: 5,
       speed: 5,
       stamina: 5,
+      attack: 6,
+      defence: 6,
       maxHP: 10,
       weapon: {
         name: 'Fists',
-        damege: 2
+        damage: 2
       },
       armor: {
         name: 'T-shirt',
@@ -57,10 +51,12 @@ module.exports = {
       aim: 8,
       speed: 8,
       stamina: 8,
+      attack: 8,
+      defence: 15,
       maxHP: 15,
       weapon: {
         name: 'Crowbar',
-        damege: 4
+        damage: 4
       },
       armor: {
         name: 'Leather jacket',

@@ -42,6 +42,13 @@ module.exports = {
     // defense, hp, damage reduction, armor usage
     stamina: { type: 'integer', defaultsTo: 10 },
 
+    baseStats: function () {
+      return {
+        attack: this.profession.attack,
+        defence: this.profession.defence
+      }
+    },
+
     ///////// Inventory slots
     weapon: { model: 'weapon' },
     armor: { model: 'armor' },
@@ -119,7 +126,6 @@ module.exports = {
   },
 
   findOnePopulated : function ( params ) {
-    console.log('params', params);
     var promise = Character
       .findOne(params)
       .populateAll()
