@@ -108,9 +108,11 @@ module.exports = React.createClass({
         <a
           href="#"
           onClick={this.toggleExpand}
-          className={cn('tile', {'tile-success':this.isWin(), 'tile-danger':!this.isWin()})}>
+          className={cn('tile tile-default')}>
             {this.isWin()?'Win':'Loose'}
-            <p>Gained 0 xp and 0 $</p>
+            <p>
+              Gained <span className="text-info">{this.props.fight.xp}</span> xp and <span className="text-success">$ {this.props.fight.dollars}</span>
+            </p>
         </a>
         <div className={cn('messages messages-img', {hidden: !this.state.expanded})}>
         {this.props.fight.log.map( (function (log, i) {

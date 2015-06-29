@@ -29,6 +29,18 @@ Fight.prototype.resolve = function () {
     looser = this.char2;
     this.winner = 'attacker';
   }
+  this.xp = Reward.xp(
+    this.char1.level,
+    this.char2.level,
+    this.char1.id === winner.id,
+    !!this.char2.user
+  );
+  this.dollars = Reward.dollars(
+    this.char1.level,
+    this.char2.level,
+    this.char1.id === winner.id,
+    !!this.char2.user
+  );
   this.log.result(winner, looser);
 };
 

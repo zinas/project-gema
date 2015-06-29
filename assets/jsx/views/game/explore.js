@@ -18,16 +18,20 @@ var CharacterView = React.createClass({
         attacker: {},
         defender: {},
         log: [],
-        winner: ''
+        winner: '',
+        xp: 0,
+        dollars: 0
       }
     };
   },
-  onResult: function (result) {
+  onResult: function (fight) {
     this.setState({fight: {
-      attacker: result.attacker,
-      defender: result.defender,
-      log: result.log,
-      winner: result.result.winner
+      attacker: fight.attacker,
+      defender: fight.defender,
+      log: fight.log,
+      winner: fight.result.winner,
+      xp: fight.result.xp,
+      dollars: fight.result.dollars
     }});
   },
   onCharacterUpdated: function (character) {

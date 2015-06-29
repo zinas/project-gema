@@ -27,7 +27,9 @@ module.exports = {
         defender:char2,
         log: fight.log.log,
         result: {
-          winner: fight.winner
+          winner: fight.winner,
+          xp: fight.xp,
+          dollars: fight.dollars
         }
       });
     });
