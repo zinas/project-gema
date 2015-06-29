@@ -1,6 +1,6 @@
 var
   React = require('react'),
-  CharacterSelector = require('./../../components/character-selector'),
+  // CharacterSelector = require('./../../components/character-selector'),
   CharacterEquipment = require('./../../components/character-equipment');
 
 var InventoryView = React.createClass({

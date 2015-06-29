@@ -79,7 +79,7 @@ module.exports = React.createClass({
             return (
               <a
                 key={monster.id}
-                className="btn btn-danger btn-rounded"
+                className="btn btn-danger btn-rounded btn-attack"
                 onClick={this.fight}
                 data-target="monster"
                 data-id={monster.id}>

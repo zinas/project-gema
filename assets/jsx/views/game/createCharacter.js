@@ -23,7 +23,7 @@ var CharacterCreateView = React.createClass({
     return (
     <div className="page-container">
 
-      <div style={{height: '852px'}} className="page-sidebar scroll">
+      <div className="page-sidebar scroll">
         <Hud character={this.state.character} />
       </div>
 

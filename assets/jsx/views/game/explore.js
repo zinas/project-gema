@@ -37,7 +37,7 @@ var CharacterView = React.createClass({
     return (
     <div className="page-container">
 
-      <div style={{height: '852px'}} className="page-sidebar scroll">
+      <div className="page-sidebar scroll">
         <Hud character={this.state.character} />
       </div>
 
@@ -51,25 +51,27 @@ var CharacterView = React.createClass({
             </div>
           </div>
 
-          <div style={{display: 'block', minHeight: '710px'}} className="content-frame-right">
+          <div className="content-frame-right">
             <Chat />
           </div>
 
           <div className="content-frame-body content-frame-body-left">
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-6 col-lg-4 col-xl-3">
                 <Map level={this.state.character.continent} current={this.state.character.location}/>
+              </div>
+              <div className="col-md-6 col-lg-4 col-xl-3">
                 <MoveControls character={this.state.character} onMove={this.onCharacterUpdated} />
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12 col-lg-4 col-xl-6">
                 <AreaInformation
                   character={this.state.character}
                   level={this.state.character.continent}
                   area={this.state.character.location}
                   onResult={this.onResult} />
-                <CombatLog fight={this.state.fight} />
               </div>
             </div>
+            <CombatLog fight={this.state.fight} />
 
           </div>
 
