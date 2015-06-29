@@ -22,10 +22,8 @@ module.exports = {
       defaultsTo: 1
     },
 
-    xp: {
-      type: 'integer',
-      defaultsTo: 0
-    },
+    xp: { type: 'integer', defaultsTo: 0 },
+    dollars: { type: 'integer', defaultsTo: 0 },
 
     currentHP: { type: 'integer' },
     maxHP: { type: 'integer' },

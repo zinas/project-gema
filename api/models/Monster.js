@@ -34,7 +34,6 @@ module.exports = {
       }
     },
 
-
     location: { model: 'area', required: true },
     continent: { model: 'level', required: true },
   },

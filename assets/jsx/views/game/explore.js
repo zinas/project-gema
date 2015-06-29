@@ -25,14 +25,17 @@ var CharacterView = React.createClass({
     };
   },
   onResult: function (fight) {
-    this.setState({fight: {
-      attacker: fight.attacker,
-      defender: fight.defender,
-      log: fight.log,
-      winner: fight.result.winner,
-      xp: fight.result.xp,
-      dollars: fight.result.dollars
-    }});
+    this.setState({
+      character: fight.attacker,
+      fight: {
+        attacker: fight.attacker,
+        defender: fight.defender,
+        log: fight.log,
+        winner: fight.result.winner,
+        xp: fight.result.xp,
+        dollars: fight.result.dollars
+      }
+    });
   },
   onCharacterUpdated: function (character) {
     this.setState({character: character});
@@ -42,7 +45,7 @@ var CharacterView = React.createClass({
     <div className="page-container">
 
       <div className="page-sidebar scroll">
-        <Hud character={this.state.character} />
+        <Hud onCharacterUpdated={this.onCharacterUpdated} character={this.state.character} />
       </div>
 
       <div className="page-content">

@@ -1,6 +1,13 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  heal: function () {
+    io.socket.get('/game/heal', (function () {
+      var character = this.props.character;
+      character.currentHP = character.maxHP;
+      this.props.onCharacterUpdated(character);
+    }).bind(this));
+  },
   render: function() {
     var sidebar = '';
     if ( this.props.character && this.props.character.name ) {
@@ -26,7 +33,10 @@ module.exports = React.createClass({
           </div>
         </li>
         <li className="xn-title">
-          <div>HP: {this.props.character.currentHP} / {this.props.character.maxHP}</div>
+          <div>
+            HP: {this.props.character.currentHP} / {this.props.character.maxHP}
+            &nbsp;<a href="#" onClick={this.heal} className="text-warning">Heal</a>
+          </div>
           <div className="progress progress-small">
             <div className="progress-bar progress-bar-colorful" role="progressbar"
               style={{width: (this.props.character.currentHP*100/this.props.character.maxHP)+'%'}}></div>
@@ -36,6 +46,7 @@ module.exports = React.createClass({
             <div className="progress-bar progress-bar-warning" role="progressbar"
               style={{width: ((this.props.character.xp*100)/(this.props.character.level * 1000))+'%'}}></div>
           </div>
+          <p>Bank account: <span className="text-success">$ {this.props.character.dollars}</span></p>
         </li>
         <li>
           <a href="/game/explore">
@@ -55,6 +66,12 @@ module.exports = React.createClass({
           <a href="/game/inventory">
             <span className="fa fa-suitcase"></span>
             <span className="xn-text">Equipment</span>
+          </a>
+        </li>
+        <li>
+          <a href="/game/market">
+            <span className="fa fa-money"></span>
+            <span className="xn-text">Black Market</span>
           </a>
         </li>
         <li>

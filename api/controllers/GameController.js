@@ -1,4 +1,6 @@
-var Promise = require('bluebird');
+var
+  Promise = require('bluebird'),
+  math = require('mathjs');
 
 /**
  * GameController
@@ -22,6 +24,27 @@ module.exports = {
       char2.stats = Statistics.generate(char2);
       var fight = new Fight(char1, char2);
       fight.resolve();
+
+      char1.currentHP = char1.currentHP > 0 ? math.round(char1.currentHP) : 0;
+      char1.xp = char1.xp + fight.xp;
+      char1.dollars = char1.dollars + fight.dollars;
+
+      Character.update({id: char1.id}, {
+        currentHP: char1.currentHP,
+        xp: char1.xp,
+        dollars: char1.dollars
+      }).exec(function() {});
+
+      if ( target === 'monster' && fight.winner === 'attacker' ) {
+        Monster.destroy({id: char2.id}).exec(function() {});
+      }
+
+      if ( target === 'character' ) {
+        Character.update({id: char2.id}, {
+          currentHP: char2.currentHP > 0 ? math.round(char2.currentHP) : 0
+        }).exec(function() {});
+      }
+
       return res.json({
         attacker:char1,
         defender:char2,
@@ -71,6 +94,16 @@ module.exports = {
       frameTitle: 'Explore',
       isJsx: true
     });
+  },
+
+  heal: function (req, res) {
+    Character.update({id: res.locals.character.id}, {
+      currentHP: res.locals.character.maxHP
+    }).exec(function (err) {
+      console.log(err);
+    });
+
+    return res.json({});
   }
 };
 
