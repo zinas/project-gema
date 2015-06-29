@@ -79,7 +79,8 @@ var CharacterSheet = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="row">
+        <div className="col-md-12 col-lg-6">
           <table className="table table-bordered table-striped table-actions">
           <tbody>
             <tr>
@@ -138,7 +139,8 @@ var CharacterSheet = React.createClass({
             </tr>
           </tbody>
           </table>
-
+        </div>
+        <div className="col-md-12 col-lg-6">
           <table className="table table-bordered table-striped table-actions">
           <tbody>
             {this.state.character.skills.map( (function (skill, i) {
@@ -174,6 +176,7 @@ var CharacterSheet = React.createClass({
             </tr>
           </tbody>
           </table>
+        </div>
       </div>
     );
   }
