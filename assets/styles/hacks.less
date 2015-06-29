@@ -49,11 +49,29 @@
   position: initial;
 }
 
-html, body, .page-container, #mainMountNode {
+html, body, #mainMountNode {
   height: 100%;
   min-height: 100%;
 }
 
 .page-container {
   float: none;
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+
+  .page-sidebar {
+    float: none;
+  }
+
+  .page-content {
+    float: none;
+    margin-left: 0;
+    width: calc(~"100% - 220px");
+  }
 }
+
+
