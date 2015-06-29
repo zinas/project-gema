@@ -4,9 +4,15 @@ var
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return {};
+    return {
+      expanded: false
+    };
   },
-  onClick: function () {
+  toggleExpand: function () {
+    this.setState({expanded: !this.state.expanded})
+  },
+  isWin: function () {
+    return this.props.fight.winner === 'attacker';
   },
   renderLog: function (log) {
     switch (log.what) {
@@ -98,14 +104,23 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className="messages messages-img">
-      {this.props.fight.log.map( (function (log, i) {
-        return (
-          <div key={i}>
-            {this.renderLog(log)}
-          </div>
-        )
-      }).bind(this)) }
+      <div className={cn({'hidden': this.props.fight.log.length === 0})}>
+        <a
+          href="#"
+          onClick={this.toggleExpand}
+          className={cn('tile', {'tile-success':this.isWin(), 'tile-danger':!this.isWin()})}>
+            {this.isWin()?'Win':'Loose'}
+            <p>Gained 0 xp and 0 $</p>
+        </a>
+        <div className={cn('messages messages-img', {hidden: !this.state.expanded})}>
+        {this.props.fight.log.map( (function (log, i) {
+          return (
+            <div key={i}>
+              {this.renderLog(log)}
+            </div>
+          )
+        }).bind(this)) }
+        </div>
       </div>
     );
   }

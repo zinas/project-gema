@@ -23,9 +23,11 @@ Fight.prototype.resolve = function () {
   if ( this.char1.currentHP <= 0 ) {
     winner = this.char2;
     looser = this.char1;
+    this.winner = 'defender';
   } else {
     winner = this.char1;
     looser = this.char2;
+    this.winner = 'attacker';
   }
   this.log.result(winner, looser);
 };

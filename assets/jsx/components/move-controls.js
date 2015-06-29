@@ -51,9 +51,6 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div className="panel panel-primary">
-        <div className="panel-heading">
-          <h3 className="panel-title">Movement</h3>
-        </div>
         <div className="panel-body">
           <button
             className="btn btn-primary btn-up"

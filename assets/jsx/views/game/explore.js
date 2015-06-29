@@ -17,7 +17,8 @@ var CharacterView = React.createClass({
       fight: {
         attacker: {},
         defender: {},
-        log: []
+        log: [],
+        winner: ''
       }
     };
   },
@@ -25,7 +26,8 @@ var CharacterView = React.createClass({
     this.setState({fight: {
       attacker: result.attacker,
       defender: result.defender,
-      log: result.log
+      log: result.log,
+      winner: result.result.winner
     }});
   },
   onCharacterUpdated: function (character) {
@@ -57,15 +59,15 @@ var CharacterView = React.createClass({
             <div className="row">
               <div className="col-md-6">
                 <Map level={this.state.character.continent} current={this.state.character.location}/>
-                <CombatLog fight={this.state.fight} />
+                <MoveControls character={this.state.character} onMove={this.onCharacterUpdated} />
               </div>
               <div className="col-md-6">
-                <MoveControls character={this.state.character} onMove={this.onCharacterUpdated} />
                 <AreaInformation
                   character={this.state.character}
                   level={this.state.character.continent}
                   area={this.state.character.location}
                   onResult={this.onResult} />
+                <CombatLog fight={this.state.fight} />
               </div>
             </div>
 

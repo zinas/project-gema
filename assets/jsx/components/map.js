@@ -54,15 +54,19 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className="level">
-        {this.state.areas.map((function (area) {
-          return (
-            <div key={area.id} style={{
-              width: 'calc('+(100 / this.props.level.width)+'% - 4px)',
-              height: 'calc('+(100 / this.props.level.height)+'% - 4px)',
-            }} className={this.getClassName(area)}>{this.getContent(area)}</div>
-          );
-        }).bind(this))}
+      <div className="panel panel-primary">
+      <div className="panel-body">
+          <div className="level">
+            {this.state.areas.map((function (area) {
+              return (
+                <div key={area.id} style={{
+                  width: 'calc('+(100 / this.props.level.width)+'% - 4px)',
+                  height: 'calc('+(100 / this.props.level.height)+'% - 4px)',
+                }} className={this.getClassName(area)}>{this.getContent(area)}</div>
+              );
+            }).bind(this))}
+          </div>
+        </div>
       </div>
     );
   }
