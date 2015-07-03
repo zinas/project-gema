@@ -32,7 +32,7 @@ module.exports = React.createClass({
     return result;
   },
   getClassName: function (area) {
-    var className = 'area tile tile-valign';
+    var className = 'area tile';
     if ( area.id === this.props.current.id ) {
       className += ' tile-danger';
     } else {

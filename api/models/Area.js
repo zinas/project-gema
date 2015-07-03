@@ -9,6 +9,7 @@ var math = require('mathjs');
 module.exports = {
 
   attributes: {
+    name: { type: 'string', required: true },
     x: {
       type: 'integer',
       required: true,
@@ -35,9 +36,9 @@ module.exports = {
   fillAll: function () {
     Area.find({}).populateAll().then(function (areas) {
       areas.forEach(function (area) {
-        if ( area.monsters.length < 2 ) {
-          console.log('spawning...');
-          Monster.spawn(area, math.randomInt(4));
+        if ( area.monsters.length <= 2 ) {
+          var spawns = math.randomInt(2, 6);
+          Monster.spawn(area, spawns);
         }
       });
     });
