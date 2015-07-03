@@ -23,12 +23,12 @@ module.exports = function () {
   MonsterTemplate.create({
     name: 'Thug',
     level: 2,
-    aim: 7,
-    speed: 7,
-    stamina: 7,
+    aim: 6,
+    speed: 6,
+    stamina: 6,
     attack: 8,
     defence: 14,
-    maxHP: 14,
+    maxHP: 18,
     weapon: {
       name: 'Crowbar',
       damage: 3

@@ -7,6 +7,8 @@
 
 var Promise = require('bluebird');
 
+var XP_PER_LEVEL = 1000;
+
 module.exports = {
 
   attributes: {
@@ -88,14 +90,21 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
-    Character.findOne(this.update.arguments[0]).then(function (character) {
-      if ( model.level ) {
-        throw 'need to update update for the profession';
-        var profession = _.find(sails.config.constants.PROFESSIONS, function (prof) {
-          return prof.ID === character.profession;
-        });
+    Character.findOnePopulated(this.update.arguments[0]).then(function (character) {
+      console.log('old xp', character.xp);
+      console.log('new xp', model.xp);
+      console.log('is about to level up', Character.isAboutToLevelUp(model.xp, character.level));
+      if ( model.xp && Character.isAboutToLevelUp(model.xp, character.level) ) {
+        model.level = character.level + 1;
+        model.xp = model.xp - character.level * XP_PER_LEVEL;
+        model.maxHP = model.level * character.profession.hp;
+        model.currentHP = model.maxHP;
+        character.level = model.level;
+        character.xp = model.xp;
+        character.maxHP = model.maxHP;
+        character.currentHP = model.maxHP;
 
-        model.maxHP = model.level * profession.HP_PER_LEVEL;
+        sails.sockets.blast('character-levelup-'+character.id, {character:character});
       }
       if ( model.location && model.location !== character.location) {
         sails.sockets.blast('character-left-area-'+character.location, {character:character});
@@ -159,6 +168,10 @@ module.exports = {
         return Character.findOnePopulated(characters[0].id);
       });
     });
+  },
+
+  isAboutToLevelUp: function (xp, level) {
+    return xp >= level * XP_PER_LEVEL;
   }
 };
 

@@ -71,7 +71,10 @@ module.exports = React.createClass({
     return (
       <div className="panel panel-danger">
         <div className="panel-heading">
-          <h3 className="panel-title">{this.props.level.name} <small>({this.props.area.x},{this.props.area.y})</small></h3>
+          <h3 className="panel-title">
+            {this.props.area.name}&nbsp;
+            <small>{this.props.level.name} ({this.props.area.x},{this.props.area.y})</small>
+          </h3>
         </div>
         <div className="panel-body">
           <p>{this.props.level.description}</p>
