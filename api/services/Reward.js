@@ -25,8 +25,6 @@ module.exports = {
     reward = reward * multiplier;
     reward = math.random(0.9 * reward, 1.1 * reward);
 
-    console.log('xp', reward);
-
     return math.round(reward);
   },
 
@@ -51,7 +49,24 @@ module.exports = {
     reward = reward * multiplier;
     reward = math.random(0.8 * reward, 1.2 * reward);
 
-    console.log('dollars', reward);
     return math.round(reward);
+  },
+
+  item: function (playerLevel, opponentLevel, multiplier) {
+    multiplier = multiplier || 1;
+    baseChance = 1;
+    if ( Dice.roll() > baseChance * multiplier ) return null;
+
+    var items = [Weapon, Armor, Implant], rolled = Dice.random(1, 3);
+    var minLevel = math.round(0.8 * opponentLevel);
+    var maxLevel = math.round(1.2 * opponentLevel);
+    return items[rolled].find({
+      level: {
+        '>=': minLevel,
+        '<=': maxLevel
+      }
+    }).then(function (items) {
+      return items[math.randomInt(0, items.length)];
+    });
   }
 };

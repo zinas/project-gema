@@ -25,36 +25,33 @@ module.exports = {
       var fight = new Fight(char1, char2);
       fight.resolve();
 
-      char1.currentHP = char1.currentHP > 0 ? math.round(char1.currentHP) : 0;
-      char1.xp = char1.xp + fight.xp;
-      char1.dollars = char1.dollars + fight.dollars;
-
-      Character.update({id: char1.id}, {
-        currentHP: char1.currentHP,
-        xp: char1.xp,
-        dollars: char1.dollars
-      }).exec(function() {});
-
       if ( target === 'monster' && fight.winner === 'attacker' ) {
-        Monster.destroy({id: char2.id}).exec(function() {});
-      }
+        Reward.roll(char2.level).then(function (item) {
+          return res.json({
+            attacker:char1,
+            defender:char2,
+            log: fight.log.log,
+            result: {
+              winner: fight.winner,
+              xp: fight.xp,
+              dollars: fight.dollars,
+              item: item
+            }
+          });
 
-      if ( target === 'character' ) {
-        Character.update({id: char2.id}, {
-          currentHP: char2.currentHP > 0 ? math.round(char2.currentHP) : 0
-        }).exec(function() {});
+        });
+      } else {
+        return res.json({
+          attacker:char1,
+          defender:char2,
+          log: fight.log.log,
+          result: {
+            winner: fight.winner,
+            xp: fight.xp,
+            dollars: fight.dollars
+          }
+        });
       }
-
-      return res.json({
-        attacker:char1,
-        defender:char2,
-        log: fight.log.log,
-        result: {
-          winner: fight.winner,
-          xp: fight.xp,
-          dollars: fight.dollars
-        }
-      });
     });
   },
 

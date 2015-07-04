@@ -50,9 +50,7 @@ module.exports = {
   },
 
   afterDestroy: function (models, next) {
-    console.log('afterDestroy');
     models.forEach(function (model) {
-      console.log('destroying '+model.id);
       sails.sockets.blast('monster-left-area-'+model.location, model);
     });
     next();
