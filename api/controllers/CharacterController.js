@@ -12,16 +12,10 @@ module.exports = {
       profession: req.param('profession'),
       user: req.user.id
     }).exec(function (err, newInstance) {
-      console.log('err', err);
-      console.log('newInstance', newInstance);
       if (err) return res.negotiate(err);
 
       res.created(newInstance);
     });
-  },
-
-  levelup: function (req, res) {
-
   },
 
   move: function (req, res) {

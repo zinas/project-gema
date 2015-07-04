@@ -103,12 +103,10 @@ module.exports = {
         character.xp = model.xp;
         character.maxHP = model.maxHP;
         character.currentHP = model.maxHP;
-
-        sails.sockets.blast('character-levelup-'+character.id, {character:character});
       }
       if ( model.location && model.location !== character.location) {
-        sails.sockets.blast('character-left-area-'+character.location, {character:character});
-        sails.sockets.blast('character-joined-area-'+model.location, {character:character});
+        sails.sockets.blast('character-left-area-'+character.location, character);
+        sails.sockets.blast('character-joined-area-'+model.location, character);
       }
       next();
     });

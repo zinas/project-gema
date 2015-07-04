@@ -44,6 +44,20 @@ module.exports = {
       .populateAll();
   },
 
+  afterCreate: function (model, next) {
+    sails.sockets.blast('monster-joined-area-'+model.location, model);
+    next();
+  },
+
+  afterDestroy: function (models, next) {
+    console.log('afterDestroy');
+    models.forEach(function (model) {
+      console.log('destroying '+model.id);
+      sails.sockets.blast('monster-left-area-'+model.location, model);
+    });
+    next();
+  },
+
   spawn: function (area, num) {
     num = num || 1;
     for ( var i = 0; i < num; i++ ) {

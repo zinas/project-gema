@@ -11,10 +11,11 @@ module.exports = React.createClass({
   },
   componentDidMount: function () {
     this.getOthers(this.props.area.id);
-    this.addListeners();
+    this.setupListeners();
   },
   componentWillReceiveProps: function (props) {
     this.getOthers(props.area.id);
+    this.setupListeners();
   },
   getOthers: function (areaId) {
     io.socket.get('/area', {id: areaId}, ( function (area) {
@@ -51,7 +52,12 @@ module.exports = React.createClass({
 
     this.setState({monsters: monsters});
   },
-  addListeners: function () {
+  setupListeners: function () {
+    io.socket.off('character-left-area-'+this.props.area.id);
+    io.socket.off('character-joined-area-'+this.props.area.id);
+    io.socket.off('monster-left-area-'+this.props.area.id);
+    io.socket.off('monster-joined-area-'+this.props.area.id);
+
     io.socket.on('character-left-area-'+this.props.area.id, this.removeCharacter);
     io.socket.on('character-joined-area-'+this.props.area.id, this.addCharacter);
     io.socket.on('monster-left-area-'+this.props.area.id, this.removeMonster);

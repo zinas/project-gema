@@ -6,6 +6,9 @@
  */
 
 module.exports = {
+  test: function (req, res) {
+    Monster.destroy({}).exec(function () {});
+  },
 
 	all: function (req, res) {
     Generate('professions');
@@ -20,32 +23,32 @@ module.exports = {
     return res.json({});
   },
 
-  monsterTemplates: function () {
+  monsterTemplates: function (req, res) {
     Generate('monsters');
     return res.json({});
   },
 
-  levels: function () {
+  levels: function (req, res) {
     Generate('levels');
     return res.json({});
   },
 
-  skills: function () {
+  skills: function (req, res) {
     Generate('skills');
     return res.json({});
   },
 
-  weapons: function () {
+  weapons: function (req, res) {
     Generate('weapons');
     return res.json({});
   },
 
-  armors: function () {
+  armors: function (req, res) {
     Generate('armors');
     return res.json({});
   },
 
-  implants: function () {
+  implants: function (req, res) {
     Generate('armors');
     return res.json({});
   }
