@@ -54,8 +54,8 @@ module.exports = {
 
   item: function (playerLevel, opponentLevel, multiplier) {
     multiplier = multiplier || 1;
-    baseChance = 1;
-    if ( Dice.roll() > baseChance * multiplier ) return null;
+    var baseChance = 1;
+    if ( Dice.roll() > baseChance * multiplier ) return Promise.resolve(null);
 
     var items = [Weapon, Armor, Implant], rolled = Dice.random(1, 3);
     var minLevel = math.round(0.8 * opponentLevel);

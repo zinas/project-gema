@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 			files: [{
 				expand: true,
 				cwd: './assets',
-				src: ['**/*.!(jsx|less|js)', 'js/atlant/**/*'],
+				src: ['**/*.!(jsx|less|js)'],
 				dest: '.tmp/public'
 			}]
 		},

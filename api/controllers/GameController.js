@@ -26,7 +26,7 @@ module.exports = {
       fight.resolve();
 
       if ( target === 'monster' && fight.winner === 'attacker' ) {
-        Reward.roll(char2.level).then(function (item) {
+        Reward.item(char2.level).then(function (item) {
           return res.json({
             attacker:char1,
             defender:char2,
@@ -89,7 +89,8 @@ module.exports = {
   explore: function (req, res) {
     return res.view({
       frameTitle: 'Explore',
-      isJsx: true
+      isJsx: true,
+      layout: 'layouts/private'
     });
   },
 
@@ -101,6 +102,13 @@ module.exports = {
     });
 
     return res.json({});
+  },
+
+  play: function (req, res) {
+    return res.view({
+      layout: 'layouts/private',
+      isJsx: true
+    });
   }
 };
 

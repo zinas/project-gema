@@ -171,7 +171,7 @@ var AuthController = {
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
         console.log(user);
-        res.redirect('/game/explore');
+        res.redirect('/game/play#explore');
       });
     });
   },

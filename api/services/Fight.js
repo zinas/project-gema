@@ -132,30 +132,30 @@ Fight.prototype.skillTypes = {
     this.log.hp(attacker);
     this.log.hp(defender);
   },
-
-  persistResult: function () {
-    this.char1.currentHP = this.char1.currentHP > 0 ? math.round(this.char1.currentHP) : 0;
-    this.char1.xp = this.char1.xp + this.xp;
-    this.char1.dollars = this.char1.dollars + this.dollars;
-
-    // player has killed a monster
-    if ( !this.char2.user && this.winner === 'attacker' ) {
-      Monster.destroy({id: this.char2.id}).exec(function() {});
-    }
-
-    if ( this.char2.user ) {
-      Character.update({id: this.char2.id}, {
-        currentHP: this.char2.currentHP > 0 ? math.round(this.char2.currentHP) : 0
-      }).exec(function() {});
-    }
-
-    Character.update({id: this.char1.id}, {
-      currentHP: this.char1.currentHP,
-      xp: this.char1.xp,
-      dollars: this.char1.dollars
-    }).exec(function() {});
-
-  }
 };
+
+Fight.prototype.persistResult = function () {
+  this.char1.currentHP = this.char1.currentHP > 0 ? math.round(this.char1.currentHP) : 0;
+  this.char1.xp = this.char1.xp + this.xp;
+  this.char1.dollars = this.char1.dollars + this.dollars;
+
+  // player has killed a monster
+  if ( !this.char2.user && this.winner === 'attacker' ) {
+    Monster.destroy({id: this.char2.id}).exec(function() {});
+  }
+
+  if ( this.char2.user ) {
+    Character.update({id: this.char2.id}, {
+      currentHP: this.char2.currentHP > 0 ? math.round(this.char2.currentHP) : 0
+    }).exec(function() {});
+  }
+
+  Character.update({id: this.char1.id}, {
+    currentHP: this.char1.currentHP,
+    xp: this.char1.xp,
+    dollars: this.char1.dollars
+  }).exec(function() {});
+
+}
 
 module.exports = Fight;

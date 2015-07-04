@@ -49,13 +49,13 @@ module.exports = React.createClass({
           <p>Bank account: <span className="text-success">$ {this.props.character.dollars}</span></p>
         </li>
         <li>
-          <a href="/game/explore">
+          <a href="/game/play#explore">
             <span className="fa fa-globe"></span>
             <span className="xn-text">Explore</span>
           </a>
         </li>
         <li>
-          <a href="/game/character">
+          <a href="/game/play#character">
             <span className="glyphicon glyphicon-dashboard"></span>
             <span className="xn-text">Vital Signs</span>
           </a>
@@ -63,13 +63,13 @@ module.exports = React.createClass({
         <li>
         </li>
         <li>
-          <a href="/game/inventory">
+          <a href="/game/play#inventory">
             <span className="fa fa-suitcase"></span>
             <span className="xn-text">Equipment</span>
           </a>
         </li>
         <li>
-          <a href="/game/market">
+          <a href="/game/play#market">
             <span className="fa fa-money"></span>
             <span className="xn-text">Black Market</span>
           </a>
@@ -81,13 +81,13 @@ module.exports = React.createClass({
           </a>
         </li>
         <li>
-          <a href="/game/guild">
+          <a href="/game/play#guild">
             <span className="fa fa-group"></span>
             <span className="xn-text">Connections</span>
           </a>
         </li>
         <li>
-          <a href="/game/news">
+          <a href="/news">
             <span className="glyphicon glyphicon-volume-up"></span>
             <span className="xn-text">Intelligence Network</span>
           </a>
