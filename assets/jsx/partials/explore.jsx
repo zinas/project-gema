@@ -1,9 +1,9 @@
 var
   React = require('react'),
-  AreaInformation = require('../components/area-information'),
-  Map = require('../components/map'),
-  MoveControls = require('../components/move-controls'),
-  CombatLog = require('../components/combat-log');
+  AreaInformation = require('../components/area-information.jsx'),
+  Map = require('../components/map.jsx'),
+  MoveControls = require('../components/move-controls.jsx'),
+  CombatLog = require('../components/combat-log.jsx');
 
 module.exports = React.createClass({
   getInitialState: function () {

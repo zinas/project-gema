@@ -1,6 +1,6 @@
 var
   React = require('react'),
-  ClassSelector = require('./class-selector');
+  ClassSelector = require('./class-selector.jsx');
 
 var CharacterCreateForm = React.createClass({
   getInitialState: function () {

@@ -1,10 +1,9 @@
 var
   React = require('react'),
-  // Router = require('react-router'),
-  data = require('./../../../js/lib/data.js'),
-  Hud = require('./../../components/hud'),
-  TopNavigation = require('./../../components/top-navigation'),
-  Chat = require('./../../components/chat');
+  data = require('./../../../js/lib/data'),
+  Hud = require('./../../components/hud.jsx'),
+  TopNavigation = require('./../../components/top-navigation.jsx'),
+  Chat = require('./../../components/chat.jsx');
 
 var Game = React.createClass({
   getInitialState: function () {
@@ -20,24 +19,21 @@ var Game = React.createClass({
     var MainView, title;
     switch (this.props.route) {
       case 'character':
-        MainView = require('../../partials/character');
+        MainView = require('../../partials/character.jsx');
         title = 'Vital Signs';
         break;
       case 'inventory':
-        MainView = require('../../partials/inventory');
+        MainView = require('../../partials/inventory.jsx');
         title = 'Equipment';
         break;
-      case 'explore':
-        MainView = require('../../partials/explore');
-        title = 'Explore';
-        break;
       case 'createCharacter':
-        MainView = require('../../partials/createCharacter');
+        MainView = require('../../partials/createCharacter.jsx');
         title = 'Create your character';
         break;
+      case 'explore':
       default:
-        title = 'Page not found';
-        MainView = require('../../partials/404');
+        MainView = require('../../partials/explore.jsx');
+        title = 'Explore';
     }
     return (
     <div className="page-container">

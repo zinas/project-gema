@@ -9,6 +9,7 @@ module.exports = React.createClass({
   },
   onClick: function () {
     this.setState({expanded: !this.state.expanded})
+    return false;
   },
   render: function() {
     return (
@@ -16,7 +17,7 @@ module.exports = React.createClass({
       <li
         onClick={this.onClick}
         className={cn('xn-icon-button pull-right last', {active: this.state.expanded})}>
-        <a href="#"><span className="fa fa-power-off"></span></a>
+        <a href=""><span className="fa fa-power-off"></span></a>
         <ul className="xn-drop-left animated zoomIn">
           <li>
             <a href="/account/settings"><span className="fa fa-wrench"></span> Account settings</a>

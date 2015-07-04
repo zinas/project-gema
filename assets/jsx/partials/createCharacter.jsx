@@ -1,7 +1,7 @@
 var
   React = require('react'),
-  CharacterCreateForm = require('../components/character-create-form'),
-  Errors = require('../components/errors');
+  CharacterCreateForm = require('../components/character-create-form.jsx'),
+  Errors = require('../components/errors.jsx');
 
 module.exports = React.createClass({
   getInitialState: function () {

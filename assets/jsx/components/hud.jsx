@@ -7,6 +7,7 @@ module.exports = React.createClass({
       character.currentHP = character.maxHP;
       this.props.onCharacterUpdated(character);
     }).bind(this));
+    return false;
   },
   render: function() {
     var sidebar = '';
@@ -15,7 +16,7 @@ module.exports = React.createClass({
       <ul className="x-navigation">
         <li className="xn-logo">
           <a href="index.html">The Grid</a>
-          <a href="#" className="x-navigation-control"></a>
+          <a href="" className="x-navigation-control"></a>
         </li>
         <li className="xn-title">HUD unit</li>
         <li className="xn-profile">
@@ -35,7 +36,7 @@ module.exports = React.createClass({
         <li className="xn-title">
           <div>
             HP: {this.props.character.currentHP} / {this.props.character.maxHP}
-            &nbsp;<a href="#" onClick={this.heal} className="text-warning">Heal</a>
+            &nbsp;<a href="" onClick={this.heal} className="text-warning">Heal</a>
           </div>
           <div className="progress progress-small">
             <div className="progress-bar progress-bar-colorful" role="progressbar"
