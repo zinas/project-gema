@@ -1,6 +1,5 @@
 var
-  React = require('react'),
-  _ = require('lodash');
+  React = require('react');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -19,9 +18,10 @@ module.exports = React.createClass({
   },
   getOthers: function (areaId) {
     io.socket.get('/area', {id: areaId}, ( function (area) {
-      var characters = _.reject(area.characters, ( function (character) {
-        return character.id === this.props.character.id;
-      }).bind(this) );
+      var characters = area.characters.filter((function (character) {
+        return character.id !== this.props.character.id;
+      }).bind(this));
+
       this.setState({
         characters: characters,
         monsters: area.monsters
