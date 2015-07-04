@@ -6,6 +6,5 @@ module.exports = {
     level: { type: 'integer', },
     damage: { type: 'integer', required: true },
     modifiers: { type: 'array' },
-    owner: { model: 'character' }
   }
 };

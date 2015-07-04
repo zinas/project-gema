@@ -16,9 +16,9 @@ module.exports = {
     Generate('skills');
     Generate('monsters');
 
-    // Generate('weapons');
-    // Generate('armors');
-    // Generate('implants');
+    Generate('weapons');
+    Generate('armors');
+    Generate('implants');
 
     return res.json({});
   },
