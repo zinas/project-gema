@@ -52,17 +52,17 @@ var Game = React.createClass({
             </div>
           </div>
 
-          <div style={{display: 'block', minHeight: '710px'}} className="content-frame-right">
-            <Chat />
+          <div className="content-wrapper">
+            <div className="main-container">
+              <MainView
+                character={this.state.character}
+                onCharacterUpdated={this.onCharacterUpdated}
+                user={this.state.user} />
+            </div>
+            <div className="chat-container">
+              <Chat />
+            </div>
           </div>
-
-          <div className="content-frame-body content-frame-body-left">
-            <MainView
-              character={this.state.character}
-              onCharacterUpdated={this.onCharacterUpdated}
-              user={this.state.user} />
-          </div>
-
         </div>
       </div>
     </div>

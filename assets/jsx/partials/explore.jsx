@@ -49,7 +49,9 @@ module.exports = React.createClass({
               onResult={this.onResult} />
           </div>
         </div>
-        <CombatLog fight={this.state.fight} />
+        <div className="col-xs-12">
+          <CombatLog fight={this.state.fight} />
+        </div>
       </div>
 
     );

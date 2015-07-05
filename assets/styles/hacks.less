@@ -50,13 +50,13 @@
 }
 
 html, body, #mainMountNode {
-  height: 100%;
-  min-height: 100%;
+  height: 100vh;
+  min-height: 100vh;
 }
 
 .page-container {
   float: none;
-  min-height: 100%;
+  height: 100vh;
 
   display: flex;
   flex-direction: row;
@@ -84,4 +84,24 @@ html, body, #mainMountNode {
   min-width: 34px;
   line-height: 28px;
 }
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
+}
 
+.main-container {
+  width: calc(~"100% - 300px");
+  height: calc(~"100vh - 110px");
+  overflow: auto;
+}
+
+.chat-container {
+  width: 300px;
+  border-left: 1px solid #ddd;
+  background: rgba(0,0,0,0.02);
+  height: calc(~"100vh - 110px");
+  overflow: auto;
+}
