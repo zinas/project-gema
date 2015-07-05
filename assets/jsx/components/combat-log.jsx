@@ -104,7 +104,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className={cn({'hidden': this.props.fight.log.length === 0})}>
+      <div className={cn('clearfix', {'hidden': this.props.fight.log.length === 0})}>
         <a
           href="#"
           onClick={this.toggleExpand}

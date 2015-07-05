@@ -95,13 +95,9 @@ module.exports = {
   },
 
   heal: function (req, res) {
-    Character.update({id: res.locals.character.id}, {
-      currentHP: res.locals.character.maxHP
-    }).exec(function (err) {
-      console.log(err);
+    Character.heal(res.locals.character).then(function () {
+      return res.json({});
     });
-
-    return res.json({});
   },
 
   play: function (req, res) {

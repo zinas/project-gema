@@ -6,6 +6,7 @@
 */
 
 var Promise = require('bluebird');
+var math = require('mathjs');
 
 var XP_PER_LEVEL = 1000;
 
@@ -170,6 +171,14 @@ module.exports = {
 
   isAboutToLevelUp: function (xp, level) {
     return xp >= level * XP_PER_LEVEL;
+  },
+
+  heal: function (character) {
+    var cost = math.round(character.dollars * 0.05);
+    return Character.update({id: character.id}, {
+      currentHP: character.maxHP,
+      dollars: character.dollars - cost
+    });
   }
 };
 

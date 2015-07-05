@@ -5,9 +5,13 @@ module.exports = React.createClass({
     io.socket.get('/game/heal', (function () {
       var character = this.props.character;
       character.currentHP = character.maxHP;
+      character.dollars = character.dollars - this.getCost();
       this.props.onCharacterUpdated(character);
     }).bind(this));
     return false;
+  },
+  getCost: function () {
+    return parseInt(this.props.character.dollars * 0.05);
   },
   render: function() {
     var sidebar = '';
@@ -36,7 +40,8 @@ module.exports = React.createClass({
         <li className="xn-title">
           <div>
             HP: {this.props.character.currentHP} / {this.props.character.maxHP}
-            &nbsp;<a href="" onClick={this.heal} className="text-warning">Heal</a>
+            &nbsp;&nbsp;<a href="" onClick={this.heal} className="text-warning">Heal</a>
+            &nbsp;&nbsp;(<span className="text-success">$ {this.getCost()}</span>)
           </div>
           <div className="progress progress-small">
             <div className="progress-bar progress-bar-colorful" role="progressbar"
