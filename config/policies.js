@@ -41,6 +41,9 @@ module.exports.policies = {
     '*' : ['passport', 'isLogged', 'hasCharacter'],
     createCharacter: ['passport', 'isLogged', 'noCharacter']
   },
+  MessageController: {
+    '*' : ['passport', 'isLogged', 'hasCharacter']
+  },
 
   // AreaController: {
   //   '*': false,

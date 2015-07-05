@@ -20,6 +20,10 @@ module.exports = {
       unique: true
     },
 
+    image: { type: 'string', defaultsTo: '/images/no-image.jpg' },
+
+    bio: { type: 'string' },
+
     level: {
       type: 'integer',
       defaultsTo: 1

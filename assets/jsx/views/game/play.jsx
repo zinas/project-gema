@@ -60,7 +60,7 @@ var Game = React.createClass({
                 user={this.state.user} />
             </div>
             <div className="chat-container">
-              <Chat />
+              <Chat character={this.state.character} />
             </div>
           </div>
         </div>

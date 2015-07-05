@@ -93,15 +93,34 @@ html, body, #mainMountNode {
 }
 
 .main-container {
-  width: calc(~"100% - 300px");
+  width: calc(~"100% - 330px");
   height: calc(~"100vh - 110px");
   overflow: auto;
 }
 
 .chat-container {
-  width: 300px;
+  width: 330px;
   border-left: 1px solid #ddd;
   background: rgba(0,0,0,0.02);
   height: calc(~"100vh - 110px");
-  overflow: auto;
+  // display: flex;
+  // align-items: stretch;
+
+  .panel {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+  }
+
+  .chat-wrapper {
+    height: 100%;
+    padding: 5px;
+  }
+
+  .messages {
+    height: calc(~"100% - 89px");
+    overflow: auto;
+    margin-top: 5px;
+  }
 }

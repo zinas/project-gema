@@ -8,7 +8,8 @@ module.exports = React.createClass({
       expanded: false
     };
   },
-  toggleExpand: function () {
+  toggleExpand: function (e) {
+    e.preventDefault();
     this.setState({expanded: !this.state.expanded})
   },
   isWin: function () {
