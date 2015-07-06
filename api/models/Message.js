@@ -12,6 +12,34 @@ module.exports = {
     sender: { model: 'character', required: true },
     recipient: { model: 'character' },
     room: { enum: ['general', 'trade', 'newbie'], defaultsTo: 'general' }
+  },
+
+  parse: function (content) {
+    var result;
+    if ( result = /^\/t\s+(.*)/.exec(content) ) {
+      return { room: 'trade', message: result[1] };
+    }
+    if ( result = /^\/trade\s+(.*)/.exec(content) ) {
+      return { room: 'trade', message: result[1] };
+    }
+
+    if ( result = /^\/m\s+([^\s]*)\s*(.*)/.exec(content) ) {
+      return { room: 'private', message: result[2], recipient: result[1] };
+    }
+    if ( result = /^\/msg\s+([^\s]*)\s*(.*)/.exec(content) ) {
+      return { room: 'private', message: result[2], recipient: result[1] };
+    }
+    if ( result = /^\/message\s+([^\s]*)\s*(.*)/.exec(content) ) {
+      return { room: 'private', message: result[2], recipient: result[1] };
+    }
+
+    if ( result = /^\/g\s+(.*)/.exec(content) ) {
+      return { room: 'general', message: result[1] };
+    }
+    if ( result = /^\/general\s+(.*)/.exec(content) ) {
+      return { room: 'general', message: result[1] };
+    }
+    return { room: 'general', message: content };
   }
 };
 

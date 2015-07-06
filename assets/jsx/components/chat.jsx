@@ -27,7 +27,9 @@ module.exports = React.createClass({
   <div key={message.id} className={cn('item item-visible')}>
     <div className="text">
       <div className="heading">
-        <strong className={colorClass}>{message.sender.name}</strong>
+        <strong className={colorClass}>
+          {message.recipient && message.recipient.id !== this.props.character.id ? 'To: '+message.recipient.name : message.sender.name}
+        </strong>
         <span className="date">{moment(message.createdAt).format('D/M H:m')}</span>
       </div>
       {message.content}
@@ -41,9 +43,13 @@ module.exports = React.createClass({
     io.socket.on('new-message-'+this.props.character.id, this.addMessage);
   },
   addMessage: function (message) {
-    var msg = this.state.messages;
-    msg.unshift(message);
-    this.setState({messages:msg});
+    if ( !message.error ) {
+      var msg = this.state.messages;
+      msg.unshift(message);
+      this.setState({messages:msg});
+    } else {
+      alert(message.error);
+    }
   },
   getMessages: function () {
     io.socket.get('/message/getMine', (function (messages) {
@@ -57,8 +63,7 @@ module.exports = React.createClass({
   },
   postMessage: function () {
     io.socket.post('/message/create', {content: this.refs.message.getDOMNode().value}, (function (message) {
-      var messages = this.state.messages;
-      this.setState({messages: messages});
+      this.addMessage(message);
       this.refs.message.getDOMNode().value = '';
     }).bind(this));
   },
@@ -79,7 +84,6 @@ module.exports = React.createClass({
       <div className="panel-body panel-body-search">
         <button type="button" className="btn btn-default btn-xs">All</button>&nbsp;
         <button type="button" className="btn btn-primary btn-xs">General</button>&nbsp;
-        <button type="button" className="btn btn-success btn-xs">Guild</button>&nbsp;
         <button type="button" className="btn btn-danger btn-xs">Private</button>&nbsp;
         <button type="button" className="btn btn-info btn-xs">Trade</button>&nbsp;
       </div>

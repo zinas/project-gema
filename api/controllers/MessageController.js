@@ -16,29 +16,53 @@ module.exports = {
       sort: 'createdAt DESC',
       limit: 30
     })
-    .populate('sender')
+    .populateAll()
     .then(function (messages) {
       return res.json(messages);
     });
   },
 
   create: function (req, res) {
-    Message.create({
-      content: req.param('content'),
-      sender: res.locals.character.id,
-      recipient: null,
-      room: 'general'
-    }).then(function (message) {
-      message.sender = res.locals.character;
-      if ( !res.recipient ) {
+    var data = Message.parse(req.param('content'));
+
+    if ( data.room !== 'private') {
+      Message.create({
+        content: data.message,
+        sender: res.locals.character.id,
+        recipient: null,
+        room: data.room
+      }).then(function (message) {
+        message.sender = res.locals.character;
         sails.sockets.blast('new-message', message);
-      } else {
-        sails.sockets.blast('new-message-'+message.recipient, message);
-      }
-      res.json(message);
-    }, function (error) {
-      console.log('not ok', error);
-    });
+        res.json(message);
+      }, function (error) {
+        res.json({error: error});
+      });
+    } else {
+      console.log('trying private message');
+      Character.findOne({name: data.recipient}).then(function (character) {
+        console.log('found char', character);
+        if ( !character ) {
+          return res.json({error: 'Character not found'});
+        }
+        Message.create({
+          content: data.message,
+          sender: res.locals.character.id,
+          recipient: character.id,
+          room: null
+        }).then(function (message) {
+          message.sender = res.locals.character;
+          message.recipient = character;
+          sails.sockets.blast('new-message-'+message.recipient.id, message);
+          res.json(message);
+        }, function (error) {
+          res.json({error: error});
+        });
+      }, function (error) {
+        res.json({error: error});
+      });
+    }
+
   }
 };
 
