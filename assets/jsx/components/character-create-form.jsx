@@ -19,7 +19,7 @@ var CharacterCreateForm = React.createClass({
       if ( data.error ) {
         this.props.onError(data);
       } else {
-        window.location = '/game/character';
+        window.location = '/game/play#explore';
       }
     }).bind(this));
 

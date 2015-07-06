@@ -56,6 +56,7 @@ module.exports = {
   },
 
   createCharacter: function (req, res) {
+  res.locals.layout = 'layouts/public';
     return res.view({
       frameTitle: 'Create your character',
       isJsx: true
