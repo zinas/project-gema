@@ -13,7 +13,7 @@ module.exports = React.createClass({
     this.getAreas(props.level.id);
   },
   getAreas: function (levelId) {
-    io.socket.get('/area', {level: levelId}, (function (areas) {
+    io.socket.get('/area/findLevelAreas', {level: levelId}, (function (areas) {
       areas = this.sort(areas);
       this.setState({areas: areas});
     }).bind(this));

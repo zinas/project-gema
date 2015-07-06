@@ -22,54 +22,54 @@ module.exports = React.createClass({
       case 'initiative':
         return (
             <div className="text">
-              <strong>{log.actor.name}</strong> has won initiative
+              <strong>{log.actor}</strong> has won initiative
             </div>
         );
       case 'hit':
         return (
             <div className="text">
-              <strong>{log.actor.name}</strong> has rolled <span className="text-primary">{log.roll}</span>&nbsp;
+              <strong>{log.actor}</strong> has rolled <span className="text-primary">{log.roll}</span>&nbsp;
               and hits for {log.damage}<br/>
-              <p><strong>{log.victim.name}</strong> has {log.hpLeft} hit points left</p>
+              <p><strong>{log.victim}</strong> has {log.hpLeft} hit points left</p>
             </div>
         );
       case 'crit':
         return (
             <div className="text">
-              <strong>{log.actor.name}</strong> has rolled&nbsp;
+              <strong>{log.actor}</strong> has rolled&nbsp;
               <span className="text-primary">{log.roll}</span>&nbsp;
               and <span className="text-success">crits</span> for {log.damage}<br />
-              <p><strong>{log.victim.name}</strong> has {log.hpLeft} hit points left</p>
+              <p><strong>{log.victim}</strong> has {log.hpLeft} hit points left</p>
             </div>
         );
       case 'graze':
         return (
             <div className="text">
-              <strong>{log.actor.name}</strong>&nbsp;
+              <strong>{log.actor}</strong>&nbsp;
               has rolled <span className="text-primary">{log.roll}</span> and&nbsp;
               <span className="text-muted">grazes</span> for {log.damage}<br />
-              <p><strong>{log.victim.name}</strong> has {log.hpLeft} hit points left</p>
+              <p><strong>{log.victim}</strong> has {log.hpLeft} hit points left</p>
             </div>
         );
       case 'miss':
         return (
             <div className="text">
-              <strong>{log.actor.name}</strong>&nbsp;
+              <strong>{log.actor}</strong>&nbsp;
               has rolled <span className="text-primary">{log.value}</span> and <span className="text-danger">misses</span>
             </div>
         );
       case 'result':
         return (
             <div className="text">
-              <strong>{log.winner.name}</strong> wins
+              <strong>{log.winner}</strong> wins
             </div>
         );
       case 'skill':
         return (
           <div className={cn('item item-visible')}>
             <div className="text">
-              <strong>{log.actor.name}</strong>&nbsp;
-              uses <span className="text-info">{skill.details.name}</span> and rolls {log.value}
+              <strong>{log.actor}</strong>&nbsp;
+              uses <span className="text-info">{skill.details}</span> and rolls {log.value}
             </div>
           </div>
         );

@@ -6,6 +6,12 @@
  */
 
 module.exports = {
-
+  findLevelAreas: function (req, res) {
+    Area.find({level: req.param('level')}).then(function (areas) {
+      res.json(areas);
+    }, function (error) {
+      res.json({error:error});
+    });
+  }
 };
 

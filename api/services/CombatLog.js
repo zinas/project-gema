@@ -7,15 +7,15 @@ Log.prototype.summary = function (char1, char2) {}
 Log.prototype.init = function (character) {
   this.log.push({
     what: 'initiative',
-    actor: character
+    actor: character.name
   });
 }
 
 Log.prototype.hit = function (attacker, defender, roll, damage, hpLeft) {
   this.log.push({
     what: 'hit',
-    actor: attacker,
-    victim: defender,
+    actor: attacker.name,
+    victim: defender.name,
     roll: roll,
     damage: damage,
     hpLeft: hpLeft
@@ -25,8 +25,8 @@ Log.prototype.hit = function (attacker, defender, roll, damage, hpLeft) {
 Log.prototype.crit = function (attacker, defender, roll, damage, hpLeft) {
   this.log.push({
     what: 'crit',
-    actor: attacker,
-    victim: defender,
+    actor: attacker.name,
+    victim: defender.name,
     roll: roll,
     damage: damage,
     hpLeft: hpLeft
@@ -36,8 +36,8 @@ Log.prototype.crit = function (attacker, defender, roll, damage, hpLeft) {
 Log.prototype.graze = function (attacker, defender, roll, damage, hpLeft) {
   this.log.push({
     what: 'graze',
-    actor: attacker,
-    victim: defender,
+    actor: attacker.name,
+    victim: defender.name,
     roll: roll,
     damage: damage,
     hpLeft: hpLeft
@@ -47,8 +47,8 @@ Log.prototype.graze = function (attacker, defender, roll, damage, hpLeft) {
 Log.prototype.miss = function (attacker, defender, roll) {
   this.log.push({
     what: 'miss',
-    actor: attacker,
-    victim: defender,
+    actor: attacker.name,
+    victim: defender.name,
     value: roll
   });
 };
@@ -59,16 +59,16 @@ Log.prototype.hp = function (character) {};
 Log.prototype.result = function (winner, looser) {
   this.log.push({
     what: 'result',
-    winner: winner,
-    looser: looser
+    winner: winner.name,
+    looser: looser.name
   });
 };
 
 Log.prototype.skill = function (skill, attacker, val) {
   this.log.push({
     what: 'skill',
-    actor: attacker,
-    which: skill,
+    actor: attacker.name,
+    which: skill.name,
     value: val
   });
 }
