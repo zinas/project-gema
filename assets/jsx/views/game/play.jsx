@@ -26,10 +26,6 @@ var Game = React.createClass({
         MainView = require('../../partials/inventory.jsx');
         title = 'Equipment';
         break;
-      // case 'createCharacter':
-      //   MainView = require('../../partials/createCharacter.jsx');
-      //   title = 'Create your character';
-      //   break;
       case 'explore':
       default:
         MainView = require('../../partials/explore.jsx');

@@ -102,9 +102,15 @@ module.exports = {
   },
 
   play: function (req, res) {
-    return res.view({
-      layout: 'layouts/private',
-      isJsx: true
+    Area
+    .findOne({id: res.locals.character.location.id})
+    .populateAll()
+    .then(function (area) {
+      return res.view({
+        layout: 'layouts/private',
+        isJsx: true,
+        area: area
+      });
     });
   }
 };

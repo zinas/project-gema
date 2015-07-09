@@ -10,7 +10,9 @@ module.exports = React.createClass({
     this.getAreas(this.props.level.id);
   },
   componentWillReceiveProps: function (props) {
-    this.getAreas(props.level.id);
+    if ( this.props.level.id !== props.level.id ) {
+      this.getAreas(props.level.id);
+    }
   },
   getAreas: function (levelId) {
     io.socket.get('/area/findLevelAreas', {level: levelId}, (function (areas) {

@@ -95,6 +95,7 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
+    console.log('trying to update id', this.update.arguments[0]);
     Character.findOnePopulated(this.update.arguments[0]).then(function (character) {
       console.log('old xp', character.xp);
       console.log('new xp', model.xp);
@@ -164,11 +165,11 @@ module.exports = {
     return Area.findOne({
       x: coords.x,
       y: coords.y
-    }).then(function (area) {
+    }).populateAll().then(function (area) {
       return Character.update(where, {
         location: area.id
       }).then(function ( characters ) {
-        return Character.findOnePopulated(characters[0].id);
+        return area;
       });
     });
   },

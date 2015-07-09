@@ -9,11 +9,11 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function () {
-    this.getOthers(this.props.area.id);
+    // this.getOthers(this.props.area.id);
     this.setupListeners();
   },
   componentWillReceiveProps: function (props) {
-    this.getOthers(props.area.id);
+    // this.getOthers(props.area.id);
     this.setupListeners();
   },
   getOthers: function (areaId) {
@@ -84,7 +84,7 @@ module.exports = React.createClass({
         </div>
         <div className="panel-body">
           <p>{this.props.level.description}</p>
-          {this.state.monsters.map( (function (monster) {
+          {this.props.area.monsters.map( (function (monster) {
             return (
               <a
                 key={monster.id}
@@ -96,7 +96,7 @@ module.exports = React.createClass({
               </a>
             )
           }).bind(this))}
-          {this.state.characters.map(function (character) {
+          {this.props.area.characters.map(function (character) {
             return (
               <a key={character.id} className="btn btn-danger btn-rounded" href={'/game/fight/character/'+character.id}>
                 <span className="fa fa-male"></span> {character.name} (lvl. {character.level})

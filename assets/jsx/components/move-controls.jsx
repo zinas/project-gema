@@ -25,8 +25,8 @@ module.exports = React.createClass({
     io.socket.post(
       '/character/move',
       {coords: coords},
-      (function (character) {
-        this.props.onMove(character);
+      (function (area) {
+        this.props.onMove(area);
       }).bind(this));
 
   },

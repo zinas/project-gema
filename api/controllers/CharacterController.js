@@ -23,8 +23,8 @@ module.exports = {
       Character.move({
         id: character.id
       }, req.param('coords'))
-      .then(function (character) {
-        res.json(character);
+      .then(function (area) {
+        res.json(area);
       });
     });
   }
