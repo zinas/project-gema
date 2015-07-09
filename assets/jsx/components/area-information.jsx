@@ -8,61 +8,6 @@ module.exports = React.createClass({
       monsters: []
     };
   },
-  componentDidMount: function () {
-    // this.getOthers(this.props.area.id);
-    this.setupListeners();
-  },
-  componentWillReceiveProps: function (props) {
-    // this.getOthers(props.area.id);
-    this.setupListeners();
-  },
-  getOthers: function (areaId) {
-    io.socket.get('/area', {id: areaId}, ( function (area) {
-      var characters = area.characters.filter((function (character) {
-        return character.id !== this.props.character.id;
-      }).bind(this));
-
-      this.setState({
-        characters: characters,
-        monsters: area.monsters
-      });
-    }).bind(this) );
-  },
-  addCharacter: function (character) {
-    var characters = this.state.characters;
-    characters.push(character);
-    this.setState({characters: characters});
-  },
-  addMonster: function (monster) {
-    var monsters = this.state.monsters;
-    monsters.push(monster);
-    this.setState({monsters: monsters});
-  },
-  removeCharacter: function (character) {
-    var characters = this.state.characters.filter(function (c) {
-      return c.id !== character.id;
-    });
-
-    this.setState({characters: characters});
-  },
-  removeMonster: function (monster) {
-    var monsters = this.state.monsters.filter(function (m) {
-      return m.id !== monster.id;
-    });
-
-    this.setState({monsters: monsters});
-  },
-  setupListeners: function () {
-    io.socket.off('character-left-area-'+this.props.area.id);
-    io.socket.off('character-joined-area-'+this.props.area.id);
-    io.socket.off('monster-left-area-'+this.props.area.id);
-    io.socket.off('monster-joined-area-'+this.props.area.id);
-
-    io.socket.on('character-left-area-'+this.props.area.id, this.removeCharacter);
-    io.socket.on('character-joined-area-'+this.props.area.id, this.addCharacter);
-    io.socket.on('monster-left-area-'+this.props.area.id, this.removeMonster);
-    io.socket.on('monster-joined-area-'+this.props.area.id, this.addMonster);
-  },
 
   fight: function (e) {
     io.socket.post('/game/fight', {

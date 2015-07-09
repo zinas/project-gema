@@ -45,13 +45,13 @@ module.exports = {
   },
 
   afterCreate: function (model, next) {
-    sails.sockets.blast('monster-joined-area-'+model.location, model);
+    sails.sockets.blast('area-changed-'+model.location, {type: 'addMonster', data: model});
     next();
   },
 
   afterDestroy: function (models, next) {
     models.forEach(function (model) {
-      sails.sockets.blast('monster-left-area-'+model.location, model);
+      sails.sockets.blast('area-changed-'+model.location, {type: 'removeMonster', data: model});
     });
     next();
   },
