@@ -47,6 +47,7 @@ module.exports = React.createClass({
     this.setState({area: area});
   },
   removeCharacter: function (character) {
+    console.log('removing character...', character);
     var characters = this.state.area.characters.filter(function (c) {
       return c.id !== character.id;
     });

@@ -95,7 +95,7 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
-    Character.findOnePopulated(this.update.arguments[0]).then(function (character) {
+    Character.findOne(this.update.arguments[0]).then(function (character) {
       if ( model.xp && Character.isAboutToLevelUp(model.xp, character.level) ) {
         model.level = character.level + 1;
         model.xp = model.xp - character.level * XP_PER_LEVEL;
@@ -109,6 +109,10 @@ module.exports = {
       if ( model.location && model.location !== character.location) {
         sails.sockets.blast('area-changed-'+character.location, {type: 'removeCharacter', data: character});
         sails.sockets.blast('area-changed-'+model.location, {type: 'addCharacter', data: character});
+      }
+      if ( model.currentHP <= 0 ) {
+        model.currentHP = 0;
+        sails.sockets.blast('area-changed-'+character.location, {type: 'removeCharacter', data: character});
       }
       next();
     });
@@ -161,7 +165,11 @@ module.exports = {
     return Area.findOne({
       x: coords.x,
       y: coords.y
-    }).populateAll().then(function (area) {
+    })
+    .populate('monsters')
+    .populate('level')
+    .populate('characters', {currentHP: {'>' : 0}})
+    .then(function (area) {
       return Character.update(where, {
         location: area.id
       }).then(function ( characters ) {

@@ -35,6 +35,10 @@ module.exports = React.createClass({
       level = this.props.character.continent,
       area = this.props.character.location;
 
+    if ( this.props.character.currentHP <= 0 ) {
+      return false;
+    }
+
     switch (direction) {
       case 'up':
         return area.y > 1;

@@ -64,7 +64,9 @@ module.exports = React.createClass({
                 <a
                   key={character.id}
                   className={this.getButtonClass(character.level)}
-                  href={'/game/fight/character/'+character.id}>
+                  onClick={this.fight}
+                  data-target="character"
+                  data-id={character.id}>
                   <span className="fa fa-male"></span> {character.name} (lvl. {character.level})
                 </a>
               </p>
