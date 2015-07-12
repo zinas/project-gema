@@ -5,7 +5,7 @@ var DOLLARS_PER_LEVEL = 15;
 
 module.exports = {
   xp: function (playerLevel, opponentLevel, isWin, isPlayer, multiplier) {
-    multiplier = multiplier || 2;
+    multiplier = multiplier || 1;
     var reward = opponentLevel * XP_PER_LEVEL;
 
     var diff = opponentLevel - playerLevel;
