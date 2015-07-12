@@ -17,6 +17,7 @@ module.exports = React.createClass({
         attacker: {},
         defender: {},
         log: [],
+        item: null,
         winner: '',
         xp: 0,
         dollars: 0
@@ -91,7 +92,6 @@ module.exports = React.createClass({
     this.setState({level: level});
   },
   onResult: function (fight) {
-    this.props.onCharacterUpdated(fight.attacker);
     this.setState({
       fight: {
         attacker: fight.attacker,
@@ -99,9 +99,11 @@ module.exports = React.createClass({
         log: fight.log,
         winner: fight.result.winner,
         xp: fight.result.xp,
-        dollars: fight.result.dollars
+        dollars: fight.result.dollars,
+        item: fight.result.item
       }
     });
+    this.props.onCharacterUpdated(fight.attacker);
   },
   render: function() {
     return (

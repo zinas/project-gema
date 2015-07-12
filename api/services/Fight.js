@@ -99,38 +99,35 @@ Fight.prototype.attack = function (attacker, defender) {
 };
 
 Fight.prototype.skill = function ( skill, character, target ) {
+  if ( skill.details.action.type !== 'combat' ) return;
   var probability = skill.level * skill.details.action.probability;
-  if ( Dice.check(probability) ) {
+  if ( Dice.check(probability) || true ) {
     this.skillTypes[skill.details.action.target].call(this, skill, character, target);
   }
 };
 
 Fight.prototype.skillTypes = {
   damage : function (skill, attacker, defender) {
-    var damage = Dice.roll(skill.details.action.dice);
+    var damage = skill.details.action.value;
     defender.currentHP -= damage;
     this.log.skill(skill, attacker, damage);
-    this.log.hp(defender);
   },
   heal : function (skill, character) {
-    var heal = Dice.roll(skill.details.action.dice);
+    var heal = skill.details.action.value;
     character.currentHP += heal;
     if ( character.currentHP > character.maxHP ) {
       character.currentHP = character.maxHP;
     }
     this.log.skill(skill, character, heal);
-    this.log.hp(character);
   },
-  drain: function (skill, level, attacker, defender) {
-    var damage = Dice.roll(skill.details.action.dice);
+  drain: function (skill, attacker, defender) {
+    var damage = skill.details.action.value;
     defender.currentHP -= damage;
     attacker.currentHP += damage;
     if ( attacker.currentHP > attacker.maxHP ) {
       attacker.currentHP = attacker.maxHP;
     }
     this.log.skill(skill, attacker, damage);
-    this.log.hp(attacker);
-    this.log.hp(defender);
   },
 };
 

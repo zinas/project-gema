@@ -59,6 +59,10 @@ module.exports = {
     armor: { model: 'armor' },
     implant: { model: 'implant' },
 
+    ///////// Inventory
+    weapons: { collection: 'weapon', via: 'owner' },
+    armors: { collection: 'armor', via: 'owner' },
+    implants: { collection: 'implant', via: 'owner' },
 
     user: { model: 'user', required: true },
 

@@ -1,6 +1,7 @@
 var
   React = require('react'),
-  cn = require('classnames');
+  cn = require('classnames'),
+  Item = require('./item.jsx');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -69,7 +70,7 @@ module.exports = React.createClass({
           <div className={cn('item item-visible')}>
             <div className="text">
               <strong>{log.actor}</strong>&nbsp;
-              uses <span className="text-info">{skill.details}</span> and rolls {log.value}
+              uses <span className="text-info">{log.which}</span> for {log.value}
             </div>
           </div>
         );
@@ -86,6 +87,12 @@ module.exports = React.createClass({
             <p>
               Gained <span className="text-info">{this.props.fight.xp}</span> xp and <span className="text-success">$ {this.props.fight.dollars}</span>
             </p>
+            {this.props.fight.item ? (
+            <div>
+              <h4>You found an item!</h4>
+              <Item item={this.props.fight.item} />
+            </div>
+            ) : ''}
         </a>
         <div className={cn('messages', {hidden: !this.state.expanded})}>
         {this.props.fight.log.map( (function (log, i) {

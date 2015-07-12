@@ -26,7 +26,7 @@ module.exports = {
       fight.resolve();
 
       if ( target === 'monster' && fight.winner === 'attacker' ) {
-        Reward.item(char2.level).then(function (item) {
+        Reward.item(char1, char2).then(function (item) {
           return res.json({
             attacker:char1,
             defender:char2,

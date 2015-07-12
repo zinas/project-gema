@@ -68,7 +68,7 @@ Log.prototype.skill = function (skill, attacker, val) {
   this.log.push({
     what: 'skill',
     actor: attacker.name,
-    which: skill.name,
+    which: skill.details.name,
     value: val
   });
 }

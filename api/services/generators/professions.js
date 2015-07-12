@@ -14,7 +14,7 @@ module.exports = function () {
       uuid: 'minor-drain',
       name: 'Minor drain',
       profession: model.id,
-      action: { type: 'combat', target: 'drain', probability: 1, dice: 2 }
+      action: { type: 'combat', target: 'drain', probability: 1, value: 2 }
     }).exec(function () {});
   });
 
@@ -32,7 +32,7 @@ module.exports = function () {
       uuid: 'lucky-shot',
       name: 'Lucky shot',
       profession: model.id,
-      action: { type: 'combat', target: 'damage', probability: 1, dice: 4 }
+      action: { type: 'combat', target: 'damage', probability: 1, value: 4 }
     }).exec(function () {});
   });
 
@@ -50,7 +50,7 @@ module.exports = function () {
       uuid: 'minor-patch',
       name: 'Minor patch',
       profession: model.id,
-      action: { type: 'combat', target: 'heal', probability: 1, dice: 4 }
+      action: { type: 'combat', target: 'heal', probability: 1, value: 4 }
     }).exec(function () {});
   });
 };

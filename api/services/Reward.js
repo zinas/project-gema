@@ -52,21 +52,26 @@ module.exports = {
     return math.round(reward);
   },
 
-  item: function (playerLevel, opponentLevel, multiplier) {
+  item: function (player, opponent, multiplier) {
     multiplier = multiplier || 1;
     var baseChance = 1;
     if ( Dice.roll() > baseChance * multiplier ) return Promise.resolve(null);
 
-    var items = [Weapon, Armor, Implant], rolled = Dice.random(1, 3);
-    var minLevel = math.round(0.8 * opponentLevel);
-    var maxLevel = math.round(1.2 * opponentLevel);
-    return items[rolled].find({
-      level: {
-        '>=': minLevel,
-        '<=': maxLevel
-      }
-    }).then(function (items) {
-      return items[math.randomInt(0, items.length)];
-    });
+    var items = [
+      { item: Weapon, template: WeaponTemplate },
+      { item: Armor, template: ArmorTemplate },
+      { item: Implant, template: ImplantTemplate }
+    ], rolled = math.randomInt(0, items.length);
+    var minLevel = math.round(0.8 * opponent.level);
+    var maxLevel = math.round(1.2 * opponent.level);
+
+    return items[rolled].template.find({
+        level: { '>=': minLevel, '<=': maxLevel }
+      }).then(function (templates) {
+        return templates[math.randomInt(0, templates.length)];
+      }).then(function (template) {
+        if ( !template ) return null;
+        return items[rolled].item.createFromTemplate(template, player);
+      });
   }
 };
