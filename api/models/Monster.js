@@ -58,8 +58,10 @@ module.exports = {
 
   clearStale: function () {
     // 30000 = 5 mins
-    var dateBefore = new Date(new Date().getTime() - 300000);
-    return Monster.find({createdAt: {'<=':dateBefore}});
+    var dateBefore = new Date(new Date().getTime() - 240000);
+    return Monster.destroy({createdAt: {'<=':dateBefore}}).then(function (monsters) {
+      console.log('cleared: ', monsters.length);
+    });
   },
 
   spawn: function (area, num) {
