@@ -52,6 +52,7 @@ module.exports = React.createClass({
                 className='btn btn-primary'
                 onClick={this.fight}
                 data-target="monster"
+                disabled={this.props.character.currentHP <= 0}
                 data-id={monster.id}>
                 Fight
               </button>
@@ -78,6 +79,7 @@ module.exports = React.createClass({
                 className='btn btn-primary'
                 onClick={this.fight}
                 data-target="character"
+                disabled={this.props.character.currentHP <= 0}
                 data-id={character.id}>
                 Fight
               </button>
