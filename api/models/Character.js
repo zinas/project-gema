@@ -8,7 +8,7 @@
 var Promise = require('bluebird');
 var math = require('mathjs');
 
-var XP_PER_LEVEL = 1000;
+var XP_PER_LEVEL = 50;
 
 module.exports = {
 
@@ -99,7 +99,7 @@ module.exports = {
   },
 
   beforeUpdate: function ( model, next ) {
-    Character.findOne(this.update.arguments[0]).then(function (character) {
+    Character.findOne(this.update.arguments[0]).populate('profession').then(function (character) {
       if ( model.xp && Character.isAboutToLevelUp(model.xp, character.level) ) {
         model.level = character.level + 1;
         model.xp = model.xp - character.level * XP_PER_LEVEL;
@@ -118,6 +118,7 @@ module.exports = {
         model.currentHP = 0;
         sails.sockets.blast('area-changed-'+character.location, {type: 'removeCharacter', data: character});
       }
+
       next();
     });
   },
