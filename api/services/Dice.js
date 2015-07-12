@@ -14,6 +14,6 @@ module.exports = {
   },
 
   check: function (p) {
-    return this.roll(100) <= p;
+    return this.random() <= p;
   }
 };

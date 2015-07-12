@@ -100,7 +100,7 @@ module.exports = {
     character.skills.forEach(function (skill) {
       if ( skill.details.action.type === 'stat' ) {
         stats[skill.details.action.target] = stats[skill.details.action.target] || 0;
-        stats[skill.details.action.target] = skill.details.action.value * skill.level;
+        stats[skill.details.action.target] = skill.details.action.perLevel.value * skill.level;
       }
     });
 
