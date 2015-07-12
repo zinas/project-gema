@@ -56,6 +56,12 @@ module.exports = {
     next();
   },
 
+  clearStale: function () {
+    // 30000 = 5 mins
+    var dateBefore = new Date(new Date().getTime() - 300000);
+    return Monster.find({createdAt: {'<=':dateBefore}});
+  },
+
   spawn: function (area, num) {
     num = num || 1;
     for ( var i = 0; i < num; i++ ) {

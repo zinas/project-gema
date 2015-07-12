@@ -1,6 +1,6 @@
 var
   React = require('react'),
-  utils = require('./../../js/lib/utils'),
+  explain = require('./../../js/lib/explain'),
   data = require('./../../js/lib/data');
 
 var CharacterSheet = React.createClass({
@@ -148,8 +148,8 @@ var CharacterSheet = React.createClass({
                 <tr key={skill.skill}>
                   <td>
                     <p><strong>{skill.details.name}</strong></p>
-                    <p>{skill.details.description} (description placeholder)</p>
-                    <div>{utils.explain(skill.details.action)}</div>
+                    <p>{skill.details.description}</p>
+                    <div dangerouslySetInnerHTML={{__html:explain(skill.details.action)}}></div>
                   </td>
                   <td className="middle">{skill.level}</td>
                   <td className="middle">

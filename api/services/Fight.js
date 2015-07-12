@@ -101,7 +101,7 @@ Fight.prototype.attack = function (attacker, defender) {
 Fight.prototype.skill = function ( skill, character, target ) {
   if ( skill.details.action.type !== 'combat' ) return;
   var probability = skill.level * skill.details.action.probability;
-  if ( Dice.check(probability) || true ) {
+  if ( Dice.check(probability) ) {
     this.skillTypes[skill.details.action.target].call(this, skill, character, target);
   }
 };

@@ -7,7 +7,9 @@
 
 module.exports = {
   test: function (req, res) {
-    Monster.destroy({}).exec(function () {});
+    Monster.clearStale().then(function (monsters) {
+      res.json({len: monsters.length});
+    })
   },
 
 	all: function (req, res) {
