@@ -8,7 +8,7 @@
 var Promise = require('bluebird');
 var math = require('mathjs');
 
-var XP_PER_LEVEL = 50;
+var XP_PER_LEVEL = 1000;
 
 module.exports = {
 
