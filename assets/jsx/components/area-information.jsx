@@ -44,34 +44,6 @@ module.exports = React.createClass({
         </div>
         <div className="panel-body">
           <p>{this.props.level.description}</p>
-          {this.props.area.monsters.map( (function (monster) {
-            return (
-              <p>
-                <a
-                  key={monster.id}
-                  className={this.getButtonClass(monster.level)}
-                  onClick={this.fight}
-                  data-target="monster"
-                  data-id={monster.id}>
-                  <span className="fa fa-bug"></span> {monster.name} (lvl. {monster.level})
-                </a>
-              </p>
-            )
-          }).bind(this))}
-          {this.props.area.characters.map((function (character) {
-            return (
-              <p>
-                <a
-                  key={character.id}
-                  className={this.getButtonClass(character.level)}
-                  onClick={this.fight}
-                  data-target="character"
-                  data-id={character.id}>
-                  <span className="fa fa-male"></span> {character.name} (lvl. {character.level})
-                </a>
-              </p>
-            )
-          }).bind(this))}
         </div>
       </div>
     );

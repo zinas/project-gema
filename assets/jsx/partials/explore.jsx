@@ -2,6 +2,7 @@ var
   React = require('react'),
   data = require('../../js/lib/data'),
   AreaInformation = require('../components/area-information.jsx'),
+  FightingPit = require('../components/fighting-pit.jsx'),
   Map = require('../components/map.jsx'),
   MoveControls = require('../components/move-controls.jsx'),
   CombatLog = require('../components/combat-log.jsx');
@@ -112,13 +113,17 @@ module.exports = React.createClass({
             <Map level={this.props.character.continent} current={this.props.character.location}/>
           </div>
           <div className="col-md-6 col-lg-4 col-xl-3">
-            <MoveControls character={this.props.character} onMove={this.onAreaChange} />
-          </div>
-          <div className="col-md-12 col-lg-4 col-xl-6">
             <AreaInformation
               character={this.props.character}
               area={this.state.area}
               level={this.props.character.continent}
+              onResult={this.onResult} />
+            <MoveControls character={this.props.character} onMove={this.onAreaChange} />
+          </div>
+          <div className="col-md-12 col-lg-4 col-xl-6">
+            <FightingPit
+              character={this.props.character}
+              area={this.state.area}
               onResult={this.onResult} />
           </div>
         </div>

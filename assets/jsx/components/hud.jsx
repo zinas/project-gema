@@ -18,8 +18,8 @@ module.exports = React.createClass({
     if ( this.props.character && this.props.character.name ) {
       sidebar = (
       <ul className="x-navigation">
-        <li className="xn-logo">
-          <a href="index.html">The Grid</a>
+        <li className="logo">
+          <a href="/game/play#explore">Project Gema</a>
           <a href="" className="x-navigation-control"></a>
         </li>
         <li className="xn-title">HUD unit</li>

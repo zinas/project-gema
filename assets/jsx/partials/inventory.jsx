@@ -19,6 +19,7 @@ module.exports = React.createClass({
         )}
 
         <h4>Inventory</h4>
+        {this.props.character.weapons.length > 0 ? (
         <ul className="list-group border-bottom">
           {this.props.character.weapons.map(function (weapon) {
             return (
@@ -27,8 +28,9 @@ module.exports = React.createClass({
             </li>)
           })}
         </ul>
-        <div>
-        </div>
+        ) : (
+          <p>You currently have no weapons in your inventory</p>
+        )}
       </div>
     </div>
   </div>
@@ -36,7 +38,7 @@ module.exports = React.createClass({
   <div className="col-sm-4">
     <div className="panel panel-primary">
       <div className="panel-body panel-body-pricing">
-        <h2>Armor</h2>
+        <h4>Equipped Armor</h4>
         {this.props.character.armor ? (
           <div>
             <Item item={this.props.character.armor} />
@@ -45,11 +47,19 @@ module.exports = React.createClass({
           <p>You currently have no armor equipped</p>
         )}
 
-        <div>
+        <h4>Inventory</h4>
+        {this.props.character.armors.length > 0 ? (
+        <ul className="list-group border-bottom">
           {this.props.character.armors.map(function (armor) {
-            return <Item item={armor} />
+            return (
+            <li className="list-group-item">
+              <Item item={armor} showActions="true" />
+            </li>)
           })}
-        </div>
+        </ul>
+        ) : (
+          <p>You currently have no armors in your inventory</p>
+        )}
       </div>
     </div>
   </div>
@@ -58,20 +68,28 @@ module.exports = React.createClass({
   <div className="col-sm-4">
     <div className="panel panel-primary">
       <div className="panel-body panel-body-pricing">
-        <h2>Implant</h2>
+        <h4>Implant</h4>
         {this.props.character.implant ? (
           <div>
             <Item item={this.props.character.implant} />
           </div>
         ) : (
-          <p>You currently have no implant equipped</p>
+          <p>You currently have no implants attached</p>
         )}
 
-        <div>
+        <h4>Inventory</h4>
+        {this.props.character.implants.length > 0 ? (
+        <ul className="list-group border-bottom">
           {this.props.character.implants.map(function (implant) {
-            return <Item item={implant} />
+            return (
+            <li className="list-group-item">
+              <Item item={implant} showActions="true" />
+            </li>)
           })}
-        </div>
+        </ul>
+        ) : (
+          <p>You currently have no implants in your inventory</p>
+        )}
       </div>
     </div>
   </div>
