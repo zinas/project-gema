@@ -12,9 +12,9 @@ var types = {
     var str =
       '<strong>' + modifier.probability +
       '%</strong> chance to <strong>' + abbr(modifier.target) + '</strong>' +
-      ' for <strong>' + modifier.value + '</strong> points.';
+      ' for <strong>' + modifier.value + '</strong> points';
     if ( modifier.perLevel ) {
-      str += '<br/>' + modifier.perLevel.probability + '% and ' +
+      str += ' initially, plus ' + modifier.perLevel.probability + '% chance and ' +
       modifier.perLevel.value + ' ' + abbr(modifier.target) + ' per level';
     }
     return str;
@@ -24,10 +24,12 @@ var types = {
       '<span class="text-success">Increase</span>' :
       '<span class="text-danger">Decrease</span>';
 
-    var str = effect + ' <strong>' + abbr(modifier.target) + '</strong> by <strong>' + modifier.value + '</strong>';
+    var str;
 
     if ( modifier.perLevel ) {
-      str += '<br/>' + modifier.perLevel.value + ' per level';
+      str = effect + ' <strong>' + abbr(modifier.target) + '</strong> by <strong>' + modifier.perLevel.value + '</strong> points per level.';
+    } else {
+      str = effect + ' <strong>' + abbr(modifier.target) + '</strong> by <strong>' + modifier.value + '</strong>.';
     }
 
     return str;
