@@ -1,18 +1,21 @@
 var math = require('mathjs');
 
-var XP_PER_LEVEL = 8;
-var DOLLARS_PER_LEVEL = 15;
+var XP_PER_LEVEL = 15;
+var DOLLARS_PER_LEVEL = 10;
 
 module.exports = {
   xp: function (playerLevel, opponentLevel, isWin, isPlayer, multiplier) {
     multiplier = multiplier || 1;
-    var reward = opponentLevel * XP_PER_LEVEL;
+    var reward = playerLevel * XP_PER_LEVEL * math.pow(0.9, playerLevel - 1);
 
     var diff = opponentLevel - playerLevel;
-    if ( diff < -5 ) { diff = -5; }
+    if ( diff < -3 ) { diff = -5; }
     if ( diff > 5 ) { diff = 5; }
 
-    reward = reward * ( 1 + diff / 20 );
+    var modifier = diff/18;
+    if (diff < 0) { modifier = diff / 5 };
+
+    reward = reward * ( 1 + modifier );
 
     if ( isPlayer ) {
       reward = reward * 1.1;
@@ -34,13 +37,16 @@ module.exports = {
     }
 
     multiplier = multiplier || 1;
-    var reward = opponentLevel * DOLLARS_PER_LEVEL;
+    var reward = playerLevel * DOLLARS_PER_LEVEL * math.pow(0.9, playerLevel - 1);
 
     var diff = opponentLevel - playerLevel;
-    if ( diff < -3 ) { diff = -3; }
-    if ( diff > 3 ) { diff = 3; }
+    if ( diff < -3 ) { diff = -5; }
+    if ( diff > 5 ) { diff = 5; }
 
-    reward = reward * ( 1 + diff / 20 );
+    var modifier = diff/18;
+    if (diff < 0) { modifier = diff / 5 };
+
+    reward = reward * ( 1 + modifier );
 
     if ( isPlayer ) {
       reward = reward * 1.2;
@@ -54,8 +60,9 @@ module.exports = {
 
   item: function (player, opponent, multiplier) {
     multiplier = multiplier || 1;
-    var baseChance = 1;
-    if ( Dice.roll() > baseChance * multiplier ) return Promise.resolve(null);
+    var baseChance = 2;
+    var initial = Dice.roll();
+    if (  initial > baseChance * multiplier ) return Promise.resolve(null);
 
     var items = [
       { item: Weapon, template: WeaponTemplate },
