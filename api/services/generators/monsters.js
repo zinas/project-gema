@@ -2,15 +2,15 @@ module.exports = function () {
   MonsterTemplate.create({
     name: 'Low-life Junkie',
     level: 1,
-    aim: 5,
-    speed: 5,
-    stamina: 5,
-    attack: 7,
-    defence: 7,
-    maxHP: 10,
+    aim: 1,
+    speed: 1,
+    stamina: 1,
+    attack: 5,
+    defence: 5,
+    maxHP: 8,
     weapon: {
       name: 'Fists',
-      damage: 5
+      damage: 2
     },
     armor: {
       name: 'T-shirt',
@@ -23,15 +23,15 @@ module.exports = function () {
   MonsterTemplate.create({
     name: 'Thug',
     level: 2,
-    aim: 6,
-    speed: 6,
-    stamina: 6,
+    aim: 3,
+    speed: 3,
+    stamina: 3,
     attack: 5,
-    defence: 9,
-    maxHP: 18,
+    defence: 8,
+    maxHP: 12,
     weapon: {
       name: 'Crowbar',
-      damage: 6
+      damage: 3
     },
     armor: {
       name: 'Leather jacket',
@@ -44,15 +44,15 @@ module.exports = function () {
   MonsterTemplate.create({
     name: 'Drug dealer',
     level: 3,
-    aim: 8,
-    speed: 8,
-    stamina: 8,
-    attack: 8,
-    defence: 6,
-    maxHP: 26,
+    aim: 5,
+    speed: 5,
+    stamina: 5,
+    attack: 7,
+    defence: 5,
+    maxHP: 20,
     weapon: {
       name: 'Knife',
-      damage: 8
+      damage: 4
     },
     armor: {
       name: 'Leather jacket',
@@ -73,7 +73,7 @@ module.exports = function () {
     maxHP: 34,
     weapon: {
       name: 'Metal punch',
-      damage: 6
+      damage: 5
     },
     armor: {
       name: 'Synthetic skin',
@@ -94,11 +94,11 @@ module.exports = function () {
     maxHP: 42,
     weapon: {
       name: 'Glock',
-      damage: 10
+      damage: 6
     },
     armor: {
       name: 'Bulletproof vest',
-      protection: 5
+      protection: 4
     }
   }).exec(function (m) {
     console.log(m);
@@ -157,7 +157,7 @@ module.exports = function () {
     maxHP: 65,
     weapon: {
       name: 'Desert Eagle',
-      damage: 12
+      damage: 10
     },
     armor: {
       name: 'Bulletproof vest',
@@ -182,7 +182,7 @@ module.exports = function () {
     },
     armor: {
       name: 'Full body armor',
-      protection: 10
+      protection: 8
     }
   }).exec(function (m) {
     console.log(m);
@@ -199,7 +199,7 @@ module.exports = function () {
     maxHP: 80,
     weapon: {
       name: 'Dual Katanas',
-      damage: 15
+      damage: 12
     },
     armor: {
       name: 'Nanite protection',
