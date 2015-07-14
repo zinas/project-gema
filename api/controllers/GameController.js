@@ -115,6 +115,13 @@ module.exports = {
         area: area
       });
     });
+  },
+
+  equip: function (req, res) {
+    Character.equip(res.locals.character, req.param('type'), req.param('id')).then(function (item) {
+      res.json(item);
+    });
   }
+
 };
 

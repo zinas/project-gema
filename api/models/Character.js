@@ -193,6 +193,28 @@ module.exports = {
       currentHP: character.maxHP,
       dollars: character.dollars - cost
     });
+  },
+
+  equip: function (character, itemType, itemId) {
+    var item = {
+      weapon: Weapon,
+      armor: Armor,
+      implant: Implant
+    };
+
+    return item[itemType].findOne({id: itemId}).then(function (item) {
+      console.log(character.level, item.level);
+      if (item && item.level <= character.level && item.owner === character.id) {
+        var data = {};
+        data[itemType] = itemId;
+        Character.update({id: character.id}, data).then(function () {
+          console.log('updated!');
+        }, function (err) {
+          console.log('err', err);
+        });
+        return item;
+      }
+    });
   }
 };
 

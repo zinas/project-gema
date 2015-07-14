@@ -103,6 +103,13 @@ module.exports = React.createClass({
         item: fight.result.item
       }
     });
+    if (fight.result.item && fight.result.item.damage) {
+      fight.attacker.weapons.push(fight.result.item);
+    } else if (fight.result.item && fight.result.item.protection) {
+      fight.attacker.armors.push(fight.result.item);
+    } else if (fight.result.item) {
+      fight.attacker.implants.push(fight.result.item);
+    }
     this.props.onCharacterUpdated(fight.attacker);
   },
   render: function() {

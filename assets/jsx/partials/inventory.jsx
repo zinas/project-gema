@@ -1,8 +1,15 @@
 var
   React = require('react'),
-  Item = require('./../components/item.jsx');
+  Item = require('./../components/item.jsx'),
+  cn = require('classnames');
+
 
 module.exports = React.createClass({
+  onEquip: function (item, type) {
+    var character = this.props.character;
+    character[type] = item;
+    this.props.onCharacterUpdated(character);
+  },
   render: function() {
     return (
 <div className="row">
@@ -21,12 +28,12 @@ module.exports = React.createClass({
         <h4>Inventory</h4>
         {this.props.character.weapons.length > 0 ? (
         <ul className="list-group border-bottom">
-          {this.props.character.weapons.map(function (weapon) {
+          {this.props.character.weapons.map((function (weapon) {
             return (
-            <li className="list-group-item">
-              <Item item={weapon} showActions="true" />
+            <li className={cn('list-group-item', {hidden: weapon.id === this.props.character.weapon.id})}>
+              <Item onEquip={this.onEquip} item={weapon} type="weapon" showActions="true" character={this.props.character} />
             </li>)
-          })}
+          }).bind(this))}
         </ul>
         ) : (
           <p>You currently have no weapons in your inventory</p>
@@ -50,12 +57,12 @@ module.exports = React.createClass({
         <h4>Inventory</h4>
         {this.props.character.armors.length > 0 ? (
         <ul className="list-group border-bottom">
-          {this.props.character.armors.map(function (armor) {
+          {this.props.character.armors.map((function (armor) {
             return (
-            <li className="list-group-item">
-              <Item item={armor} showActions="true" />
+            <li className={cn('list-group-item', {hidden: armor.id === this.props.character.armor.id})}>
+              <Item onEquip={this.onEquip} item={armor} type="armor" showActions="true" character={this.props.character} />
             </li>)
-          })}
+          }).bind(this))}
         </ul>
         ) : (
           <p>You currently have no armors in your inventory</p>
@@ -80,12 +87,12 @@ module.exports = React.createClass({
         <h4>Inventory</h4>
         {this.props.character.implants.length > 0 ? (
         <ul className="list-group border-bottom">
-          {this.props.character.implants.map(function (implant) {
+          {this.props.character.implants.map((function (implant) {
             return (
-            <li className="list-group-item">
-              <Item item={implant} showActions="true" />
+            <li className={cn('list-group-item', {hidden: implant.id === this.props.character.implant.id})}>
+              <Item onEquip={this.onEquip} item={implant} type="implant" showActions="true" character={this.props.character} />
             </li>)
-          })}
+          }).bind(this))}
         </ul>
         ) : (
           <p>You currently have no implants in your inventory</p>
