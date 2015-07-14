@@ -195,6 +195,27 @@ module.exports = {
     });
   },
 
+  reset: function (character) {
+    Character.update({id: character.id}, {
+      level: 1,
+      xp: 0,
+      maxHP: 10,
+      currentHP: 10,
+      aim: 10,
+      speed: 10,
+      stamina: 10,
+      weapon: null,
+      armor: null,
+      implant: null
+    }).exec(function (err, model) {
+      console.log('error resetting', err);
+    });
+
+    CharacterSkill.update({character: character.id}, {level: 0}).exec(function (err, model) {
+      console.log('error resetting skill', err);
+    });
+  },
+
   equip: function (character, itemType, itemId) {
     var item = {
       weapon: Weapon,
@@ -208,7 +229,6 @@ module.exports = {
         var data = {};
         data[itemType] = itemId;
         Character.update({id: character.id}, data).then(function () {
-          console.log('updated!');
         }, function (err) {
           console.log('err', err);
         });

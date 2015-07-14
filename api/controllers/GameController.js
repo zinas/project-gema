@@ -121,7 +121,10 @@ module.exports = {
     Character.equip(res.locals.character, req.param('type'), req.param('id')).then(function (item) {
       res.json(item);
     });
-  }
+  },
 
+  reset: function (req, res) {
+    Character.reset(res.locals.character);
+  }
 };
 

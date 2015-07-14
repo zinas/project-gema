@@ -1,14 +1,25 @@
 var React = require('react');
 
 module.exports = React.createClass({
-  heal: function () {
+  heal: function (e) {
     io.socket.get('/game/heal', (function () {
       var character = this.props.character;
       character.currentHP = character.maxHP;
       character.dollars = character.dollars - this.getCost();
       this.props.onCharacterUpdated(character);
     }).bind(this));
-    return false;
+    e.preventDefault();
+  },
+  reset: function (e) {
+    var conf = confirm('Are you sure you want to reset? Your character will go back to level 1, but will keep all his money and items');
+    if (conf) {
+      io.socket.get('/game/reset');
+      setTimeout(function () {
+        window.location.href = '/game/play';
+      }, 1000);
+    }
+
+    e.preventDefault();
   },
   getCost: function () {
     return parseInt(this.props.character.dollars * 0.05);
@@ -53,6 +64,7 @@ module.exports = React.createClass({
               style={{width: ((this.props.character.xp*100)/(this.props.character.level * 1000))+'%'}}></div>
           </div>
           <p>Bank account: <span className="text-success">$ {this.props.character.dollars}</span></p>
+          <p><a href="" onClick={this.reset} className="text-warning">Reset Character</a></p>
         </li>
         <li>
           <a href="/game/play#explore">
