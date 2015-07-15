@@ -100,7 +100,16 @@ Fight.prototype.attack = function (attacker, defender) {
 
 Fight.prototype.skill = function ( skill, character, target ) {
   if ( skill.details.action.type !== 'combat' ) return;
-  var probability = skill.details.action.probability + skill.level * skill.details.action.perLevel.probability;
+  var probability = 0;
+
+  if ( skill.details.action.probability ) {
+    probability += skill.details.action.probability;
+  }
+
+  if ( skill.details.action.perLevel && skill.details.action.perLevel.probability ) {
+    probability += ( skill.details.action.perLevel.probability * skill.level );
+  }
+
   if ( Dice.check(probability) ) {
     this.skillTypes[skill.details.action.target].call(this, skill, character, target);
   }
@@ -108,12 +117,27 @@ Fight.prototype.skill = function ( skill, character, target ) {
 
 Fight.prototype.skillTypes = {
   damage : function (skill, attacker, defender) {
-    var damage = skill.details.action.value + skill.details.action.perLevel.value * skill.level;
+    var damage = 0;
+    if ( skill.details.action.value ) {
+      damage += skill.details.action.value;
+    }
+
+    if ( skill.details.action.perLevel && skill.details.action.perLevel.value ) {
+      damage += (skill.details.action.perLevel.value * skill.level);
+    }
+
     defender.currentHP -= damage;
     this.log.skill(skill, attacker, damage);
   },
   heal : function (skill, character) {
-    var heal = skill.details.action.value + skill.details.action.perLevel.value * skill.level;
+    var heal = 0;
+    if ( skill.details.action.value ) {
+      heal += skill.details.action.value;
+    }
+
+    if ( skill.details.action.perLevel && skill.details.action.perLevel.value ) {
+      heal += (skill.details.action.perLevel.value * skill.level);
+    }
     character.currentHP += heal;
     if ( character.currentHP > character.maxHP ) {
       character.currentHP = character.maxHP;
@@ -121,9 +145,18 @@ Fight.prototype.skillTypes = {
     this.log.skill(skill, character, heal);
   },
   drain: function (skill, attacker, defender) {
-    var damage = skill.details.action.value + skill.details.action.perLevel.value * skill.level;
+    var damage = 0;
+    if ( skill.details.action.value ) {
+      damage += skill.details.action.value;
+    }
+
+    if ( skill.details.action.perLevel && skill.details.action.perLevel.value ) {
+      damage += (skill.details.action.perLevel.value * skill.level);
+    }
+
     defender.currentHP -= damage;
     attacker.currentHP += damage;
+
     if ( attacker.currentHP > attacker.maxHP ) {
       attacker.currentHP = attacker.maxHP;
     }
