@@ -18,9 +18,13 @@ var Game = React.createClass({
   render: function() {
     var MainView, title;
     switch (this.props.route) {
-      case 'character':
-        MainView = require('../../partials/character.jsx');
-        title = 'Vital Signs';
+      case 'upgrades':
+        MainView = require('../../partials/upgrades.jsx');
+        title = 'Avatar upgrades';
+        break;
+      case 'statistics':
+        MainView = require('../../partials/statistics.jsx');
+        title = 'Avatar statistics';
         break;
       case 'inventory':
         MainView = require('../../partials/inventory.jsx');

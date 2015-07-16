@@ -112,7 +112,8 @@ module.exports = {
       return res.view({
         layout: 'layouts/private',
         isJsx: true,
-        area: area
+        area: area,
+        stats: Statistics.generate(res.locals.character)
       });
     });
   },

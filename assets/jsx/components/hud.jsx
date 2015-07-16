@@ -10,17 +10,6 @@ module.exports = React.createClass({
     }).bind(this));
     e.preventDefault();
   },
-  reset: function (e) {
-    var conf = confirm('Are you sure you want to reset? Your character will go back to level 1, but will keep all his money and items');
-    if (conf) {
-      io.socket.get('/game/reset');
-      setTimeout(function () {
-        window.location.href = '/game/play';
-      }, 1000);
-    }
-
-    e.preventDefault();
-  },
   getCost: function () {
     return parseInt(this.props.character.dollars * 0.05);
   },
@@ -64,7 +53,6 @@ module.exports = React.createClass({
               style={{width: ((this.props.character.xp*100)/(this.props.character.level * 1000))+'%'}}></div>
           </div>
           <p>Bank account: <span className="text-success">$ {this.props.character.dollars}</span></p>
-          <p><a href="" onClick={this.reset} className="text-warning">Reset Character</a></p>
         </li>
         <li>
           <a href="/game/play#explore">
@@ -73,12 +61,16 @@ module.exports = React.createClass({
           </a>
         </li>
         <li>
-          <a href="/game/play#character">
-            <span className="glyphicon glyphicon-dashboard"></span>
-            <span className="xn-text">Vital Signs</span>
+          <a href="/game/play#statistics">
+            <span className="fa fa-male"></span>
+            <span className="xn-text">My Avatar</span>
           </a>
         </li>
         <li>
+          <a href="/game/play#upgrades">
+            <span className="fa fa-level-up"></span>
+            <span className="xn-text">Avatar upgrades</span>
+          </a>
         </li>
         <li>
           <a href="/game/play#inventory">
@@ -86,25 +78,25 @@ module.exports = React.createClass({
             <span className="xn-text">Equipment</span>
           </a>
         </li>
-        <li>
+        <li className="hidden">
           <a href="/game/play#market">
             <span className="fa fa-money"></span>
             <span className="xn-text">Black Market</span>
           </a>
         </li>
-        <li>
+        <li className="hidden">
           <a href="/encyclopedia">
             <span className="fa fa-book"></span>
             <span className="xn-text">Encyclopedia</span>
           </a>
         </li>
-        <li>
+        <li className="hidden">
           <a href="/game/play#guild">
             <span className="fa fa-group"></span>
             <span className="xn-text">Connections</span>
           </a>
         </li>
-        <li>
+        <li className="hidden">
           <a href="/news">
             <span className="glyphicon glyphicon-volume-up"></span>
             <span className="xn-text">Intelligence Network</span>
