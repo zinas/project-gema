@@ -67,7 +67,6 @@ var CharacterSheet = React.createClass({
       io.socket.put('/characterSkill/'+s.id, {
         level: s.level,
       }, function ( skill , resp) {
-        console.log(skill);
       });
     }).bind(this) );
   },

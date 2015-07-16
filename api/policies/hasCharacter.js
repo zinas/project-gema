@@ -3,7 +3,7 @@ module.exports = function (req, res, next) {
     if ( !character ) {
       return res.redirect('/game/createCharacter');
     }
-
+    character.stats = Statistics.generate(character);
     res.locals.character = character;
     next();
   });

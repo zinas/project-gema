@@ -2,6 +2,11 @@ var React = require('react');
 
 module.exports = React.createClass({
   heal: function (e) {
+    if ( this.props.character.currentHP >= this.props.character.maxHP ) {
+      alert('Your Avatar is already at maximum health');
+      e.preventDefault();
+      return;
+    }
     io.socket.get('/game/heal', (function () {
       var character = this.props.character;
       character.currentHP = character.maxHP;

@@ -13,6 +13,10 @@ var Game = React.createClass({
     };
   },
   onCharacterUpdated: function (character) {
+    if ( character.xp >= character.level * 50 ) {
+      alert('Your Avatar\'s circuits have evolved. New upgrades are now available.');
+      window.location.href = '/game/play';
+    }
     this.setState({character: character});
   },
   render: function() {

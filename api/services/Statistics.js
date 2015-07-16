@@ -41,7 +41,7 @@ module.exports = {
     var keys = [
       'aim', 'speed', 'stamina', 'attack', 'defence',
       'hitThreshold', 'grazeThreshold', 'grazeMult',
-      'critThreshold', 'critMult'
+      'critThreshold', 'critMult', 'armor', 'damage'
     ];
 
     keys.forEach(function (key) {
@@ -78,15 +78,19 @@ module.exports = {
       baseDamage = character.weapon.damage;
     }
 
+    if (stats.damage) {
+      baseDamage += stats.damage;
+    }
+
     return math.round(
       baseDamage * (1 + ( ( (stats.aim-10)/10 + (stats.speed-10)/20) )/100 )
       , sails.config.constants.ROUNDING_DIGITS);
   },
 
   calculateArmor: function (stats, character) {
-    var baseArmor = 0;
+    var baseArmor = stats.armor;
     if ( character.armor ) {
-      baseArmor = character.armor.protection;
+      baseArmor += character.armor.protection;
     }
 
     return math.round(
@@ -95,12 +99,14 @@ module.exports = {
   },
 
   getStatsFromSkills: function (character) {
-    var stats = {};
+    var stats = {}, initial, cumulative;
 
     character.skills.forEach(function (skill) {
       if ( skill.details.action.type === 'stat' ) {
         stats[skill.details.action.target] = stats[skill.details.action.target] || 0;
-        stats[skill.details.action.target] = skill.details.action.perLevel.value * skill.level;
+        initial = skill.details.action.value || 0;
+        cumulative = (skill.details.action.perLevel && skill.details.action.perLevel.value) ? skill.details.action.perLevel.value * skill.level : 0;
+        stats[skill.details.action.target] += initial + cumulative;
       }
     });
 

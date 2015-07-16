@@ -68,7 +68,9 @@ module.exports = React.createClass({
       <h3 className="panel-title">Avatars</h3>
     </div>
     <div className="panel-body list-group list-group-contacts">
-      {this.props.area.characters.map( (function (character) {
+      {this.props.area.characters.filter((function (character) {
+        return character.id !== this.props.character.id;
+      }).bind(this)).map( (function (character) {
         return (
           <div className="list-group-item">
             <span className="contacts-title">{character.name}</span>

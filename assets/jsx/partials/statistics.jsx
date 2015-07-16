@@ -3,11 +3,6 @@ var
   data = require('./../../js/lib/data');
 
 module.exports = React.createClass({
-  getInitialState: function () {
-    return {
-      stats: data('stats')
-    };
-  },
   reset: function (e) {
     var conf = confirm('Are you sure you want to reset? Your character will go back to level 1, but will keep all his money and items');
     if (conf) {
@@ -33,27 +28,27 @@ module.exports = React.createClass({
               <ul className="list-group border-bottom">
                 <li className="list-group-item">
                   Aim
-                  <span className="badge">{this.state.stats.aim}</span>
+                  <span className="badge">{this.props.character.stats.aim}</span>
                 </li>
                 <li className="list-group-item">
                   Speed
-                  <span className="badge">{this.state.stats.speed}</span>
+                  <span className="badge">{this.props.character.stats.speed}</span>
                 </li>
                 <li className="list-group-item">
                   Stamina
-                  <span className="badge">{this.state.stats.stamina}</span>
+                  <span className="badge">{this.props.character.stats.stamina}</span>
                 </li>
                 <li className="list-group-item">
                   Attack
-                  <span className="badge">{this.state.stats.attack}</span>
+                  <span className="badge">{this.props.character.stats.attack}</span>
                 </li>
                 <li className="list-group-item">
                   Defence
-                  <span className="badge">{this.state.stats.defence}</span>
+                  <span className="badge">{this.props.character.stats.defence}</span>
                 </li>
                 <li className="list-group-item">
                   Armor
-                  <span className="badge">{this.state.stats.armor}</span>
+                  <span className="badge">{this.props.character.stats.armor}</span>
                 </li>
               </ul>
             </div>
@@ -77,27 +72,27 @@ module.exports = React.createClass({
               <ul className="list-group border-bottom">
                 <li className="list-group-item">
                   Damage
-                  <span className="badge">{this.state.stats.damage}</span>
+                  <span className="badge">{this.props.character.stats.damage}</span>
                 </li>
                 <li className="list-group-item">
                   Graze Chance
-                  <span className="badge">{this.state.stats.grazeThreshold}</span>
+                  <span className="badge">{this.props.character.stats.grazeThreshold}</span>
                 </li>
                 <li className="list-group-item">
                   Graze Multiplier
-                  <span className="badge">{this.state.stats.grazeMult}</span>
+                  <span className="badge">{this.props.character.stats.grazeMult}</span>
                 </li>
                 <li className="list-group-item">
                   Hit Chance
-                  <span className="badge">{this.state.stats.hitThreshold}</span>
+                  <span className="badge">{this.props.character.stats.hitThreshold}</span>
                 </li>
                 <li className="list-group-item">
                   Crit Chance
-                  <span className="badge">{this.state.stats.critThreshold}</span>
+                  <span className="badge">{this.props.character.stats.critThreshold}</span>
                 </li>
                 <li className="list-group-item">
                   Crit Multiplier
-                  <span className="badge">{this.state.stats.critMult}</span>
+                  <span className="badge">{this.props.character.stats.critMult}</span>
                 </li>
               </ul>
             </div>

@@ -12,7 +12,6 @@ module.exports = React.createClass({
       type: this.props.type,
       id: this.props.item.id
     }, (function (item) {
-      console.log(this.props);
       this.props.onEquip(item, this.props.type);
     }).bind(this));
   },
