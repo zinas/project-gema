@@ -20,6 +20,9 @@ module.exports = {
     };
 
     targets[target].findOnePopulated({id: id}).then(function (char2) {
+      if ( !char1 || !char2 ) {
+        return res.json({error: 'Could not find opponent to fight'});
+      }
       if ( char1.currentHP <= 0 || char2.currentHP <= 0 ) {
         return res.json({error: 'Dead men cant fight'});
       }
