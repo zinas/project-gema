@@ -9,11 +9,17 @@ var
 
 module.exports = React.createClass({
   getInitialState: function () {
+    var area = data('area');
+    var characters = area.characters.filter(function (character) {
+      return character.currentHP > 0;
+    });
+
+    area.characters = characters;
     return {
       level: {
         areas: []
       },
-      area: data('area'),
+      area: area,
       fight: {
         attacker: { stats: {} },
         defender: { stats: {} },
