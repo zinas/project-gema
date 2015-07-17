@@ -4,7 +4,7 @@ module.exports = function () {
     name: 'Accuracy',
     description: '',
     profession: 'all',
-    action: { type: 'stat', target: 'aim', value: 1, perLevel: {value: 1} }
+    action: { type: 'stat', target: 'aim', value: 0, perLevel: {value: 1} }
   }).exec(function () {});
 
   Skill.create({
@@ -12,7 +12,7 @@ module.exports = function () {
     name: 'Alacrity',
     description: '',
     profession: 'all',
-    action: { type: 'stat', target: 'speed', value: 1, perLevel: {value: 1} }
+    action: { type: 'stat', target: 'speed', value: 0, perLevel: {value: 1} }
   }).exec(function () {});
 
   Skill.create({
@@ -20,6 +20,6 @@ module.exports = function () {
     name: 'Durability',
     description: '',
     profession: 'all',
-    action: { type: 'stat', target: 'stamina', value: 1, perLevel: {value: 1} }
+    action: { type: 'stat', target: 'stamina', value: 0, perLevel: {value: 1} }
   }).exec(function () {});
 }

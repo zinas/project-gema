@@ -23,7 +23,7 @@ module.exports = function () {
       description: 'The fixer is highly trained to spot weaknesses in his opponents fighting style. By targetting '+
       'those weak spots he can cause increased damage',
       profession: model.id,
-      action: { type: 'stat', target: 'critMult', value: 0.2, perLevel: {value: 0.05} }
+      action: { type: 'stat', target: 'critMult', value: 0, perLevel: {value: 0.05} }
     }).exec(function () {});
     Skill.create({
       uuid: 'lucky-shot',

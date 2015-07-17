@@ -100,12 +100,15 @@ module.exports = {
 
   getStatsFromSkills: function (character) {
     var stats = {}, initial, cumulative;
-
+    console.log('getting stats from skills');
     character.skills.forEach(function (skill) {
       if ( skill.details.action.type === 'stat' ) {
         stats[skill.details.action.target] = stats[skill.details.action.target] || 0;
         initial = skill.details.action.value || 0;
         cumulative = (skill.details.action.perLevel && skill.details.action.perLevel.value) ? skill.details.action.perLevel.value * skill.level : 0;
+        console.log('got from ', skill.details.name);
+        console.log('initial', initial);
+        console.log('cumulative', cumulative);
         stats[skill.details.action.target] += initial + cumulative;
       }
     });
