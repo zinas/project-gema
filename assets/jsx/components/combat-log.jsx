@@ -76,6 +76,19 @@ module.exports = React.createClass({
         );
     }
   },
+  renderStat: function (name, yours, opponents) {
+    var positive = yours > opponents;
+    var negative = yours < opponents;
+    return (
+      <li className="list-group-item">
+        {name}
+        <span className={cn('badge', {
+          'badge-success':positive,
+          'badge-danger': negative
+        })}>{positive ? '+' : ''}{(yours-opponents)}</span>
+      </li>
+    );
+  },
   render: function() {
     return (
       <div className={cn('clearfix', {'hidden': this.props.fight.log.length === 0})}>
@@ -94,6 +107,36 @@ module.exports = React.createClass({
             </div>
             ) : ''}
         </a>
+        <div className={cn('row', {hidden: !this.state.expanded})}>
+          <div className="col-xs-6">
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <ul className="list-group border-bottom">
+                  {this.renderStat('Aim', this.props.fight.attacker.stats.aim, this.props.fight.defender.stats.aim)}
+                  {this.renderStat('Speed', this.props.fight.attacker.stats.speed, this.props.fight.defender.stats.speed)}
+                  {this.renderStat('Stamina', this.props.fight.attacker.stats.stamina, this.props.fight.defender.stats.stamina)}
+                  {this.renderStat('Attack', this.props.fight.attacker.stats.attack, this.props.fight.defender.stats.attack)}
+                  {this.renderStat('Defence', this.props.fight.attacker.stats.defence, this.props.fight.defender.stats.defence)}
+                  {this.renderStat('Armor', this.props.fight.attacker.stats.armor, this.props.fight.defender.stats.armor)}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-6">
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <ul className="list-group border-bottom">
+                  {this.renderStat('Damage', this.props.fight.attacker.stats.damage, this.props.fight.defender.stats.damage)}
+                  {this.renderStat('Graze Chance', this.props.fight.attacker.stats.grazeThreshold, this.props.fight.defender.stats.grazeThreshold)}
+                  {this.renderStat('Graze Multiplier', this.props.fight.attacker.stats.grazeMult, this.props.fight.defender.stats.grazeMult)}
+                  {this.renderStat('Hit Chance', this.props.fight.attacker.stats.hitThreshold, this.props.fight.defender.stats.hitThreshold)}
+                  {this.renderStat('Crit Chance', this.props.fight.attacker.stats.critThreshold, this.props.fight.defender.stats.critThreshold)}
+                  {this.renderStat('Crit Multiplier', this.props.fight.attacker.stats.critMult, this.props.fight.defender.stats.critMult)}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className={cn('messages', {hidden: !this.state.expanded})}>
         {this.props.fight.log.map( (function (log, i) {
           return (

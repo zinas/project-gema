@@ -15,8 +15,8 @@ module.exports = React.createClass({
       },
       area: data('area'),
       fight: {
-        attacker: {},
-        defender: {},
+        attacker: { stats: {} },
+        defender: { stats: {} },
         log: [],
         item: null,
         winner: '',
