@@ -14,7 +14,7 @@ var Game = React.createClass({
     };
   },
   onCharacterUpdated: function (character) {
-    if ( character.xp >= character.level * 50 ) {
+    if ( character.xp >= character.level * 1000 ) {
       require('pubsub-js').publish('show-popup', {
         box: 'warning',
         title: 'Avatar circuits upgraded',
