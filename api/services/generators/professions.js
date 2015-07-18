@@ -49,7 +49,7 @@ module.exports = function () {
       name: 'Full Auto',
       description: 'The Soldier empties his clip at the enemy managing a lot of simultaneous hits.',
       profession: model.id,
-      action: { type: 'combat', target: 'damage', probability: 5, value: 10, perLevel: {probability: 1, value: 0.4} }
+      action: { type: 'combat', target: 'damage', probability: 5, value: 5, perLevel: {probability: 1, value: 0.5} }
     }).exec(function () {});
 
     Skill.create({
@@ -66,7 +66,7 @@ module.exports = function () {
       description: 'The Soldier carries around his personal life saver. A small medpac which injects nanites in his blood, '+
       'allowing him to regenerate his wound constantly.',
       profession: model.id,
-      action: { type: 'combat', target: 'heal', probability: 90, value: 1, perLevel: {value: 0.5} }
+      action: { type: 'combat', target: 'heal', probability: 75, value: 1, perLevel: {value: 0.25} }
     }).exec(function () {});
   });
 
@@ -86,7 +86,7 @@ module.exports = function () {
       description: 'The Medic has invented a special mix of medication that immediately close some of his wounds. '+
       'As he gets more experienced, this mixture gets more and more potent',
       profession: model.id,
-      action: { type: 'combat', target: 'heal', probability: 5, value: 5, perLevel: {probability: 1, value: 0.4} }
+      action: { type: 'combat', target: 'heal', probability: 5, value: 5, perLevel: {probability: 1, value: 0.5} }
     }).exec(function () {});
 
     Skill.create({
@@ -104,7 +104,7 @@ module.exports = function () {
       description: 'The Medic knows how to create a variety of drugs and medicine. And he has tried them all '+
       'on himself. His immune system exhbits great resilience after having tried all sorts of drugs',
       profession: model.id,
-      action: { type: 'stat', target: 'stamina', value: 1.2, perLevel: {value: 1.2} }
+      action: { type: 'stat', target: 'stamina', value: 1, perLevel: {value: 1.25} }
     }).exec(function () {});
   });
 };
