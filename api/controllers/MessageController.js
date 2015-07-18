@@ -39,11 +39,10 @@ module.exports = {
         res.json({error: error});
       });
     } else {
-      console.log('trying private message');
       Character.findOne({name: data.recipient}).then(function (character) {
         console.log('found char', character);
         if ( !character ) {
-          return res.json({error: 'Character not found'});
+          return res.json({error: 'Connection to the requested Avatar could not be established. Our archives show that such Avatar does not exist.'});
         }
         Message.create({
           content: data.message,

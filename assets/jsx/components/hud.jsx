@@ -1,9 +1,14 @@
 var React = require('react');
+var pubsub = require('pubsub-js');
 
 module.exports = React.createClass({
   heal: function (e) {
     if ( this.props.character.currentHP >= this.props.character.maxHP ) {
-      alert('Your Avatar is already at maximum health');
+      pubsub.publish('show-popup', {
+        box: 'info',
+        title: 'Avatar health status: OPTIMAL',
+        content: 'Avatar life signs and circuits operate at maximum capacity. There is no need for further restoration.'
+      });
       e.preventDefault();
       return;
     }

@@ -31,7 +31,7 @@ module.exports = React.createClass({
           {this.props.character.weapons.map((function (weapon) {
             var eqid = this.props.character.weapon ? this.props.character.weapon.id : 0;
             return (
-            <li className={cn('list-group-item', {hidden: weapon.id === eqid})}>
+            <li key={weapon.id} className={cn('list-group-item', {hidden: weapon.id === eqid})}>
               <Item onEquip={this.onEquip} item={weapon} type="weapon" showActions="true" character={this.props.character} />
             </li>)
           }).bind(this))}
@@ -61,7 +61,7 @@ module.exports = React.createClass({
           {this.props.character.armors.map((function (armor) {
             var eqid = this.props.character.armor ? this.props.character.armor.id : 0;
             return (
-            <li className={cn('list-group-item', {hidden: armor.id === eqid})}>
+            <li key={armor.id} className={cn('list-group-item', {hidden: armor.id === eqid})}>
               <Item onEquip={this.onEquip} item={armor} type="armor" showActions="true" character={this.props.character} />
             </li>)
           }).bind(this))}
@@ -92,7 +92,7 @@ module.exports = React.createClass({
           {this.props.character.implants.map((function (implant) {
             var eqid = this.props.character.implant ? this.props.character.implant.id : 0;
             return (
-            <li className={cn('list-group-item', {hidden: implant.id === eqid})}>
+            <li key={implant.id} className={cn('list-group-item', {hidden: implant.id === eqid})}>
               <Item onEquip={this.onEquip} item={implant} type="implant" showActions="true" character={this.props.character} />
             </li>)
           }).bind(this))}

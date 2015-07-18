@@ -15,7 +15,11 @@ module.exports = React.createClass({
     e.preventDefault();
   },
   reprogram: function (e) {
-    alert('Feature not implemented yet. If you want to plan ahead, cost will be $10k per level, and you will be able to reprogram 1/week');
+    require('pubsub-js').publish('show-popup', {
+      box: 'warning',
+      title: 'Avatar repromming initiative not ready',
+      content: 'You can not reprogram your avatar yet. You will be given the ability to do so in the near future.'
+    });
     e.preventDefault();
   },
   render: function() {

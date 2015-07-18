@@ -1,6 +1,7 @@
 var React = require('react');
 var cn = require('classnames');
 var moment = require('moment');
+var pubsub = require('pubsub-js');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -48,7 +49,11 @@ module.exports = React.createClass({
       msg.unshift(message);
       this.setState({messages:msg});
     } else {
-      alert(message.error);
+      pubsub.publish('show-popup', {
+        box: 'danger',
+        title: 'Communication protocol error',
+        content: message.error
+      });
     }
   },
   getMessages: function () {

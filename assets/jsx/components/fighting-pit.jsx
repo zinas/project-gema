@@ -43,7 +43,7 @@ module.exports = React.createClass({
     <div className="panel-body list-group list-group-contacts">
       {this.props.area.monsters.map( (function (monster) {
         return (
-          <div className="list-group-item">
+          <div key={monster.id} className="list-group-item">
             <span className="contacts-title">{monster.name}</span>
             <p><label className={this.getLabelClass(monster.level)}>lvl. {monster.level}</label></p>
             <div className="list-group-controls">
@@ -72,7 +72,7 @@ module.exports = React.createClass({
         return character.id !== this.props.character.id;
       }).bind(this)).map( (function (character) {
         return (
-          <div className="list-group-item">
+          <div key={character.id} className="list-group-item">
             <span className="contacts-title">{character.name}</span>
             <p><label className={this.getLabelClass(character.level)}>lvl. {character.level}</label></p>
             <div className="list-group-controls">

@@ -3,6 +3,7 @@ var
   data = require('./../../../js/lib/data'),
   Hud = require('./../../components/hud.jsx'),
   TopNavigation = require('./../../components/top-navigation.jsx'),
+  Popup = require('./../../components/popup.jsx'),
   Chat = require('./../../components/chat.jsx');
 
 var Game = React.createClass({
@@ -14,8 +15,14 @@ var Game = React.createClass({
   },
   onCharacterUpdated: function (character) {
     if ( character.xp >= character.level * 50 ) {
-      alert('Your Avatar\'s circuits have evolved. New upgrades are now available.');
-      window.location.href = '/game/play';
+      require('pubsub-js').publish('show-popup', {
+        box: 'warning',
+        title: 'Avatar circuits upgraded',
+        content: 'Your Avatar has adapted his circuits for optimal performance.',
+        onClose: function () {
+          window.location.href = '/game/play';
+        }
+      });
     }
     this.setState({character: character});
   },
@@ -69,6 +76,7 @@ var Game = React.createClass({
           </div>
         </div>
       </div>
+      <Popup />
     </div>
     );
   }

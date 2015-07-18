@@ -5,7 +5,11 @@ var
 
 module.exports = React.createClass({
   sell: function () {
-    alert('Item trading coming soon!');
+    require('pubsub-js').publish('show-popup', {
+      box: 'warning',
+      title: 'Black market under way',
+      content: 'The black market where you can buy and sell equipment has not opened to the public yet.'
+    });
   },
   equip: function () {
     io.socket.post('/game/equip', {
@@ -14,6 +18,9 @@ module.exports = React.createClass({
     }, (function (item) {
       this.props.onEquip(item, this.props.type);
     }).bind(this));
+  },
+  getModifiers: function () {
+    return this.props.item.modifiers.length > 0 ? this.props.item.modifiers : [];
   },
   render: function() {
     if ( !this.props.item ) return (<div>Item not found</div>);
@@ -27,7 +34,7 @@ module.exports = React.createClass({
         <h6>Protection {this.props.item.protection}</h6>
         ) : ''}
         <p>{this.props.item.description}</p>
-        {this.props.item.modifiers.map(function (modifier) {
+        {this.getModifiers().map(function (modifier) {
           return (<p className="small" dangerouslySetInnerHTML={{__html:explain(modifier)}}></p>)
         })}
         {this.props.showActions ? (
