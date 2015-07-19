@@ -4,17 +4,20 @@ var
 module.exports = React.createClass({
   getInitialState: function () {
     return {
+      fighting: false,
       characters: [],
       monsters: []
     };
   },
 
   fight: function (e) {
+    this.setState({fighting: true});
     io.socket.post('/game/fight', {
       target: e.currentTarget.getAttribute('data-target'),
       id: e.currentTarget.getAttribute('data-id')
     }, (function (result) {
       this.props.onResult(result);
+      this.setState({fighting: false});
     }).bind(this));
   },
 
@@ -52,7 +55,7 @@ module.exports = React.createClass({
                 className='btn btn-primary'
                 onClick={this.fight}
                 data-target="monster"
-                disabled={this.props.character.currentHP <= 0}
+                disabled={this.props.character.currentHP <= 0 || this.state.fighting}
                 data-id={monster.id}>
                 Fight
               </button>
@@ -81,7 +84,7 @@ module.exports = React.createClass({
                 className='btn btn-primary'
                 onClick={this.fight}
                 data-target="character"
-                disabled={this.props.character.currentHP <= 0}
+                disabled={this.props.character.currentHP <= 0 || this.state.fighting}
                 data-id={character.id}>
                 Fight
               </button>

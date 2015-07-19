@@ -1,6 +1,11 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  getInitialState: function () {
+    return {
+      moving: false
+    };
+  },
   move: function (e) {
     var coords = {
       x: this.props.character.location.x,
@@ -22,11 +27,13 @@ module.exports = React.createClass({
         break;
     }
 
+    this.setState({moving: true});
     io.socket.post(
       '/character/move',
       {coords: coords},
       (function (area) {
         this.props.onMove(area);
+        this.setState({moving: false});
       }).bind(this));
 
   },
@@ -34,6 +41,10 @@ module.exports = React.createClass({
     var
       level = this.props.character.continent,
       area = this.props.character.location;
+
+    if (this.state.moving) {
+      return false;
+    }
 
     if ( this.props.character.currentHP <= 0 ) {
       return false;
