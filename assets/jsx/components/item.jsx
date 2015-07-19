@@ -20,7 +20,7 @@ module.exports = React.createClass({
     }).bind(this));
   },
   getModifiers: function () {
-    return this.props.item.modifiers.length > 0 ? this.props.item.modifiers : [];
+    return this.props.item.modifiers ? this.props.item.modifiers : [];
   },
   render: function() {
     if ( !this.props.item ) return (<div>Item not found</div>);
