@@ -65,6 +65,7 @@ module.exports = {
     implants: { collection: 'implant', via: 'owner' },
 
     user: { model: 'user', required: true },
+    online : { type: 'boolean', defaultsTo: false },
 
     location: { model: 'area' },
     continent: { model: 'level' },

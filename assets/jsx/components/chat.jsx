@@ -6,7 +6,8 @@ var pubsub = require('pubsub-js');
 module.exports = React.createClass({
   getInitialState: function () {
     return {
-      messages: []
+      messages: [],
+      onlineCharacters: []
     };
   },
   renderMessage: function (message) {
@@ -39,7 +40,7 @@ module.exports = React.createClass({
     );
   },
   componentDidMount: function () {
-    this.getMessages();
+    this.getChat();
     io.socket.on('new-message', this.addMessage);
     io.socket.on('new-message-'+this.props.character.id, this.addMessage);
   },
@@ -56,9 +57,9 @@ module.exports = React.createClass({
       });
     }
   },
-  getMessages: function () {
-    io.socket.get('/message/getMine', (function (messages) {
-      this.setState({messages: messages});
+  getChat: function () {
+    io.socket.get('/message/getChat', (function (data) {
+      this.setState({messages: data.messages, onlineCharacters: data.characters});
     }).bind(this));
   },
   onKeyUp: function (e) {
@@ -67,6 +68,7 @@ module.exports = React.createClass({
     }
   },
   postMessage: function () {
+    console.log(this.state);
     io.socket.post('/message/create', {content: this.refs.message.getDOMNode().value}, (function (message) {
       this.addMessage(message);
       this.refs.message.getDOMNode().value = '';

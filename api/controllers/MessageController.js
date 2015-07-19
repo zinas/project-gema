@@ -1,3 +1,4 @@
+var Promise = require('bluebird');
 /**
  * MessageController
  *
@@ -6,8 +7,8 @@
  */
 
 module.exports = {
-	getMine: function (req, res) {
-    Message.find({
+	getChat: function (req, res) {
+    var messages = Message.find({
       or: [
         { recipient: res.locals.character.id },
         { recipient: null },
@@ -16,9 +17,18 @@ module.exports = {
       sort: 'createdAt DESC',
       limit: 30
     })
-    .populateAll()
-    .then(function (messages) {
-      return res.json(messages);
+    .populateAll();
+
+    var characters = Character.find({online: true}).then(function (c) {
+      return c;
+    }, function (err) {
+    });
+
+    Promise.all([messages, characters]).spread(function (msgs, chars) {
+      return res.json({
+        messages: msgs,
+        characters: chars
+      });
     });
   },
 
