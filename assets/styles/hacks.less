@@ -103,8 +103,6 @@ html, body, #mainMountNode {
   border-left: 1px solid #ddd;
   background: rgba(0,0,0,0.02);
   height: calc(~"100vh - 110px");
-  // display: flex;
-  // align-items: stretch;
 
   .panel {
     padding-left: 5px;
@@ -118,10 +116,19 @@ html, body, #mainMountNode {
     padding: 5px;
   }
 
-  .messages {
+  .messages-wrapper {
     height: calc(~"100% - 89px");
+    max-height: calc(~"100% - 89px");
     overflow: auto;
     margin-top: 5px;
+    width: 100%;
+  }
+
+  .messages {
+    float: none;
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: 100%;
   }
 }
 

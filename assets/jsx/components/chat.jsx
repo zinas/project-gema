@@ -10,6 +10,9 @@ module.exports = React.createClass({
       onlineCharacters: []
     };
   },
+  componentDidUpdate: function () {
+    this.refs.messagesWrapper.getDOMNode().scrollTop = this.refs.messagesWrapper.getDOMNode().scrollHeight;
+  },
   renderMessage: function (message) {
     var colorClass;
     switch (message.room) {
@@ -77,6 +80,13 @@ module.exports = React.createClass({
   render: function() {
     return (
   <div className="chat-wrapper">
+    <div className="messages-wrapper" ref="messagesWrapper">
+      <div className="messages">
+        {this.state.messages.map((function (message, i) {
+          return this.renderMessage(message);
+        }).bind(this))}
+      </div>
+    </div>
     <div className="panel panel-default">
       <div className="panel-body panel-body-search">
         <div className="input-group">
@@ -94,11 +104,6 @@ module.exports = React.createClass({
         <button type="button" className="btn btn-danger btn-xs">Private</button>&nbsp;
         <button type="button" className="btn btn-info btn-xs">Trade</button>&nbsp;
       </div>
-    </div>
-    <div className="messages">
-      {this.state.messages.map((function (message, i) {
-        return this.renderMessage(message);
-      }).bind(this))};
     </div>
   </div>
     );
