@@ -19,9 +19,13 @@ module.exports = {
     })
     .populateAll();
 
-    var characters = Character.find({online: true}).then(function (c) {
-      return c;
+    var characters = Character.find({online: true}).populate('profession').then(function (c) {
+      var characters = c.filter(function (character) {
+        return c.id !== res.locals.character.id;
+      });
+      return characters;
     }, function (err) {
+      console.log(err);
     });
 
     Promise.all([messages, characters]).spread(function (msgs, chars) {
@@ -50,7 +54,6 @@ module.exports = {
       });
     } else {
       Character.findOne({name: data.recipient}).then(function (character) {
-        console.log('found char', character);
         if ( !character ) {
           return res.json({error: 'Connection to the requested Avatar could not be established. Our archives show that such Avatar does not exist.'});
         }

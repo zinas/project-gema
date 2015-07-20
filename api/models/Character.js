@@ -115,6 +115,12 @@ module.exports = {
         sails.sockets.blast('area-changed-'+character.location, {type: 'removeCharacter', data: character});
         sails.sockets.blast('area-changed-'+model.location, {type: 'addCharacter', data: character});
       }
+      if ( model.online === true ) {
+        sails.sockets.blast('character-is-online', character);
+      }
+      if ( model.online === false ) {
+        sails.sockets.blast('character-is-offline', character);
+      }
       if ( model.currentHP <= 0 ) {
         model.currentHP = 0;
         sails.sockets.blast('area-changed-'+character.location, {type: 'removeCharacter', data: character});

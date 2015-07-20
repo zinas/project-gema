@@ -13,6 +13,11 @@ module.exports = React.createClass({
   componentDidUpdate: function () {
     this.refs.messagesWrapper.getDOMNode().scrollTop = this.refs.messagesWrapper.getDOMNode().scrollHeight;
   },
+  onOnlineClick: function (event) {
+    this.refs.message.getDOMNode().value = '/m "' + event.currentTarget.getAttribute('rel') + '" ';
+    this.refs.message.getDOMNode().focus();
+    event.preventDefault();
+  },
   renderMessage: function (message) {
     var colorClass;
     switch (message.room) {
@@ -42,10 +47,25 @@ module.exports = React.createClass({
   </div>
     );
   },
+  addCharacter: function (character) {
+    if ( character.id === this.props.character.id ) return;
+    var characters = this.state.onlineCharacters;
+    characters.push(character);
+    this.setState({onlineCharacters: characters});
+  },
+  removeCharacter: function (character) {
+    var characters = this.state.onlineCharacters.filter(function (c) {
+      return c.id !== character.id;
+    });
+
+    this.setState({onlineCharacters: characters});
+  },
   componentDidMount: function () {
     this.getChat();
     io.socket.on('new-message', this.addMessage);
     io.socket.on('new-message-'+this.props.character.id, this.addMessage);
+    io.socket.on('character-is-online', this.addCharacter);
+    io.socket.on('character-is-offline', this.removeCharacter);
   },
   addMessage: function (message) {
     if ( !message.error ) {
@@ -71,7 +91,6 @@ module.exports = React.createClass({
     }
   },
   postMessage: function () {
-    console.log(this.state);
     io.socket.post('/message/create', {content: this.refs.message.getDOMNode().value}, (function (message) {
       this.addMessage(message);
       this.refs.message.getDOMNode().value = '';
@@ -80,6 +99,24 @@ module.exports = React.createClass({
   render: function() {
     return (
   <div className="chat-wrapper">
+    <div className="panel online-users-list">
+      <div className="panel-body">
+      <h6>Online now</h6>
+      {this.state.onlineCharacters.map( (function (character) {
+        return (
+          <div key={character.id} className="links-list">
+            <a
+              href=""
+              onClick={this.onOnlineClick}
+              className="links-list-item text-danger"
+              rel={character.name}>
+              {character.name}, {character.profession.name} Lvl. {character.level}
+            </a>
+          </div>
+        )
+      }).bind(this))}
+      </div>
+    </div>
     <div className="messages-wrapper" ref="messagesWrapper">
       <div className="messages">
         {this.state.messages.map((function (message, i) {

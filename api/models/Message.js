@@ -23,6 +23,9 @@ module.exports = {
       return { room: 'trade', message: result[1] };
     }
 
+    if ( result = /^\/m\s+"([^\s]*)"\s*(.*)/.exec(content) ) {
+      return { room: 'private', message: result[2], recipient: result[1] };
+    }
     if ( result = /^\/m\s+([^\s]*)\s*(.*)/.exec(content) ) {
       return { room: 'private', message: result[2], recipient: result[1] };
     }
