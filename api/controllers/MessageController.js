@@ -38,7 +38,6 @@ module.exports = {
 
   create: function (req, res) {
     var data = Message.parse(req.param('content'));
-
     if ( data.room !== 'private') {
       Message.create({
         content: data.message,

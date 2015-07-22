@@ -23,13 +23,19 @@ module.exports = {
       return { room: 'trade', message: result[1] };
     }
 
-    if ( result = /^\/m\s+"([^\s]*)"\s*(.*)/.exec(content) ) {
+    if ( result = /^\/m\s+"(.*)"\s*(.*)/.exec(content) ) {
       return { room: 'private', message: result[2], recipient: result[1] };
     }
     if ( result = /^\/m\s+([^\s]*)\s*(.*)/.exec(content) ) {
       return { room: 'private', message: result[2], recipient: result[1] };
     }
+    if ( result = /^\/msg\s+"(.*)"\s*(.*)/.exec(content) ) {
+      return { room: 'private', message: result[2], recipient: result[1] };
+    }
     if ( result = /^\/msg\s+([^\s]*)\s*(.*)/.exec(content) ) {
+      return { room: 'private', message: result[2], recipient: result[1] };
+    }
+    if ( result = /^\/message\s+"(.*)"\s*(.*)/.exec(content) ) {
       return { room: 'private', message: result[2], recipient: result[1] };
     }
     if ( result = /^\/message\s+([^\s]*)\s*(.*)/.exec(content) ) {
