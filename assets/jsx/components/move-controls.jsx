@@ -11,8 +11,13 @@ module.exports = React.createClass({
       x: this.props.character.location.x,
       y: this.props.character.location.y
     };
-
-    switch ( e.currentTarget.getAttribute('data-direction') ) {
+    var direction;
+    if (e.currentTarget) {
+      direction = e.currentTarget.getAttribute('data-direction');
+    } else {
+      direction = e;
+    }
+    switch ( direction ) {
       case 'up':
         coords.y -= 1;
         break;
@@ -36,6 +41,22 @@ module.exports = React.createClass({
         this.setState({moving: false});
       }).bind(this));
 
+  },
+  componentDidMount: function () {
+    window.addEventListener('keyup', (function (evt) {
+      if ( evt.keyCode === 38 && this.canIMove('up') ) {
+        this.move('up');
+      }
+      if ( evt.keyCode === 40 && this.canIMove('down') ) {
+        this.move('down');
+      }
+      if ( evt.keyCode === 37 && this.canIMove('left') ) {
+        this.move('left');
+      }
+      if ( evt.keyCode === 39 && this.canIMove('right') ) {
+        this.move('right');
+      }
+    }).bind(this));
   },
   canIMove: function (direction) {
     var

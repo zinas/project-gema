@@ -82,6 +82,7 @@ module.exports = React.createClass({
   onKeyUp: function (e) {
     if ( e.keyCode === 38 ) {
       this.refs.message.getDOMNode().value = this.state.repeat;
+      e.stopPropagation();
     }
     if ( e.keyCode === 13 ) {
       this.postMessage();
