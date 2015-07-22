@@ -60,7 +60,7 @@ module.exports = {
 
   item: function (player, opponent, multiplier) {
     multiplier = multiplier || 1;
-    var baseChance = 2;
+    var baseChance = 1.5;
     var initial = Dice.roll();
     if (  initial > baseChance * multiplier ) return Promise.resolve(null);
 
