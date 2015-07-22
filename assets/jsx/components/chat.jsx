@@ -6,6 +6,8 @@ var pubsub = require('pubsub-js');
 module.exports = React.createClass({
   getInitialState: function () {
     return {
+      history: [],
+      repeat: '',
       messages: [],
       onlineCharacters: []
     };
@@ -68,17 +70,9 @@ module.exports = React.createClass({
     io.socket.on('character-is-offline', this.removeCharacter);
   },
   addMessage: function (message) {
-    if ( !message.error ) {
-      var msg = this.state.messages;
-      msg.unshift(message);
-      this.setState({messages:msg});
-    } else {
-      pubsub.publish('show-popup', {
-        box: 'danger',
-        title: 'Communication protocol error',
-        content: message.error
-      });
-    }
+    var msg = this.state.messages;
+    msg.unshift(message);
+    this.setState({messages:msg});
   },
   getChat: function () {
     io.socket.get('/message/getChat', (function (data) {
@@ -86,14 +80,31 @@ module.exports = React.createClass({
     }).bind(this));
   },
   onKeyUp: function (e) {
+    if ( e.keyCode === 38 ) {
+      this.refs.message.getDOMNode().value = this.state.repeat;
+    }
     if ( e.keyCode === 13 ) {
       this.postMessage();
     }
   },
   postMessage: function () {
-    io.socket.post('/message/create', {content: this.refs.message.getDOMNode().value}, (function (message) {
-      this.addMessage(message);
+    io.socket.post('/message/create', {content: this.refs.message.getDOMNode().value}, (function (res) {
+      if ( res.error ) {
+        pubsub.publish('show-popup', {
+          box: 'danger',
+          title: 'Communication protocol error',
+          content: res.error
+        });
+        return;
+      }
+      this.addMessage(res.message);
       this.refs.message.getDOMNode().value = '';
+      var history = this.state.history;
+      history.push(this.refs.message.getDOMNode().value);
+      this.setState({
+        repeat: res.data.repeat,
+        history: history
+      });
     }).bind(this));
   },
   render: function() {

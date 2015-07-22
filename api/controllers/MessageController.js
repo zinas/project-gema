@@ -38,6 +38,7 @@ module.exports = {
 
   create: function (req, res) {
     var data = Message.parse(req.param('content'));
+    data.repeat = req.param('content').replace(data.message, '');
     if ( data.room !== 'private') {
       Message.create({
         content: data.message,
@@ -47,7 +48,7 @@ module.exports = {
       }).then(function (message) {
         message.sender = res.locals.character;
         sails.sockets.blast('new-message', message);
-        res.json(message);
+        res.json({data: data, message: message});
       }, function (error) {
         res.json({error: error});
       });
@@ -65,7 +66,7 @@ module.exports = {
           message.sender = res.locals.character;
           message.recipient = character;
           sails.sockets.blast('new-message-'+message.recipient.id, message);
-          res.json(message);
+          res.json({data: data, message: message});
         }, function (error) {
           res.json({error: error});
         });
